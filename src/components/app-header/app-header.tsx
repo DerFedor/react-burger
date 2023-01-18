@@ -8,7 +8,7 @@ import appHeaderStyle from "./app-header.module.css";
 
 function AppHeader() {
   return (
-    <header className={appHeaderStyle.header + " p-10"}>
+    <header className={appHeaderStyle.header + " p-4"}>
       <a href="/#" className={appHeaderStyle.logo}>
         <Logo />
       </a>
