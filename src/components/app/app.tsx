@@ -1,13 +1,13 @@
 import React from "react";
-import AppHeader from "../app-header/app-header";
-import BurgerIngredients from "../burger-ingredients/burger-ingredients";
+import {AppHeader} from "../app-header/app-header";
+import {BurgerIngredients} from "../burger-ingredients/burger-ingredients";
 import appStyle from "./app.module.css";
-import BurgerConstructor from "../burger-constructor/burger-constructor";
+import {BurgerConstructor} from "../burger-constructor/burger-constructor";
 
 
-class App extends React.Component {
+export const App = () => {
 
-  render() {
+
     return (
       <div className={appStyle.page}>
         <AppHeader />
@@ -17,7 +17,6 @@ class App extends React.Component {
         </main>
       </div>
     );
-  }
 }
 
 export default App;

@@ -94,15 +94,13 @@ const ConstructorButtonBox = () => {
   );
 };
 
-export default class BurgerConstructor extends React.Component {
-  render() {
+export const BurgerConstructor = () => {
     return (
         <section className={"pt-25 " + burgerConstructorStyle.constructor}>
-          <ConstructorBox />
-          <ConstructorButtonBox />
+            <ConstructorBox />
+            <ConstructorButtonBox />
         </section>
     );
-  }
 }
 
 ItemConstructor.propTypes = {

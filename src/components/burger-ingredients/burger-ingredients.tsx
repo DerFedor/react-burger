@@ -89,18 +89,17 @@ BurgerItemIngredients.propTypes = {
     text: PropTypes.string.isRequired,
 };
 
-export default class BurgerIngredients extends React.Component {
-    render() {
-        return (
-            <section className={IngredientsStyle.burgerIngredients}>
-                <HeaderBurgerIngredients>Соберите бургер</HeaderBurgerIngredients>
-                <TabContainer />
-                <ul className={IngredientsStyle.box}>
-                    <BurgerItemIngredients key="bun" type="bun" text="Булки" />
-                    <BurgerItemIngredients key="sauce" type="sauce" text="Соусы" />
-                    <BurgerItemIngredients key="main" type="main" text="Начинки" />
-                </ul>
-            </section>
-        );
-    }
+export const BurgerIngredients = () => {
+    return (
+        <section className={IngredientsStyle.burgerIngredients}>
+            <HeaderBurgerIngredients>Соберите бургер</HeaderBurgerIngredients>
+            <TabContainer />
+            <ul className={IngredientsStyle.box}>
+                <BurgerItemIngredients key="bun" type="bun" text="Булки" />
+                <BurgerItemIngredients key="sauce" type="sauce" text="Соусы" />
+                <BurgerItemIngredients key="main" type="main" text="Начинки" />
+            </ul>
+        </section>
+    );
+
 }
