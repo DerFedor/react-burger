@@ -6,7 +6,7 @@ import {
   Button,
   CurrencyIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components";
-import { data } from "../../utils/data";
+
 import burgerConstructorStyle from "./burger-constructor.module.css";
 
 const ItemConstructor = ({ props }) => {
@@ -45,8 +45,8 @@ const ItemConstructorLocked = (props) => {
 
 
 
-const ConstructorBox = () => {
-  let ingredients = data.filter(item => item.type !== "bun")
+const ConstructorBox = (props) => {
+  let ingredients = props.api.filter(item => item.type !== "bun")
   return (
       <ul className={burgerConstructorStyle.box}>
         <ItemConstructorLocked
@@ -94,10 +94,10 @@ const ConstructorButtonBox = () => {
   );
 };
 
-export const BurgerConstructor = () => {
+export const BurgerConstructor = (props) => {
     return (
         <section className={"pt-25 " + burgerConstructorStyle.constructor}>
-            <ConstructorBox />
+            <ConstructorBox api={props.api}/>
             <ConstructorButtonBox />
         </section>
     );

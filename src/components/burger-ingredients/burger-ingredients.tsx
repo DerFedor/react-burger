@@ -1,5 +1,5 @@
 import React from "react";
-import { data } from "../../utils/data";
+
 import PropTypes from "prop-types";
 import IngredientsStyle from "./burger-ingredients.module.css";
 import {
@@ -71,7 +71,7 @@ IngredientCard.propTypes = {
 };
 
 const BurgerItemIngredients = (props) => {
-    let itemType = data.filter((item) => item.type === props.type);
+    let itemType = props.api.filter((item) => item.type === props.type);
     return (
         <li className="mt-10" id={props.type}>
             <h2 className="text text_type_main-medium">{props.text}</h2>
@@ -87,17 +87,18 @@ const BurgerItemIngredients = (props) => {
 BurgerItemIngredients.propTypes = {
     type: PropTypes.oneOf(["bun", "sauce", "main"]).isRequired,
     text: PropTypes.string.isRequired,
+    api: PropTypes.object.isRequired,
 };
 
-export const BurgerIngredients = () => {
+export const BurgerIngredients = (props) => {
     return (
         <section className={IngredientsStyle.burgerIngredients}>
             <HeaderBurgerIngredients>Соберите бургер</HeaderBurgerIngredients>
             <TabContainer />
             <ul className={IngredientsStyle.box}>
-                <BurgerItemIngredients key="bun" type="bun" text="Булки" />
-                <BurgerItemIngredients key="sauce" type="sauce" text="Соусы" />
-                <BurgerItemIngredients key="main" type="main" text="Начинки" />
+                <BurgerItemIngredients api={props.api} key="bun" type="bun" text="Булки" />
+                <BurgerItemIngredients api={props.api} key="sauce" type="sauce" text="Соусы" />
+                <BurgerItemIngredients api={props.api} key="main" type="main" text="Начинки" />
             </ul>
         </section>
     );
