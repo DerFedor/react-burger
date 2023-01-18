@@ -31,7 +31,9 @@ export const Modal = (props) => {
             <h2 className={"text text_type_main-large " + modalStyle.header}>
               {props.header}
             </h2>
-            <CloseIcon type="primary"/>
+            <div className={modalStyle.close}>
+              <CloseIcon type="primary" onClick={props.onClose}/>
+            </div>
           </div>
           {props.children}
         </div>
@@ -40,21 +42,8 @@ export const Modal = (props) => {
   );
 };
 
-// export const Modal = (props) => {
-//   console.log(props);
-
-//   return ReactDOM.createPortal(
-//     <ModalOverlay active={props.active} setActive={props.setActive}>
-//       <div className={modalStyle.popup}>
-//         <div
-//           className={modalStyle.close}
-//           onClick={() => props.setActive(false)}
-//         >
-//           <CloseIcon />
-//         </div>
-//       </div>
-//     </ModalOverlay>,
-
-//     modalRoot
-//   );
-// };
+Modal.propTypes = {
+  onClose: PropTypes.func.isRequired,
+  header: PropTypes.string,
+  children: PropTypes.element
+};

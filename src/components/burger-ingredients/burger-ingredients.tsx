@@ -75,12 +75,15 @@ const IngredientCard = ({ card }) => {
     return (
         <>
         <li
-            className={"mt-6 " + IngredientsStyle.ingridientCard}
+            className={"mt-6 " + IngredientsStyle.ingredientCard}
             onClick={handleOpen}>
             <img className="ml-4 mr-4 " src={card.image} alt={card.image} />
             <div className={"mt-1 mb-1 " + IngredientsStyle.priceBox}>
-                <p className="text text_type_digits-default">{card.price}</p>
-                <CurrencyIcon type="primary" />
+                <p className="text text_type_digits-default">
+                    {card.price+" "}
+                    <CurrencyIcon type="primary" />
+                </p>
+
             </div>
             <h2
                 className={
@@ -89,15 +92,15 @@ const IngredientCard = ({ card }) => {
             >
                 {card.name}
             </h2>
-            <div
-                className={
-                    "text text_type_digits-default " +
-                    ((card.__v > 0 && IngredientsStyle.count) ||
-                        IngredientsStyle.countZero)
-                }
-            >
-                {card.__v}
-            </div>
+            {/*<div*/}
+            {/*    className={*/}
+            {/*        "text text_type_digits-default " +*/}
+            {/*        ((card.__v > 0 && IngredientsStyle.count) ||*/}
+            {/*            IngredientsStyle.countZero)*/}
+            {/*    }*/}
+            {/*>*/}
+            {/*    {card.__v}*/}
+            {/*</div>*/}
         </li>
             {isVisible && modal}
         </>
@@ -172,3 +175,7 @@ export const BurgerIngredients = (props) => {
     );
 
 }
+
+BurgerIngredients.propTypes = {
+    api: PropTypes.arrayOf(PropTypes.object).isRequired
+};

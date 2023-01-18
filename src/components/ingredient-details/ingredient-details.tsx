@@ -1,5 +1,5 @@
 import React from "react";
-// import PropTypes from "prop-types";
+ import PropTypes from "prop-types";
 // import ReactDOM from "react-dom";
 import ingredientDetailsStyle from "./ingredient-details.module.css";
 
@@ -30,3 +30,18 @@ export const IngredientDetails = (props) => {
     </div>
   );
 };
+
+
+Structure.propTypes = {
+    structure: PropTypes.string,
+    children: PropTypes.number
+}
+
+IngredientDetails.propTypes = {
+    image: PropTypes.string,
+    name: PropTypes.string,
+    calories: PropTypes.number,
+    proteins: PropTypes.number,
+    fat: PropTypes.number,
+    carbohydrates: PropTypes.number
+}

@@ -4,7 +4,7 @@ import {BurgerIngredients} from "../burger-ingredients/burger-ingredients";
 import appStyle from "./app.module.css";
 import {BurgerConstructor} from "../burger-constructor/burger-constructor";
 //import PropTypes from 'prop-types';
-
+import  ErrorBoundary  from "../error-boundary/error-boundary";
 
 const apiUrl = "https://norma.nomoreparties.space/api/ingredients";
 
@@ -41,8 +41,8 @@ const apiUrl = "https://norma.nomoreparties.space/api/ingredients";
 //     }
 // };
 
-//ПИШЕТ ЧТО TS2339: Property 'hasError' does not exist on type 'Readonly<{}>'.
-//ПИШЕТ ЧТО TS2339: Property 'children' does not exist on type 'Readonly<{}>'.
+//ПИШЕТ  TS2339: Property 'hasError' does not exist on type 'Readonly<{}>'.
+//ПИШЕТ  TS2339: Property 'children' does not exist on type 'Readonly<{}>'.
 
 
 
@@ -50,14 +50,16 @@ export const App = () => {
     const [api, setApi] = React.useState([]);
 
     React.useEffect(() => {
-        const getData = async () => {
-            try {
-                const res = await fetch(apiUrl);
-                const data = await res.json();
-                setApi(data.data);
-            } catch (err) {
-                console.log(err);
-            }
+        const getData = () => {
+            fetch(apiUrl)
+                .then(function (res) {
+                    if (res.ok) {
+                        return res.json();
+                    }
+                    return Promise.reject(`Ошибка: ${res.statusText}`);
+                })
+                .then((data) => setApi(data.data))
+                .catch((err) => console.log(err));
         };
         getData();
     }, []);
@@ -66,12 +68,12 @@ export const App = () => {
     return (
       <div className={appStyle.page}>
         <AppHeader />
-          {/*<ErrorBoundary>*/}
+          <ErrorBoundary>
             <main className={appStyle.main}>
               <BurgerIngredients api={api}/>
               <BurgerConstructor api={api}/>
             </main>
-          {/*</ErrorBoundary>*/}
+          </ErrorBoundary>
       </div>
     );
 }

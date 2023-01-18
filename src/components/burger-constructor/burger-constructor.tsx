@@ -6,9 +6,10 @@ import {
   Button,
   CurrencyIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components";
-
-import burgerConstructorStyle from "./burger-constructor.module.css";
+import {OrderDetails} from "../order-details/order-details"
 import { Modal } from "../modal/modal";
+import burgerConstructorStyle from "./burger-constructor.module.css";
+
 
 const ItemConstructor = ({ props }) => {
   return (
@@ -94,7 +95,10 @@ const ConstructorButtonBox = () => {
     const handleClose = () => {
         setIsVisible(false);
     };
-    const modal = <Modal onClose={handleClose}></Modal>;
+
+    const modal = <Modal onClose={handleClose}>
+        <OrderDetails/>
+    </Modal>;
 
     return (
       <div className={"mr-4 mt-10 " + burgerConstructorStyle.button_order}>
@@ -126,3 +130,15 @@ ItemConstructorLocked.propTypes = {
     price: PropTypes.number.isRequired,
     thumbnail: PropTypes.string.isRequired,
 };
+
+ItemConstructor.propTypes = {
+    api: PropTypes.array
+};
+
+ConstructorBoxPrice.propTypes = {
+    children: PropTypes.string
+}
+
+BurgerConstructor.propTypes = {
+    api: PropTypes.arrayOf(PropTypes.object).isRequired
+}
