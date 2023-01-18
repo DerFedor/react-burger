@@ -8,6 +8,7 @@ import {
 } from "@ya.praktikum/react-developer-burger-ui-components";
 
 import burgerConstructorStyle from "./burger-constructor.module.css";
+import { Modal } from "../modal/modal";
 
 const ItemConstructor = ({ props }) => {
   return (
@@ -46,7 +47,7 @@ const ItemConstructorLocked = (props) => {
 
 
 const ConstructorBox = (props) => {
-  let ingredients = props.api.filter(item => item.type !== "bun")
+  let ingredients = props.api.filter((item) => item.type !== "bun")
   return (
       <ul className={burgerConstructorStyle.box}>
         <ItemConstructorLocked
@@ -84,10 +85,21 @@ const ConstructorBoxPrice = (props) => {
 };
 
 const ConstructorButtonBox = () => {
-  return (
+    const [isVisible, setIsVisible] = React.useState(false);
+
+    const handleOpen = () => {
+        setIsVisible(true);
+    };
+
+    const handleClose = () => {
+        setIsVisible(false);
+    };
+    const modal = <Modal onClose={handleClose}></Modal>;
+
+    return (
       <div className={"mr-4 mt-10 " + burgerConstructorStyle.button_order}>
         <ConstructorBoxPrice>610</ConstructorBoxPrice>
-        <Button htmlType="button" type="primary" size="large">
+        <Button htmlType="button" type="primary" size="large" onClick={handleOpen}>
           Оформить заказ
         </Button>
       </div>
