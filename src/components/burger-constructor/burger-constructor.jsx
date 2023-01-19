@@ -9,6 +9,7 @@ import {
 import {OrderDetails} from "../order-details/order-details"
 import { Modal } from "../modal/modal";
 import burgerConstructorStyle from "./burger-constructor.module.css";
+import {ingredientType} from "../../utils/prop-types";
 
 
 const ItemConstructor = ({ props }) => {
@@ -48,7 +49,7 @@ const ItemConstructorLocked = (props) => {
 
 
 const ConstructorBox = (props) => {
-  let ingredients = props.api.filter((item) => item.type !== "bun")
+  const ingredients = props.data.filter((item) => item.type !== "bun")
   return (
       <ul className={burgerConstructorStyle.box}>
         <ItemConstructorLocked
@@ -113,7 +114,7 @@ const ConstructorButtonBox = () => {
 export const BurgerConstructor = (props) => {
     return (
         <section className={"pt-25 " + burgerConstructorStyle.constructor}>
-            <ConstructorBox api={props.api}/>
+            <ConstructorBox data={props.data}/>
             <ConstructorButtonBox />
         </section>
     );
@@ -132,7 +133,7 @@ ItemConstructorLocked.propTypes = {
 };
 
 ItemConstructor.propTypes = {
-    api: PropTypes.array
+    data: PropTypes.array
 };
 
 ConstructorBoxPrice.propTypes = {
@@ -140,5 +141,5 @@ ConstructorBoxPrice.propTypes = {
 }
 
 BurgerConstructor.propTypes = {
-    api: PropTypes.arrayOf(PropTypes.object).isRequired
+    data: PropTypes.arrayOf(ingredientType).isRequired
 }

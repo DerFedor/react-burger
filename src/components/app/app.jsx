@@ -9,12 +9,12 @@ import {getIngredients} from "../../utils/burger-api";
 
 
 export const App = () => {
-   const [api, setApi] = React.useState([]);
+   const [data, setData] = React.useState([]);
 
     React.useEffect(() => {
         const getData = () => {
             getIngredients()
-                .then((data) => setApi(data.data))
+                .then((data) => setData(data.data))
                 .catch((err) => console.log(err));
         };
         getData();
@@ -22,7 +22,7 @@ export const App = () => {
 
 
 
-    React.useEffect(() => console.log(api), [api]);
+    React.useEffect(() => console.log(data), [data]);
 
 
     return (
@@ -30,8 +30,8 @@ export const App = () => {
         <AppHeader />
           <ErrorBoundary>
             <main className={appStyle.main}>
-              <BurgerIngredients api={api}/>
-              <BurgerConstructor api={api}/>
+              <BurgerIngredients ingredients={data}/>
+              <BurgerConstructor data={data}/>
             </main>
           </ErrorBoundary>
       </div>

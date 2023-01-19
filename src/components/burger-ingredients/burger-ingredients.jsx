@@ -7,6 +7,7 @@ import {
     CurrencyIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import { Modal } from "../modal/modal";
+import {ingredientType} from "../../utils/prop-types";
 
 
 const HeaderBurgerIngredients = (props) => {
@@ -114,7 +115,7 @@ IngredientCard.propTypes = {
 const BurgerItemIngredients = (props) => {
     //React.useEffect(() => console.log(typeof props.refElement));
 
-    let itemType = props.api.filter((item) => item.type === props.type);
+    const itemType = props.api.filter((item) => item.type === props.type);
     return (
         <li className="mt-10" id={props.type} ref={props.refElement}>
             <h2 className="text text_type_main-medium">{props.text}</h2>
@@ -137,7 +138,7 @@ BurgerItemIngredients.propTypes = {
 
 export const BurgerIngredients = (props) => {
     const buns = React.useRef("bun");
-    const sause = React.useRef("sause");
+    const sauce = React.useRef("sauce");
     const main = React.useRef("main");
 
     const scroll = (item) => {
@@ -148,25 +149,25 @@ export const BurgerIngredients = (props) => {
             <HeaderBurgerIngredients>Соберите бургер</HeaderBurgerIngredients>
             <TabContainer
                 buns={() => scroll(buns)}
-                sauses={() => scroll(sause)}
+                sauses={() => scroll(sauce)}
                 main={() => scroll(main)}
             />
             <ul className={IngredientsStyle.box}>
                 <BurgerItemIngredients
                     refElement={buns}
-                    api={props.api}
+                    api={props.ingredients}
                     key="bun"
                     type="bun"
                     text="Булки"/>
                 <BurgerItemIngredients
-                    refElement={sause}
-                    api={props.api}
+                    refElement={sauce}
+                    api={props.ingredients}
                     key="sauce"
                     type="sauce"
                     text="Соусы"/>
                 <BurgerItemIngredients
                     refElement={main}
-                    api={props.api}
+                    api={props.ingredients}
                     key="main"
                     type="main"
                     text="Начинки"/>
@@ -177,5 +178,5 @@ export const BurgerIngredients = (props) => {
 }
 
 BurgerIngredients.propTypes = {
-    api: PropTypes.arrayOf(PropTypes.object).isRequired
+    ingredients: PropTypes.arrayOf(ingredientType).isRequired
 };
