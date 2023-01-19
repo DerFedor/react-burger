@@ -4,11 +4,31 @@ import React from "react";
 import modalOverlayStyle from "./modal-overlay.module.css";
 
 export const ModalOverlay = (props) => {
-  console.log(props);
+  //console.log(props);
   return (
       <div className={modalOverlayStyle.modalOverlay}
            onClick={props.onClose}>
-      {props.children}
     </div>
   );
 };
+
+
+
+
+// class Modal extends React.Component {
+//   render() {
+//     const { children, header, onClose } = this.props;
+//     // Возвращаем ReactDOM.createPortal,
+//     // который поместит дочерние элементы в modalRoot
+//     return ReactDOM.createPortal(
+//         <>
+//           <div className="Modal">
+//             <ModalHeader onClose={onClose}>{header}</ModalHeader>
+//             {children}
+//           </div>
+//           <ModalBackDrop onClose={onClose} />
+//         </>,
+//         modalRoot
+//     );
+//   }
+// }

@@ -97,7 +97,7 @@ const ConstructorButtonBox = () => {
         setIsVisible(false);
     };
 
-    const modal = <Modal onClose={handleClose}>
+    const modal = <Modal onClose={handleClose} >
         <OrderDetails/>
     </Modal>;
 

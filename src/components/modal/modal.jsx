@@ -25,9 +25,10 @@ export const Modal = (props) => {
   console.log(props.onClose);
 
   return ReactDOM.createPortal(
-      <ModalOverlay onClose={props.onClose}>
-        <div className={modalStyle.popup} onClick={(e) => e.stopPropagation()}>
-          <div className={"pl-10 pt-10 pr-10 " + modalStyle.header__box}>
+      <div>
+        <ModalOverlay onClose={props.onClose}/>
+         <div className={modalStyle.popup} onClick={(e) => e.stopPropagation()}>
+              <div className={"pl-10 pt-10 pr-10 " + modalStyle.header__box}>
             <h2 className={"text text_type_main-large " + modalStyle.header}>
               {props.header}
             </h2>
@@ -37,7 +38,7 @@ export const Modal = (props) => {
           </div>
           {props.children}
         </div>
-      </ModalOverlay>,
+      </div>,
       modalRoot
   );
 };
