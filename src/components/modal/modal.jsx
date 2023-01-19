@@ -6,7 +6,7 @@ import { ModalOverlay } from "../modalOverlay/modal-overlay";
 
 import { CloseIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 
-const modalRoot = document.getElementById("react-modals")as HTMLElement;
+const modalRoot = document.getElementById("react-modals");
 
 export const Modal = (props) => {
   const escClose = (e) => {
