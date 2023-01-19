@@ -79,7 +79,7 @@ const IngredientCard = ({ card }) => {
             className={"mt-6 " + IngredientsStyle.ingredientCard}
             onClick={handleOpen}>
             <img className="ml-4 mr-4 " src={card.image} alt={card.image} />
-            <div className={"mt-1 mb-1 " + IngredientsStyle.priceBox}>
+            <div className={"mt-1 mb-1 " + IngredientsStyle.priceElement}>
                 <p className="text text_type_digits-default">
                     {card.price+" "}
                     <CurrencyIcon type="primary" />
@@ -97,7 +97,7 @@ const IngredientCard = ({ card }) => {
             {/*    className={*/}
             {/*        "text text_type_digits-default " +*/}
             {/*        ((card.__v > 0 && IngredientsStyle.count) ||*/}
-            {/*            IngredientsStyle.countZero)*/}
+            {/*            IngredientsStyle.countNone)*/}
             {/*    }*/}
             {/*>*/}
             {/*    {card.__v}*/}

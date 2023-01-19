@@ -107,6 +107,7 @@ const ConstructorButtonBox = () => {
         <Button htmlType="button" type="primary" size="large" onClick={handleOpen}>
           Оформить заказ
         </Button>
+        {isVisible && modal}
       </div>
   );
 };
