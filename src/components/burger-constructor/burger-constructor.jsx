@@ -122,7 +122,7 @@ export const BurgerConstructor = (props) => {
 }
 
 ItemConstructor.propTypes = {
-    props: PropTypes.object,
+    props: PropTypes.arrayOf(ingredientType).isRequired,
 };
 
 ItemConstructorLocked.propTypes = {
@@ -131,10 +131,6 @@ ItemConstructorLocked.propTypes = {
     text: PropTypes.string.isRequired,
     price: PropTypes.number.isRequired,
     thumbnail: PropTypes.string.isRequired,
-};
-
-ItemConstructor.propTypes = {
-    data: PropTypes.array
 };
 
 ConstructorBoxPrice.propTypes = {

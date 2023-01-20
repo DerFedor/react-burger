@@ -2,6 +2,7 @@ import React from "react";
 // import PropTypes from "prop-types";
 // import ReactDOM from "react-dom";
 import modalOverlayStyle from "./modal-overlay.module.css";
+import PropTypes from "prop-types";
 
 export const ModalOverlay = (props) => {
   //console.log(props);
@@ -12,23 +13,8 @@ export const ModalOverlay = (props) => {
   );
 };
 
+ModalOverlay.propTypes = {
+  onClose: PropTypes.func.isRequired,
+};
 
 
-
-// class Modal extends React.Component {
-//   render() {
-//     const { children, header, onClose } = this.props;
-//     // Возвращаем ReactDOM.createPortal,
-//     // который поместит дочерние элементы в modalRoot
-//     return ReactDOM.createPortal(
-//         <>
-//           <div className="Modal">
-//             <ModalHeader onClose={onClose}>{header}</ModalHeader>
-//             {children}
-//           </div>
-//           <ModalBackDrop onClose={onClose} />
-//         </>,
-//         modalRoot
-//     );
-//   }
-// }

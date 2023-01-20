@@ -22,8 +22,6 @@ export const App = () => {
 
 
 
-    React.useEffect(() => console.log(data), [data]);
-
 
     return (
       <div className={appStyle.page}>

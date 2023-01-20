@@ -39,7 +39,7 @@ const TabContainer = (props) => {
                 active={current === "two"}
                 onClick={() => {
                     setCurrent("two");
-                    props.sauses();
+                    props.sauces();
                 }}
             >
                 Соусы
@@ -93,15 +93,6 @@ const IngredientCard = ({ card }) => {
             >
                 {card.name}
             </h2>
-            {/*<div*/}
-            {/*    className={*/}
-            {/*        "text text_type_digits-default " +*/}
-            {/*        ((card.__v > 0 && IngredientsStyle.count) ||*/}
-            {/*            IngredientsStyle.countNone)*/}
-            {/*    }*/}
-            {/*>*/}
-            {/*    {card.__v}*/}
-            {/*</div>*/}
         </li>
             {isVisible && modal}
         </>
@@ -113,8 +104,6 @@ IngredientCard.propTypes = {
 };
 
 const BurgerItemIngredients = (props) => {
-    //React.useEffect(() => console.log(typeof props.refElement));
-
     const itemType = props.api.filter((item) => item.type === props.type);
     return (
         <li className="mt-10" id={props.type} ref={props.refElement}>
@@ -138,7 +127,7 @@ BurgerItemIngredients.propTypes = {
 
 export const BurgerIngredients = (props) => {
     const buns = React.useRef("bun");
-    const sauce = React.useRef("sauce");
+    const sauces = React.useRef("sauces");
     const main = React.useRef("main");
 
     const scroll = (item) => {
@@ -149,7 +138,7 @@ export const BurgerIngredients = (props) => {
             <HeaderBurgerIngredients>Соберите бургер</HeaderBurgerIngredients>
             <TabContainer
                 buns={() => scroll(buns)}
-                sauses={() => scroll(sauce)}
+                sauces={() => scroll(sauces)}
                 main={() => scroll(main)}
             />
             <ul className={IngredientsStyle.box}>
@@ -160,7 +149,7 @@ export const BurgerIngredients = (props) => {
                     type="bun"
                     text="Булки"/>
                 <BurgerItemIngredients
-                    refElement={sauce}
+                    refElement={sauces}
                     api={props.ingredients}
                     key="sauce"
                     type="sauce"
