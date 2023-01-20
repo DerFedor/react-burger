@@ -13,7 +13,7 @@ import {ingredientType} from "../../utils/prop-types";
 
 
 const ItemConstructor = ({ props }) => {
-  return (
+     return (
       <li className={"pl-8 " + burgerConstructorStyle.card}>
         <div className={burgerConstructorStyle.drag}>
           <DragIcon type="primary" />
@@ -62,7 +62,7 @@ const ConstructorBox = (props) => {
         <li>
           <ul className={burgerConstructorStyle.box_scroll}>
             {ingredients.map((item) => (
-                <ItemConstructor key={item._id} props={item} />
+                <ItemConstructor key={item._id} props={item}  />
             ))}
           </ul>
         </li>
@@ -122,7 +122,7 @@ export const BurgerConstructor = (props) => {
 }
 
 ItemConstructor.propTypes = {
-    props: PropTypes.arrayOf(ingredientType).isRequired,
+    props: ingredientType.isRequired,
 };
 
 ItemConstructorLocked.propTypes = {

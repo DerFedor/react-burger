@@ -45,6 +45,6 @@ export const Modal = (props) => {
 
 Modal.propTypes = {
   onClose: PropTypes.func.isRequired,
-  header: PropTypes.string.isRequired,
+  header: PropTypes.string,  //не всегда отправляется
   children: PropTypes.element.isRequired
 };

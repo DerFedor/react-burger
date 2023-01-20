@@ -121,7 +121,7 @@ const BurgerItemIngredients = (props) => {
 BurgerItemIngredients.propTypes = {
     type: PropTypes.oneOf(["bun", "sauce", "main"]).isRequired,
     text: PropTypes.string.isRequired,
-    api: PropTypes.object.isRequired,
+    api: PropTypes.arrayOf(ingredientType).isRequired,
     refElement: PropTypes.object.isRequired,
 };
 

@@ -13,4 +13,5 @@ export const ingredientType = shape({
     price: number.isRequired,
     proteins: number.isRequired,
     type: string.isRequired,
-});
+
+    });
