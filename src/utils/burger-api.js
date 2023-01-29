@@ -1,6 +1,6 @@
 import React from "react";
 
-const Burger_API = "https://norma.nomoreparties.space/api";
+export const Burger_API = "https://norma.nomoreparties.space/api";
 
 
 export function getIngredients()

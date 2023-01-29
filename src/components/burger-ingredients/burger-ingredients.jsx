@@ -1,5 +1,4 @@
 import React from "react";
-import {IngredientDetails} from "../ingredient-details/ingredient-details"
 import PropTypes from "prop-types";
 import IngredientsStyle from "./burger-ingredients.module.css";
 import {
@@ -8,6 +7,8 @@ import {
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import { Modal } from "../modal/modal";
 import {ingredientType} from "../../utils/prop-types";
+import {IngredientDetails} from "../ingredient-details/ingredient-details";
+import { IngredientsContext } from "../../services/ingredients-сontext";
 
 
 const HeaderBurgerIngredients = (props) => {
@@ -100,14 +101,15 @@ const IngredientCard = ({ card }) => {
 };
 
 IngredientCard.propTypes = {
-    card: PropTypes.object.isRequired,
+    card: ingredientType,
 };
 
-const BurgerItemIngredients = (props) => {
-    const itemType = props.api.filter((item) => item.type === props.type);
+const BurgerItemIngredients = (data) => {
+    const ingredients  = React.useContext(IngredientsContext);
+    const itemType = ingredients.filter((item) => item.type === data.type);
     return (
-        <li className="mt-10" id={props.type} ref={props.refElement}>
-            <h2 className="text text_type_main-medium">{props.text}</h2>
+        <li className="mt-10" id={data.type} ref={data.refElement}>
+            <h2 className="text text_type_main-medium">{data.text}</h2>
             <ul className={" pl-4 " + IngredientsStyle.ingredientsList}>
                 {itemType.map((item) => (
                     <IngredientCard key={item._id} card={item} />
@@ -118,14 +120,14 @@ const BurgerItemIngredients = (props) => {
     );
 };
 
-BurgerItemIngredients.propTypes = {
-    type: PropTypes.oneOf(["bun", "sauce", "main"]).isRequired,
-    text: PropTypes.string.isRequired,
-    api: PropTypes.arrayOf(ingredientType).isRequired,
-    refElement: PropTypes.object.isRequired,
-};
+// BurgerItemIngredients.propTypes = {
+//     type: PropTypes.oneOf(["bun", "sauce", "main"]).isRequired,
+//     text: PropTypes.string.isRequired,
+//     api: PropTypes.arrayOf(ingredientType).isRequired,
+//     refElement: PropTypes.object.isRequired,
+// };
 
-export const BurgerIngredients = (props) => {
+export const BurgerIngredients = () => {
     const buns = React.useRef("bun");
     const sauces = React.useRef("sauces");
     const main = React.useRef("main");
@@ -144,19 +146,16 @@ export const BurgerIngredients = (props) => {
             <ul className={IngredientsStyle.box}>
                 <BurgerItemIngredients
                     refElement={buns}
-                    api={props.ingredients}
                     key="bun"
                     type="bun"
                     text="Булки"/>
                 <BurgerItemIngredients
                     refElement={sauces}
-                    api={props.ingredients}
                     key="sauce"
                     type="sauce"
                     text="Соусы"/>
                 <BurgerItemIngredients
                     refElement={main}
-                    api={props.ingredients}
                     key="main"
                     type="main"
                     text="Начинки"/>
@@ -166,6 +165,6 @@ export const BurgerIngredients = (props) => {
 
 }
 
-BurgerIngredients.propTypes = {
-    ingredients: PropTypes.arrayOf(ingredientType).isRequired
-};
+// BurgerIngredients.propTypes = {
+//     ingredients: PropTypes.arrayOf(ingredientType).isRequired
+// };

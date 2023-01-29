@@ -56,3 +56,22 @@
   align-items: center;
   gap: 10px;
 }
+
+.box_active {
+  composes: box;
+  max-height: 470px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  scrollbar-width: thin;
+  scrollbar-color: #8585AD #2F2F37;
+}
+
+.box_active::-webkit-scrollbar {
+  background-color: #2F2F37;
+  width: 8px;
+
+}
+
+.box_active::-webkit-scrollbar-thumb {
+  background-color: #8585AD;
+}
