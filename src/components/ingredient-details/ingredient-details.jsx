@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 // import ReactDOM from "react-dom";
 import ingredientDetailsStyle from "./ingredient-details.module.css";
-import {useDispatch, useSelector} from "react-redux";
+import { useSelector} from "react-redux";
 
 const Structure = (props) => {
     return (
@@ -15,8 +15,8 @@ const Structure = (props) => {
     );
 };
 
-export const IngredientDetails = (props) => {
-    const view = useSelector((store) => store.burger.openCard);
+export const IngredientDetails = () => {
+    const view = useSelector((store) => store.view.openCard);
     return (
         <div className={ingredientDetailsStyle.box}>
             <img className={ingredientDetailsStyle.image} src={view.image} alt={view.name}/>
@@ -38,11 +38,3 @@ Structure.propTypes = {
     children: PropTypes.number.isRequired
 }
 
-IngredientDetails.propTypes = {
-    image: PropTypes.string.isRequired,
-    name: PropTypes.string.isRequired,
-    calories: PropTypes.number.isRequired,
-    proteins: PropTypes.number.isRequired,
-    fat: PropTypes.number.isRequired,
-    carbohydrates: PropTypes.number.isRequired
-}

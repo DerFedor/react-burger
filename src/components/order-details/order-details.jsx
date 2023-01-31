@@ -4,7 +4,7 @@ import orderDetailsStyle from "./order-details.module.css";
 import { useSelector } from 'react-redux';
 
 export const OrderDetails = () => {
-    const {order} = useSelector(store => store.burger)
+    const {order} = useSelector(store => store.order)
   return (
     <div className={"m-4 " + orderDetailsStyle.box}>
         <h2 className="text text_type_digits-large pb-8">{order}</h2>
