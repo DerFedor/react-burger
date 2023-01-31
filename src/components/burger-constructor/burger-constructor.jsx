@@ -10,13 +10,12 @@ import {OrderDetails} from "../order-details/order-details"
 import {Modal} from "../modal/modal";
 import burgerConstructorStyle from "./burger-constructor.module.css";
 import {ingredientType} from "../../utils/prop-types";
-import {IngredientsContext} from "../../services/ingredients-сontext";
 import {
     ConstructorPriceContext,
-    ConstructorDataContext
 } from "../../services/сonstructor-сontext";
-import {Burger_API} from "../../utils/burger-api";
-import {OrderContext} from "../../services/order-context";
+import { useDispatch, useSelector } from 'react-redux';
+import { getOrder } from "../../services/actions/list-ingredients";
+import { ORDER_CLEAR } from "../../services/actions/list-ingredients";
 
 
 const ItemConstructor = ({ingredient}) => {
@@ -55,8 +54,9 @@ const ItemConstructorLocked = ({ingredient, position}) => {
 
 
 const ConstructorBox = ({ ingredients }) => {
-    const ingredientsData = React.useContext(IngredientsContext);
+    const ingredientsData = useSelector(state => state.burger.ingredients)
     const {dispatch} = React.useContext(ConstructorPriceContext);
+
 
     const constructorData = ingredientsData.filter((item) =>
         ingredients.find((el) => el === item._id));
@@ -108,36 +108,14 @@ const ConstructorBoxPrice = () => {
 };
 
 const ConstructorButtonBox = ({ingredients}) => {
-    const [order, setOrder] = React.useState(null);
+    const dispatch = useDispatch()
+    const {order} = useSelector(store => store.burger)
 
-    // const handleOpen = () => {
-    //     setIsVisible(true);
-    // };
-
-    // const handleClose = () => {
-    //     setIsVisible(false);
-    // };
-    const fetchOrder = async () => {
-        await fetch(`${Burger_API}/orders`, {
-            method: "POST",
-            headers: {"Content-Type": "application/json"},
-            body: JSON.stringify({
-                ingredients: ingredients,
-            }),
-        })
-            .then(function (res) {
-                if (res.ok) {
-                    return res.json();
-                }
-                //console.log(res);
-                return Promise.reject(`Ошибка: ${res.statusText}`);
-            })
-            .then((data) => setOrder(data))
-            .catch((err) => console.log(err));
-    };
 
     const handleClose = () => {
-        setOrder(null);
+        dispatch({
+            type: ORDER_CLEAR
+        })
     };
 
 
@@ -148,18 +126,17 @@ const ConstructorButtonBox = ({ingredients}) => {
 
     return (
         <div className={"mr-4 mt-10 " + burgerConstructorStyle.button_order}>
-            <OrderContext.Provider value={order}>
                 <ConstructorBoxPrice/>
-                <Button htmlType="button"
+                <Button
                         type="primary"
                         size="large"
                         onClick={async () => {
-                            await fetchOrder();
+//                            await fetchOrder();
+                            dispatch(getOrder(ingredients))
                         }}>
                     Оформить заказ
                 </Button>
                 {order && modal}
-            </OrderContext.Provider>
         </div>
     );
 };
@@ -182,7 +159,7 @@ function reducer(state, action) {
 
 export const BurgerConstructor = () => {
     const [state, dispatch] = React.useReducer(reducer, priceInitialState);
-    const componentsData = React.useContext(ConstructorDataContext);
+    const componentsData = useSelector(store => store.burger.components);
 
     const ingredients = React.useMemo(
         () => componentsData.components.concat(componentsData.buns),

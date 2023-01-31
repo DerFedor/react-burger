@@ -8,7 +8,8 @@ import {
 import { Modal } from "../modal/modal";
 import {ingredientType} from "../../utils/prop-types";
 import {IngredientDetails} from "../ingredient-details/ingredient-details";
-import { IngredientsContext } from "../../services/ingredients-сontext";
+import { useDispatch, useSelector } from "react-redux";
+import { OPEN_CARD, CLOSE_CARD } from "../../services/actions/list-ingredients";
 
 
 const HeaderBurgerIngredients = (props) => {
@@ -60,18 +61,26 @@ const TabContainer = (props) => {
 };
 
 const IngredientCard = ({ card }) => {
+    const dispatch = useDispatch();
     const [isVisible, setIsVisible] = React.useState(false);
 
     const handleOpen = () => {
+        dispatch({
+            type: OPEN_CARD,
+            view: card,
+        });
         setIsVisible(true);
     };
 
     const handleClose = () => {
+        dispatch({
+            type: CLOSE_CARD
+        })
         setIsVisible(false);
     };
 
     const modal = <Modal onClose={handleClose} header='Детали ингредиента'>
-        <IngredientDetails {...card}/>
+        <IngredientDetails/>
     </Modal>;
 
     return (
@@ -105,7 +114,7 @@ IngredientCard.propTypes = {
 };
 
 const BurgerItemIngredients = (data) => {
-    const ingredients  = React.useContext(IngredientsContext);
+    const ingredients = useSelector((store) => store.burger.ingredients);
     const itemType = ingredients.filter((item) => item.type === data.type);
     return (
         <li className="mt-10" id={data.type} ref={data.refElement}>
