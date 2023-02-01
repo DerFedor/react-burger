@@ -44,10 +44,8 @@ export const burgerConstructorReducer = (state = constructorInitialState, action
         }
         case CLEAR_COMPONENTS: {
             return {
-                components: {
-                    bun: "60d3b41abdacab0026a733c7",
-                    components: [],
-                },
+                buns: "60d3b41abdacab0026a733c7",
+                components: [],
             };
         }
         default: {

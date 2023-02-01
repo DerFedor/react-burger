@@ -1,4 +1,5 @@
 import {Burger_API} from "../../utils/burger-api";
+import {checkResponse} from "../../utils/check-response"
 export const GET_INGREDIENTS_REQUEST = "GET_INGREDIENTS_REQUEST";
 export const GET_INGREDIENTS_SUCCESS = "GET_INGREDIENTS_SUCCESS";
 export const GET_INGREDIENTS_FAIL = "GET_INGREDIENTS_FAIL";
@@ -9,12 +10,7 @@ export function getIngredients() {
             type: GET_INGREDIENTS_REQUEST,
         });
         fetch(`${Burger_API}/ingredients`)
-            .then(function (res) {
-                if (res.ok) {
-                    return res.json();
-                }
-                return Promise.reject(`Ошибка: ${res.statusText}`);
-            })
+            .then(checkResponse)
             .then((res) => {
                 if (res && res.success) {
                     dispatch({

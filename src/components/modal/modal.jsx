@@ -22,7 +22,7 @@ export const Modal = (props) => {
     };
   }, []);
 
-  console.log(props.onClose);
+  //console.log(props.onClose);
 
   return ReactDOM.createPortal(
       <div>

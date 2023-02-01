@@ -29,7 +29,7 @@ HeaderBurgerIngredients.propTypes = {
 const TabContainer = (props) => {
     // const [current, setCurrent] = useState("one");
     return (
-        <div style={{display: "flex"}}>
+        <div className={IngredientsStyle.tab}>
             <Tab
                 value="one"
                 active={props.tab === "one"}
@@ -174,7 +174,7 @@ const BurgerItemIngredients = (data) => {
 };
 
 BurgerItemIngredients.propTypes = {
-    type: PropTypes.oneOf(["bun", "sauces", "main"]).isRequired,
+    type: PropTypes.oneOf(["bun", "sauce", "main"]).isRequired,
     text: PropTypes.string.isRequired,
 };
 
@@ -227,8 +227,8 @@ export const BurgerIngredients = () => {
                     text="Булки"/>
                 <BurgerItemIngredients
                     refElement={sauces}
-                    key="sauces"
-                    type="sauces"
+                    key="sauce"
+                    type="sauce"
                     text="Соусы"/>
                 <BurgerItemIngredients
                     refElement={main}
