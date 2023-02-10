@@ -1,0 +1,60 @@
+.box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 480px;
+}
+
+
+
+.main {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+}
+.input {
+  min-width: 480px;
+  margin-bottom: 24px;
+}
+
+.i__box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* height: 100vh; */
+  width: 100vw;
+  margin-top: 180px;
+}
+
+.text {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 8px;
+  justify-content: center;
+}
+
+.link {
+  text-decoration: none;
+  color: #4C4CFF;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  text-align: center;
+}
+
+.authorization__box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 480px;
+  margin: 20px 20px;
+}
