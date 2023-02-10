@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import ReactDOM from "react-dom";
 import modalStyle from "./modal.module.css";
-import { ModalOverlay } from "../modalOverlay/modal-overlay";
+import { ModalOverlay } from "../modal-overlay/modal-overlay";
 
 import { CloseIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 
@@ -22,7 +22,7 @@ export const Modal = (props) => {
     };
   }, []);
 
-  console.log(props.onClose);
+  //console.log(props.onClose);
 
   return ReactDOM.createPortal(
       <div>

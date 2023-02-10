@@ -3,36 +3,34 @@ import {AppHeader} from "../app-header/app-header";
 import {BurgerIngredients} from "../burger-ingredients/burger-ingredients";
 import appStyle from "./app.module.css";
 import {BurgerConstructor} from "../burger-constructor/burger-constructor";
-//import PropTypes from 'prop-types';
-import  ErrorBoundary  from "../error-boundary/error-boundary";
-import {getIngredients} from "../../utils/burger-api";
+import ErrorBoundary from "../error-boundary/error-boundary";
+import {useDispatch} from "react-redux";
+import {getIngredients} from "../../services/actions/burger-ingredients";
+import {HTML5Backend} from "react-dnd-html5-backend";
+import {DndProvider} from "react-dnd";
 
 
 export const App = () => {
-   const [data, setData] = React.useState([]);
+    const dispatch = useDispatch()
+
 
     React.useEffect(() => {
-        const getData = () => {
-            getIngredients()
-                .then((data) => setData(data.data))
-                .catch((err) => console.log(err));
-        };
-        getData();
-    }, []);
-
-
+        dispatch(getIngredients())
+    }, [dispatch])
 
 
     return (
-      <div className={appStyle.page}>
-        <AppHeader />
-          <ErrorBoundary>
-            <main className={appStyle.main}>
-              <BurgerIngredients ingredients={data}/>
-              <BurgerConstructor data={data}/>
-            </main>
-          </ErrorBoundary>
-      </div>
+        <div className={appStyle.page}>
+            <AppHeader/>
+            <ErrorBoundary>
+                <main className={appStyle.main}>
+                    <DndProvider backend={HTML5Backend}>
+                        <BurgerIngredients/>
+                        <BurgerConstructor/>
+                    </DndProvider>
+                </main>
+            </ErrorBoundary>
+        </div>
     );
 }
 
