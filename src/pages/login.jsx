@@ -1,58 +1,72 @@
-import React, { useEffect } from "react";
+import React, {useEffect} from "react";
 import {
     EmailInput,
     PasswordInput,
     Button,
 } from "@ya.praktikum/react-developer-burger-ui-components";
-import { Link } from "react-router-dom";
 import style from "./pages.module.css";
-import { AppHeader } from "../components/app-header/app-header";
+import {AppHeader} from "../components/app-header/app-header";
+import {Link, useNavigate, redirect, useLocation, Navigate} from "react-router-dom";
+import {useDispatch, useSelector} from "react-redux";
+import {getLogin} from "../services/actions/login";
+import {getCookie} from "../utils/cookies";
+
 
 
 export const LoginPage = () => {
-    const [emailValue, setEmailValue] = React.useState("bob@example.com");
-    // const onChangeEmail = (e) => {
-    //     setEmailValue(e.target.value);
-    // };
-    const [passwordValue, setPasswordValue] = React.useState("password");
+    const navigate = useNavigate()
+    const {state} = useLocation()
+    const {isAuthenticated} = useSelector(state => state.user)
+
+
+    // useEffect(() => {
+    //     isAuthenticated ? navigate("/") : console.log(isAuthenticated)
+    // }, [isAuthenticated])
+
+    const dispatch = useDispatch()
+
+    const [emailValue, setEmailValue] = React.useState("");
+
+    const onChangeEmail = (e) => {
+        setEmailValue(e.target.value);
+    };
+    const [passwordValue, setPasswordValue] = React.useState("");
     const onChangePassword = (e) => {
         setPasswordValue(e.target.value);
     };
-    const Email =() => {
-        const [value, setValue] = React.useState('bob@example.com')
-        const onChangeEmail = e => {
-            setValue(e.target.value)
+    const loginOnClick = () => {
+        const loginData = {
+            email: emailValue,
+            password: passwordValue
         }
+        dispatch(getLogin(loginData))
+
+    }
+
+    if (isAuthenticated) {
         return (
-            <div style={{ display: 'flex', flexDirection: 'column' }}>
-                {/*<EmailInput*/}
-                {/*    onChange={onChange}*/}
-                {/*    value={value}*/}
-                {/*    name={'email'}*/}
-                {/*    placeholder="Логин"*/}
-                {/*    isIcon={true}*/}
-                {/*    extraClass="mb-2"*/}
-                {/*/>*/}
-                <EmailInput
-                    onChange={onChangeEmail}
-                    value={value}
-                    name={'email'}
-                    isIcon={false}
-                    extraClass="mb-4 mt-4"
-                />
-            </div>
+            <Navigate to= "/" />
         )
-    };
+    }
+    // if (isAuthenticated) {
+    //     return (
+    //         <redirect to={state?.from || '/'} />
+    //     )
+    // }
 
     return (
         <>
-            <AppHeader />
+            <AppHeader/>
             <section className={style.i__box}>
                 <div className={style.box}>
                     <h1 className={"text text_type_main-medium"}>
                         Вход
                     </h1>
-                    <Email/>
+                    <EmailInput
+                        onChange={onChangeEmail}
+                        value={emailValue}
+                        name={"email"}
+                    />
                     <PasswordInput
                         onChange={onChangePassword}
                         value={passwordValue}
@@ -63,22 +77,9 @@ export const LoginPage = () => {
                             type="primary"
                             size="medium"
                             extraClass="mb-20"
+                            onClick={loginOnClick}
                     >
                         Войти</Button>
-                    {/*<div className={style.text+"mt-20" }>*/}
-                    {/*    <p className="text text_type_main-default">*/}
-                    {/*        Вы - новый пользователь?*/}
-                    {/*    </p>*/}
-                    {/*    <Link className={style.link + "text text_type_main-default"} to="/">*/}
-                    {/*        Зарегистрироваться*/}
-                    {/*    </Link>*/}
-                    {/*</div>*/}
-                    {/*<div className="mt-4 text">*/}
-                    {/*    <p className="text text_type_main-default">Забыли пароль?</p>*/}
-                    {/*    <Link className={style.link +"text text_type_main-default"} to="/">*/}
-                    {/*        Восстановить пароль*/}
-                    {/*    </Link>*/}
-                    {/*</div>*/}
                     <nav>
                         <ul className={style.list}>
                             <li className="text text_type_main-default text_color_inactive">

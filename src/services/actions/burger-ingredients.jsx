@@ -1,4 +1,4 @@
-import {Burger_API} from "../../utils/burger-api";
+import {Burger_API} from "../../utils/burger-url";
 import {checkResponse} from "../../utils/check-response"
 export const GET_INGREDIENTS_REQUEST = "GET_INGREDIENTS_REQUEST";
 export const GET_INGREDIENTS_SUCCESS = "GET_INGREDIENTS_SUCCESS";

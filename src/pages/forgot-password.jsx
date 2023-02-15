@@ -5,20 +5,61 @@ import {
     Input,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import {AppHeader} from "../components/app-header/app-header";
-import {Link, useNavigate} from "react-router-dom";
+import {Link, useNavigate, redirect, useLocation} from "react-router-dom";
 import style from "./pages.module.css";
+import {Burger_API} from "../utils/burger-url";
+import { useSelector } from "react-redux";
 
 export const ForgotPassword = () => {
+    const { isAuthenticated } = useSelector(state => state.user);
     const [emailValue, setEmailValue] = React.useState("");
     const onChangeEmail = (e) => {
         setEmailValue(e.target.value);
     };
     const navigate = useNavigate();
+    // const location = useLocation();
+    // console.log("location:");
+    // console.log(location);
 
-    const onClick = () => {
-        navigate("/reset-password");
+
+    // const onClick = () => {
+    //     navigate("/reset-password");
+    // };
+
+    const forgotPasswordClick = () => {
+        const sendPost = () => {
+            fetch(`${Burger_API}/password-reset`, {
+                method: "POST",
+                headers: {"Content-Type": "application/json"},
+                body: JSON.stringify({
+                    email: emailValue,
+                }),
+            })
+                .then(function (res) {
+                    if (res.ok) {
+                        return res.json();
+                    }
+                    return Promise.reject(`Ошибка: ${res.statusText}`);
+                })
+                .then((res) => {
+                    if (res && res.success) {
+                        navigate("/reset-password");
+                    }
+                })
+                .catch((err) => {
+                    console.log(err);
+                });
+        };
+        if (emailValue) {
+            sendPost();
+        }
     };
 
+    if (isAuthenticated) {
+        return (
+            <redirect to='/profile' />
+        )
+    }
     return (
         <>
             <AppHeader/>
@@ -34,8 +75,9 @@ export const ForgotPassword = () => {
                         name={"email"}
                         placeholder="Укажите e-mail"
                     />
-                    <Button onClick={onClick}
+                    <Button onClick={forgotPasswordClick}
                             extraClass="mt-4 mb-20"
+                            htmlType={"submit"}
                     >Восстановить</Button>
                     <nav>
                         <ul className={style.list}>

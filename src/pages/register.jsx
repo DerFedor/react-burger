@@ -6,11 +6,26 @@ import {
     Input,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import { AppHeader } from "../components/app-header/app-header";
-import { Link } from "react-router-dom";
+import {Link, Navigate, useNavigate} from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+//import { REGISTRATION_REQUEST } from "../services/actions/register";
+import { getRegistration } from "../services/actions/register";
+
 import style from "./pages.module.css";
 
 
 export const Registration = () => {
+    const navigate = useNavigate()
+    const dispatch = useDispatch()
+//    const { isRequest, isFail } = useSelector(state => state.register)
+    const { isAuthenticated } = useSelector(state => state.user)
+
+    // useEffect(() => {
+    //
+    //     console.log(isAuthenticated)
+    //     isAuthenticated ? navigate("/") : console.log(isAuthenticated)
+    // }, [isAuthenticated])
+
     const [emailValue, setEmailValue] = React.useState("");
     const onChangeEmail = (e) => {
         setEmailValue(e.target.value);
@@ -21,11 +36,25 @@ export const Registration = () => {
     };
     const [nameInput, setNameInput] = React.useState("");
     const inputRef = React.useRef(null);
-    const onIconClick = () => {
-        setTimeout(() => inputRef.current.focus(), 0);
-        alert("Icon Click Callback");
-    };
+    // const onIconClick = () => {
+    //     setTimeout(() => inputRef.current.focus(), 0);
+    //     alert("Icon Click Callback");
+    // };
 
+    const registerOnClick = () => {
+        const registerData = {
+            email: emailValue,
+            password: passwordValue,
+            name: nameInput
+        }
+        dispatch(getRegistration(registerData))
+    }
+
+    if (isAuthenticated) {
+        return (
+            <Navigate to='/' />
+        )
+    }
     return (
         <>
             <AppHeader />
@@ -40,8 +69,8 @@ export const Registration = () => {
                         name={"name"}
                         ref={inputRef}
                         errorText={"Ошибка"}
-                        onIconClick={onIconClick}
-                    ></Input>
+                        //onIconClick={onIconClick}
+                    />
                     <EmailInput
                         onChange={onChangeEmail}
                         value={emailValue}
@@ -59,6 +88,7 @@ export const Registration = () => {
                             type="primary"
                             size="medium"
                             extraClass="mt-4 mb-20"
+                            onClick={registerOnClick}
                     >
                         Зарегистрироваться</Button>
                     <nav>

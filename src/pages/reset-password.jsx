@@ -4,10 +4,16 @@ import {
     Input,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import { AppHeader } from "../components/app-header/app-header";
-import { Link, useNavigate } from "react-router-dom";
+import {Link, useNavigate, useLocation, Navigate} from "react-router-dom";
 import style from "./pages.module.css";
+import {Burger_API} from "../utils/burger-url";
+import {useSelector} from "react-redux";
 
 export const ResetPassword = () => {
+    const navigate = useNavigate();
+    const { state } = useLocation()
+    const { isAuthenticated } = useSelector(state => state.user)
+
     const [passwordValue, setPasswordValue] = useState("");
     const onChangePassword = (e) => {
         setPasswordValue(e.target.value);
@@ -18,13 +24,57 @@ export const ResetPassword = () => {
         setTimeout(() => inputRef.current.focus(), 0);
         alert("Icon Click Callback");
     };
+    const resetPasswordClick = () => {
+        const sendPost = () => {
+            fetch(`${Burger_API}/password-reset/reset`, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    password: passwordValue,
+                    token: codeInput,
+                }),
+            })
+                .then(function (res) {
+                    if (res.ok) {
+                        return res.json();
+                    }
+                    //return Promise.reject(`Ошибка: ${res.statusText}`);
+                    return Promise.reject(res);
+                })
+                .then((res) => {
+                    if (res && res.success) {
+                        navigate("/login");
+                    }
+                })
+                .catch((res) => {
+                    return res.json()
+                }).then((res) => {
+                console.log(res.message)
+                alert(res.message)
+            })
+        };
+        if (passwordValue && codeInput) {
+            sendPost();
+        }
+    };
 
+    if (isAuthenticated) {
+        return (
+            <Navigate to='/profile' />
+        )
+    }
+
+    if (!isAuthenticated && state?.from.pathname !== '/forgot-password') {
+        return (
+            <Navigate to='/' />
+        )
+    }
     return (
         <>
             <AppHeader />
             <section className={style.i__box}>
                 <div className={style.authorization__box}>
-                    <h1 className="mb-6 text text_type_main-medium ">Регистрация</h1>
+                    <h1 className="mb-6 text text_type_main-medium ">Восстановление пароля</h1>
                     <Input
                         type="password"
                         onChange={onChangePassword}
@@ -41,8 +91,10 @@ export const ResetPassword = () => {
                         ref={inputRef}
                         errorText={"Ошибка"}
                         onIconClick={onIconClick}
-                    ></Input>
-                    <Button extraClass="mt-4 mb-20">Сохранить</Button>
+                    />
+                    <Button extraClass="mt-4 mb-20"
+                            onClick={resetPasswordClick}
+                    >Сохранить</Button>
                     <nav>
                         <ul className={style.list}>
                             <li className="text text_type_main-default text_color_inactive mt-6">

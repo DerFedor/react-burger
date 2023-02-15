@@ -2,11 +2,11 @@ import {AppHeader} from "../components/app-header/app-header";
 
 import React from "react";
 
-export default function FeedPage() {
+export function FeedPage() {
   return (
       <>
         <AppHeader />
-          <h1 className="pt-10">Food</h1>
+          <h1 className="pt-10">Feed</h1>
       </>
   );
 }

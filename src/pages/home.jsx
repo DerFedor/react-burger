@@ -9,17 +9,8 @@ import { AppHeader } from "../components/app-header/app-header";
 import homeStyle from "./pages.module.css"
 
 
-export const HomePage = () => {
-    const location = useLocation();
-    //const match = useRouteMatch();
-    //const url = useResolvedPath("").pathname;
 
-    const navigate = useNavigate();
-    useEffect(() => {
-        console.log(navigate);
-        console.log(location);
-       // console.log(url);
-    }, [navigate, location]);
+export const HomePage = () => {
 
     return (
         <>

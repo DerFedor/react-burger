@@ -1,31 +1,36 @@
-import React from "react";
-import {AppHeader} from "../app-header/app-header";
-import {BurgerIngredients} from "../burger-ingredients/burger-ingredients";
-import appStyle from "./app.module.css";
-import {BurgerConstructor} from "../burger-constructor/burger-constructor";
+import React, {useEffect} from "react";
 import ErrorBoundary from "../error-boundary/error-boundary";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {getIngredients} from "../../services/actions/burger-ingredients";
-import {HTML5Backend} from "react-dnd-html5-backend";
-import {DndProvider} from "react-dnd";
-import {BrowserRouter, Routes, Route} from 'react-router-dom';
-import {HomePage} from "../../pages/home";
-import {LoginPage} from "../../pages/login";
-import {NotFound404} from "../../pages/not-found/not-found";
-import FoodPage from "../../pages/food";
-import {Registration} from "../../pages/register";
-import {ForgotPassword} from "../../pages/forgot-password";
-import {ResetPassword} from "../../pages/reset-password";
+import {BrowserRouter, Routes, Route, Navigate} from 'react-router-dom';
+import { Profile, ResetPassword, ForgotPassword, Registration, LoginPage, HomePage, FeedPage, NotFound404 } from '../../pages/index'
+import {getCookie, setCookie} from "../../utils/cookies";
+import { getUserData } from "../../services/actions/user";
+import { ProtectedRouteElement  } from "../protected-route/protected-route";
+import { IngredientPage } from "../../pages/ingredient/IngredientPage";
+
+
 
 
 export const App = () => {
-    const dispatch = useDispatch()
+    const { isAuthenticated, token } = useSelector((state) => state.user);
+    const dispatch = useDispatch();
+    //const access = getCookie("accessToken")
 
-
-    React.useEffect(() => {
+    useEffect(() => {
         dispatch(getIngredients())
     }, [dispatch])
 
+    useEffect(() => {
+        const refreshToken = getCookie('refreshToken')
+        if (refreshToken) {
+            dispatch(getUserData(refreshToken))
+        }
+    }, [])
+
+    // useEffect(() => {
+    //     console.log(token)
+    // }, [token])
 
     return (
         <ErrorBoundary>
@@ -42,14 +47,18 @@ export const App = () => {
                     {/*        <BurgerConstructor/>*/}
                     {/*    </DndProvider>*/}
                     {/*</main>*/}
-                    <Route path="/login" element={<LoginPage/>}/>
-                    <Route path="/food" element={<FoodPage/>}/>
+                    <Route path="/login"  element={<LoginPage />}/>
+                    {/*<Route path="/login" element={(!isAuthenticated && !token) ? <LoginPage /> : <Navigate to={'/'} />} />*/}
+                    <Route path="/feed" element={<FeedPage/>}/>
+                    <Route path="/ingredients/:id" element={<IngredientPage/>}/>
                     <Route path="/register" element={<Registration/>}/>
                     <Route path="/forgot-password" element={<ForgotPassword/>}/>
                     <Route path="/reset-password" element={<ResetPassword/>}/>
+                    {/*<Route path="/profile" element={<Profile/>}/>*/}
+
+                    {/*<Route path="/profile" element={isAuthenticated ? <Profile/> : <LoginPage/>}/>*/}
+                    <Route path="/profile" element={<ProtectedRouteElement element={<Profile />}/>} />
                     <Route path="*" element={<NotFound404/>}/>
-
-
                     {/*</div>*/}
                 </Routes>
             </BrowserRouter>
