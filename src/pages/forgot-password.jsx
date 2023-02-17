@@ -4,18 +4,19 @@ import {
     Button,
     Input,
 } from "@ya.praktikum/react-developer-burger-ui-components";
-import {AppHeader} from "../components/app-header/app-header";
-import {Link, useNavigate, redirect, useLocation} from "react-router-dom";
+import {Link, useNavigate, redirect, useLocation, Navigate} from "react-router-dom";
 import style from "./pages.module.css";
-import {Burger_API} from "../utils/burger-url";
-import { useSelector } from "react-redux";
+
+import {useDispatch, useSelector} from "react-redux";
+import {passwordForgot} from "../services/actions/reset-password";
+
 
 export const ForgotPassword = () => {
-    const { isAuthenticated } = useSelector(state => state.user);
+    const {isAuthenticated} = useSelector(state => state.user);
     const [emailValue, setEmailValue] = React.useState("");
-    const onChangeEmail = (e) => {
-        setEmailValue(e.target.value);
-    };
+    const {forgotSuccess} = useSelector(state => state.password)
+    const dispatch = useDispatch()
+    // const location = useLocation();
     const navigate = useNavigate();
     // const location = useLocation();
     // console.log("location:");
@@ -26,59 +27,51 @@ export const ForgotPassword = () => {
     //     navigate("/reset-password");
     // };
 
-    const forgotPasswordClick = () => {
-        const sendPost = () => {
-            fetch(`${Burger_API}/password-reset`, {
-                method: "POST",
-                headers: {"Content-Type": "application/json"},
-                body: JSON.stringify({
-                    email: emailValue,
-                }),
-            })
-                .then(function (res) {
-                    if (res.ok) {
-                        return res.json();
-                    }
-                    return Promise.reject(`Ошибка: ${res.statusText}`);
-                })
-                .then((res) => {
-                    if (res && res.success) {
-                        navigate("/reset-password");
-                    }
-                })
-                .catch((err) => {
-                    console.log(err);
-                });
-        };
+    useEffect(() => {
+        console.log("forgotSuccess", forgotSuccess)
+
+    }, [forgotSuccess])
+
+    const forgotPasswordSubmit = (e) => {
+        e.preventDefault()
         if (emailValue) {
-            sendPost();
+            dispatch(passwordForgot(emailValue))
         }
     };
 
+    if (!isAuthenticated && forgotSuccess) {
+        // <Redirect to={{ pathname: '/reset-password', state: { from: location } }} />
+        return (
+            <Navigate to="/reset-password"/>
+        )
+    }
+
     if (isAuthenticated) {
         return (
-            <redirect to='/profile' />
+            <Navigate to="/profile"/>
         )
     }
     return (
         <>
-            <AppHeader/>
             <section className={style.i__box}>
-                <div className={style.authorization__box}>
+                <form className={style.authorization__box}
+                      onSubmit={(e) => forgotPasswordSubmit(e)}>
                     <h1 className="mb-6 text text_type_main-medium ">
                         Восстановление пароля
                     </h1>
                     <Input
                         type="email"
-                        onChange={onChangeEmail}
+                        onChange={(e) => setEmailValue(e.target.value)}
                         value={emailValue}
                         name={"email"}
                         placeholder="Укажите e-mail"
                     />
-                    <Button onClick={forgotPasswordClick}
-                            extraClass="mt-4 mb-20"
-                            htmlType={"submit"}
-                    >Восстановить</Button>
+                    <Button
+                        extraClass="mt-4 mb-20"
+                        htmlType={"submit"}
+                    >
+                        Восстановить
+                    </Button>
                     <nav>
                         <ul className={style.list}>
                             <li className="text text_type_main-default text_color_inactive mt-6">
@@ -89,7 +82,7 @@ export const ForgotPassword = () => {
                             </li>
                         </ul>
                     </nav>
-                </div>
+                </form>
             </section>
         </>
     );

@@ -27,7 +27,6 @@ import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import style from './ingredient-page.module.css'
 import PropTypes from "prop-types";
-import {AppHeader} from "../../components/app-header/app-header";
 
 
 const Structure = (props) => {
@@ -51,7 +50,6 @@ export const IngredientPage = () => {
 
     return (
         <>
-            <AppHeader />
             <section className={style.section}>
                 <h1 className={"text text_type_main-large  " + style.header}>Детали ингредиента</h1>
                 <div className={style.box}>

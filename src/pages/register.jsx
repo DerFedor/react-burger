@@ -27,13 +27,13 @@ export const Registration = () => {
     // }, [isAuthenticated])
 
     const [emailValue, setEmailValue] = React.useState("");
-    const onChangeEmail = (e) => {
-        setEmailValue(e.target.value);
-    };
+    // const onChangeEmail = (e) => {
+    //     setEmailValue(e.target.value);
+    // };
     const [passwordValue, setPasswordValue] = React.useState("");
-    const onChangePassword = (e) => {
-        setPasswordValue(e.target.value);
-    };
+    // const onChangePassword = (e) => {
+    //     setPasswordValue(e.target.value);
+    // };
     const [nameInput, setNameInput] = React.useState("");
     const inputRef = React.useRef(null);
     // const onIconClick = () => {
@@ -41,7 +41,8 @@ export const Registration = () => {
     //     alert("Icon Click Callback");
     // };
 
-    const registerOnClick = () => {
+    const registerOnClick = (e) => {
+        e.preventDefault()
         const registerData = {
             email: emailValue,
             password: passwordValue,
@@ -57,9 +58,8 @@ export const Registration = () => {
     }
     return (
         <>
-            <AppHeader />
             <section className={style.i__box}>
-                <div className={style.authorization__box}>
+                <form className="authorization__box" onSubmit={(e) => registerOnClick(e)}>
                     <h1 className="mb-6 text text_type_main-medium ">Регистрация</h1>
                     <Input
                         type={"text"}
@@ -72,14 +72,14 @@ export const Registration = () => {
                         //onIconClick={onIconClick}
                     />
                     <EmailInput
-                        onChange={onChangeEmail}
+                        onChange={(e) => setEmailValue(e.target.value)}
                         value={emailValue}
                         name={"email"}
                         extraClass="mb-4"
                         // className="input_size_large"
                     />
                     <PasswordInput
-                        onChange={onChangePassword}
+                        onChange={(e) => setPasswordValue(e.target.value)}
                         value={passwordValue}
                         name={"password"}
                         //extraClass="mb-4"
@@ -88,7 +88,7 @@ export const Registration = () => {
                             type="primary"
                             size="medium"
                             extraClass="mt-4 mb-20"
-                            onClick={registerOnClick}
+                            // onClick={registerOnClick}
                     >
                         Зарегистрироваться</Button>
                     <nav>
@@ -101,7 +101,7 @@ export const Registration = () => {
                             </li>
                         </ul>
                     </nav>
-                </div>
+                </form>
             </section>
         </>
     );

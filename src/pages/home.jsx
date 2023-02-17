@@ -5,7 +5,6 @@ import { useNavigate, useLocation } from "react-router-dom";
 
 import { BurgerIngredients } from "../components/burger-ingredients/burger-ingredients";
 import { BurgerConstructor } from "../components/burger-constructor/burger-constructor";
-import { AppHeader } from "../components/app-header/app-header";
 import homeStyle from "./pages.module.css"
 
 
@@ -14,7 +13,6 @@ export const HomePage = () => {
 
     return (
         <>
-            <AppHeader />
             <DndProvider backend={HTML5Backend}>
                 <main className={homeStyle.main}>
                     <BurgerIngredients />

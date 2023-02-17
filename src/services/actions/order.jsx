@@ -1,4 +1,4 @@
-import {Burger_API} from "../../utils/burger-url";
+import {BASE_URL} from "../../utils/base-url";
 import {checkResponse} from "../../utils/check-response";
 
 export const GET_ORDER_REQUEST = "GET_ORDER_REQUEST";
@@ -11,7 +11,7 @@ export function getOrder(ingredients, token) {
         dispatch({
             type: GET_ORDER_REQUEST,
         });
-        fetch(`${Burger_API}/orders`, {
+        fetch(`${BASE_URL}/orders`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({

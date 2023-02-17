@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, {useEffect, useState, useRef} from "react";
 import {
     EmailInput,
     PasswordInput,
@@ -6,16 +6,16 @@ import {
     Input,
     EditIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components";
-import { AppHeader } from "../components/app-header/app-header";
-import {Link, useLocation, useNavigate} from "react-router-dom";
+import {useLocation} from "react-router-dom";
 import style from "./pages.module.css";
-import { useDispatch, useSelector } from "react-redux";
-import { getLogout } from "../services/actions/logout";
-import { getCookie } from "../utils/cookies";
-import { userDataUpdate, tokenUpdate, userDataUpdateWithoutToken } from "../services/actions/user";
+import {useDispatch, useSelector} from "react-redux";
+import {getLogout} from "../services/actions/logout";
+import {getCookie} from "../utils/cookies";
+import {userDataUpdate, userDataUpdateWithoutToken} from "../services/actions/user";
+
 export const Profile = () => {
     const dispatch = useDispatch();
-    const { email, userName, isAuthenticated, token } = useSelector((state) => state.user);
+    const {email, userName, token} = useSelector((state) => state.user);
     const [emailValue, setEmailValue] = useState("");
     const [passwordValue, setPasswordValue] = useState("");
     const [nameInput, setNameInput] = useState("");
@@ -31,7 +31,6 @@ export const Profile = () => {
     // };
 
 
-
     useEffect(() => {
         setEmailValue(email);
         setNameInput(userName);
@@ -42,7 +41,9 @@ export const Profile = () => {
         dispatch(getLogout(refreshToken))
     }
 
-    const userSaveDataOnClick = () => {
+    const userSaveDataOnClick = (e) => {
+        e.preventDefault()
+        console.log("e", e)
         const userData = {
             email: emailValue,
             name: nameInput,
@@ -59,7 +60,10 @@ export const Profile = () => {
         }
     }
 
-    const cancelButtonOnClick = () => {
+    const cancelButtonOnClick = (e) => {
+        e.stopPropagation()
+        e.preventDefault()
+        console.log(e)
         setEmailValue(email);
         setNameInput(userName);
         setPasswordValue('')
@@ -67,7 +71,6 @@ export const Profile = () => {
 
     return (
         <>
-            <AppHeader />
             <section className={style.profile}>
                 <ul className={style.list}>
                     <li className={style.profile_box}>
@@ -87,8 +90,9 @@ export const Profile = () => {
                     </li>
                 </ul>
                 {/*<div className="authorization__box">*/}
-                    {location.pathname === '/profile' && <form className="authorization__box" onSubmit={(e) => userSaveDataOnClick(e)}>
-                        <Input
+                {/*    {location.pathname === '/profile' && <form className="authorization__box" onSubmit={(e) => userSaveDataOnClick(e)}>*/}
+                <form className="authorization__box" onSubmit={(e) => userSaveDataOnClick(e)}>
+                    <Input
                         type={"text"}
                         placeholder={"Имя"}
                         onChange={(e) => setNameInput(e.target.value)}
@@ -119,11 +123,18 @@ export const Profile = () => {
                         <Button
                             htmlType="button" type="secondary"
                             size="medium"
-                            onClick={cancelButtonOnClick}>Отмена</Button>
-                        <Button onClick={userSaveDataOnClick}>Сохранить</Button>
+                            onClick={(e) => cancelButtonOnClick(e)}
+                        >
+                            Отмена
+                        </Button>
+                        <Button
+                            htmlType="submit"
+                            type="primary">
+                            Сохранить
+                        </Button>
                     </div>
-                   {/*</div>*/}
-                    </form>}
+                    {/*</div>*/}
+                </form>
             </section>
         </>
     );

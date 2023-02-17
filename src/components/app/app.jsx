@@ -8,6 +8,8 @@ import {getCookie, setCookie} from "../../utils/cookies";
 import { getUserData } from "../../services/actions/user";
 import { ProtectedRouteElement  } from "../protected-route/protected-route";
 import { IngredientPage } from "../../pages/ingredient/IngredientPage";
+import {AppHeader} from "../app-header/app-header";
+
 
 
 
@@ -35,18 +37,10 @@ export const App = () => {
     return (
         <ErrorBoundary>
             <BrowserRouter>
+                <AppHeader/>
                 <Routes>
                     {/*<div className={appStyle.page}>*/}
-                    {/*<AppHeader/>*/}
-
-
                     <Route path="/" element={<HomePage/>}/>
-                    {/*<main className={appStyle.main}>*/}
-                    {/*    <DndProvider backend={HTML5Backend}>*/}
-                    {/*        <BurgerIngredients/>*/}
-                    {/*        <BurgerConstructor/>*/}
-                    {/*    </DndProvider>*/}
-                    {/*</main>*/}
                     <Route path="/login"  element={<LoginPage />}/>
                     {/*<Route path="/login" element={(!isAuthenticated && !token) ? <LoginPage /> : <Navigate to={'/'} />} />*/}
                     <Route path="/feed" element={<FeedPage/>}/>

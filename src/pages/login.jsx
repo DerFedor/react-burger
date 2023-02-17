@@ -12,7 +12,6 @@ import {getLogin} from "../services/actions/login";
 import {getCookie} from "../utils/cookies";
 
 
-
 export const LoginPage = () => {
     const navigate = useNavigate()
     const {state} = useLocation()
@@ -27,25 +26,26 @@ export const LoginPage = () => {
 
     const [emailValue, setEmailValue] = React.useState("");
 
-    const onChangeEmail = (e) => {
-        setEmailValue(e.target.value);
-    };
+    // const onChangeEmail = (e) => {
+    //     setEmailValue(e.target.value);
+    // };
     const [passwordValue, setPasswordValue] = React.useState("");
-    const onChangePassword = (e) => {
-        setPasswordValue(e.target.value);
-    };
-    const loginOnClick = () => {
+    // const onChangePassword = (e) => {
+    //     setPasswordValue(e.target.value);
+    // };
+
+    const loginOnClick = (e) => {
+        e.preventDefault()
         const loginData = {
             email: emailValue,
             password: passwordValue
         }
         dispatch(getLogin(loginData))
-
     }
 
     if (isAuthenticated) {
         return (
-            <Navigate to= "/" />
+            <Navigate to="/"/>
         )
     }
     // if (isAuthenticated) {
@@ -56,30 +56,29 @@ export const LoginPage = () => {
 
     return (
         <>
-            <AppHeader/>
             <section className={style.i__box}>
-                <div className={style.box}>
-                    <h1 className={"text text_type_main-medium"}>
+                <form className={style.box} onSubmit={(e) => loginOnClick(e)}>
+                    <h1 className={"mb-6 text text_type_main-medium"}>
                         Вход
                     </h1>
                     <EmailInput
-                        onChange={onChangeEmail}
                         value={emailValue}
                         name={"email"}
+                        onChange={(e) => setEmailValue(e.target.value)}
                     />
                     <PasswordInput
-                        onChange={onChangePassword}
                         value={passwordValue}
                         name={"password"}
                         extraClass="mb-4"
+                        onChange={(e) => setPasswordValue(e.target.value)}
                     />
-                    <Button htmlType="button"
+                    <Button htmlType="submit"
                             type="primary"
                             size="medium"
                             extraClass="mb-20"
-                            onClick={loginOnClick}
                     >
                         Войти</Button>
+
                     <nav>
                         <ul className={style.list}>
                             <li className="text text_type_main-default text_color_inactive">
@@ -96,8 +95,7 @@ export const LoginPage = () => {
                             </li>
                         </ul>
                     </nav>
-
-                </div>
+                </form>
             </section>
         </>
     );
