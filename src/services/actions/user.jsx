@@ -113,10 +113,11 @@ export const getUserData = (token) => {
                     setTimeout(() => dispatch({type: RESET_TOKEN}), [1000 * 1200])
                     return res
                 }
-            })
-            .then((res) => {
+            }).then((res) => {
                 fetch(`${BASE_URL}/auth/user`, {
-                    headers: {authorization: res.accessToken, "Content-Type": "application/json"},
+                    headers: {
+                        authorization: res.accessToken,
+                        "Content-Type": "application/json"},
                 })
                     .then(checkResponse)
                     .then((res) => {
@@ -149,8 +150,7 @@ export const userDataUpdateWithoutToken = (data, token) => {
             body: JSON.stringify({
                 token: token
             }),
-        })
-            .then(checkResponse)
+        }).then(checkResponse)
             .then((res) => {
                 if (res && res.success) {
                     dispatch({

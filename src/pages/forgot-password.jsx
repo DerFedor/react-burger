@@ -1,10 +1,9 @@
 import React, {useEffect} from "react";
 import {
-    EmailInput,
     Button,
     Input,
 } from "@ya.praktikum/react-developer-burger-ui-components";
-import {Link, useNavigate, redirect, useLocation, Navigate} from "react-router-dom";
+import {Link, Navigate} from "react-router-dom";
 import style from "./pages.module.css";
 
 import {useDispatch, useSelector} from "react-redux";
@@ -16,16 +15,6 @@ export const ForgotPassword = () => {
     const [emailValue, setEmailValue] = React.useState("");
     const {forgotSuccess} = useSelector(state => state.password)
     const dispatch = useDispatch()
-    // const location = useLocation();
-    const navigate = useNavigate();
-    // const location = useLocation();
-    // console.log("location:");
-    // console.log(location);
-
-
-    // const onClick = () => {
-    //     navigate("/reset-password");
-    // };
 
     useEffect(() => {
         console.log("forgotSuccess", forgotSuccess)
@@ -40,7 +29,6 @@ export const ForgotPassword = () => {
     };
 
     if (!isAuthenticated && forgotSuccess) {
-        // <Redirect to={{ pathname: '/reset-password', state: { from: location } }} />
         return (
             <Navigate to="/reset-password"/>
         )

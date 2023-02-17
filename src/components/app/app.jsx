@@ -17,7 +17,6 @@ import {AppHeader} from "../app-header/app-header";
 export const App = () => {
     const { isAuthenticated, token } = useSelector((state) => state.user);
     const dispatch = useDispatch();
-    //const access = getCookie("accessToken")
 
     useEffect(() => {
         dispatch(getIngredients())
@@ -30,16 +29,12 @@ export const App = () => {
         }
     }, [])
 
-    // useEffect(() => {
-    //     console.log(token)
-    // }, [token])
 
     return (
         <ErrorBoundary>
             <BrowserRouter>
                 <AppHeader/>
                 <Routes>
-                    {/*<div className={appStyle.page}>*/}
                     <Route path="/" element={<HomePage/>}/>
                     <Route path="/login"  element={<LoginPage />}/>
                     {/*<Route path="/login" element={(!isAuthenticated && !token) ? <LoginPage /> : <Navigate to={'/'} />} />*/}

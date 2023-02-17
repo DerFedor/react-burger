@@ -1,38 +1,24 @@
-import React, {useEffect} from "react";
+import React from "react";
 import {
     EmailInput,
     PasswordInput,
     Button,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import style from "./pages.module.css";
-import {AppHeader} from "../components/app-header/app-header";
-import {Link, useNavigate, redirect, useLocation, Navigate} from "react-router-dom";
+import {Link, Navigate} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import {getLogin} from "../services/actions/login";
-import {getCookie} from "../utils/cookies";
 
 
 export const LoginPage = () => {
-    const navigate = useNavigate()
-    const {state} = useLocation()
+
     const {isAuthenticated} = useSelector(state => state.user)
-
-
-    // useEffect(() => {
-    //     isAuthenticated ? navigate("/") : console.log(isAuthenticated)
-    // }, [isAuthenticated])
 
     const dispatch = useDispatch()
 
     const [emailValue, setEmailValue] = React.useState("");
 
-    // const onChangeEmail = (e) => {
-    //     setEmailValue(e.target.value);
-    // };
     const [passwordValue, setPasswordValue] = React.useState("");
-    // const onChangePassword = (e) => {
-    //     setPasswordValue(e.target.value);
-    // };
 
     const loginOnClick = (e) => {
         e.preventDefault()
@@ -48,12 +34,6 @@ export const LoginPage = () => {
             <Navigate to="/"/>
         )
     }
-    // if (isAuthenticated) {
-    //     return (
-    //         <redirect to={state?.from || '/'} />
-    //     )
-    // }
-
     return (
         <>
             <section className={style.i__box}>

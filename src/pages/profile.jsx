@@ -1,11 +1,9 @@
 import React, {useEffect, useState, useRef} from "react";
 import {
-    EmailInput,
     PasswordInput,
     Button,
     Input,
-    EditIcon,
-} from "@ya.praktikum/react-developer-burger-ui-components";
+    } from "@ya.praktikum/react-developer-burger-ui-components";
 import {useLocation} from "react-router-dom";
 import style from "./pages.module.css";
 import {useDispatch, useSelector} from "react-redux";
@@ -24,12 +22,6 @@ export const Profile = () => {
     const location = useLocation();
     console.log("location:");
     console.log(location);
-
-    // const onIconClick = () => {
-    //     setTimeout(() => inputRef.current.focus(), 0);
-    //     alert("Icon Click Callback");
-    // };
-
 
     useEffect(() => {
         setEmailValue(email);
@@ -89,8 +81,6 @@ export const Profile = () => {
                         </p>
                     </li>
                 </ul>
-                {/*<div className="authorization__box">*/}
-                {/*    {location.pathname === '/profile' && <form className="authorization__box" onSubmit={(e) => userSaveDataOnClick(e)}>*/}
                 <form className="authorization__box" onSubmit={(e) => userSaveDataOnClick(e)}>
                     <Input
                         type={"text"}
@@ -101,7 +91,6 @@ export const Profile = () => {
                         ref={inputRef}
                         errorText={"Ошибка"}
                         icon="EditIcon"
-                        //onIconClick={onIconClick}
                     />
                     <Input
                         type={"email"}
@@ -133,7 +122,6 @@ export const Profile = () => {
                             Сохранить
                         </Button>
                     </div>
-                    {/*</div>*/}
                 </form>
             </section>
         </>
