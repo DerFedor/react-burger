@@ -3,7 +3,7 @@ import {
     Button,
     Input,
 } from "@ya.praktikum/react-developer-burger-ui-components";
-import {Link, Navigate} from "react-router-dom";
+import {Link, Navigate, NavLink, useLocation, redirect} from "react-router-dom";
 import style from "./pages.module.css";
 
 import {useDispatch, useSelector} from "react-redux";
@@ -15,10 +15,11 @@ export const ForgotPassword = () => {
     const [emailValue, setEmailValue] = React.useState("");
     const {forgotSuccess} = useSelector(state => state.password)
     const dispatch = useDispatch()
+    const location = useLocation()
 
     useEffect(() => {
         console.log("forgotSuccess", forgotSuccess)
-
+        console.log("location", location)
     }, [forgotSuccess])
 
     const forgotPasswordSubmit = (e) => {
@@ -29,9 +30,14 @@ export const ForgotPassword = () => {
     };
 
     if (!isAuthenticated && forgotSuccess) {
+        console.log("location", location)
         return (
-            <Navigate to="/reset-password"/>
+            <Navigate to="/reset-password" state={{from: location}} />
+
+            // <Navigate to={{ state: { from: location }, pathname: "/reset-password" }}/>
+            // <redirect to={{ pathname: '/reset-password', state: { from: location } }} />
         )
+
     }
 
     if (isAuthenticated) {
@@ -39,6 +45,7 @@ export const ForgotPassword = () => {
             <Navigate to="/profile"/>
         )
     }
+
     return (
         <>
             <section className={style.i__box}>

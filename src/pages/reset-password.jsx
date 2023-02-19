@@ -1,15 +1,18 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import {
     Button,
     Input,
 } from "@ya.praktikum/react-developer-burger-ui-components";
-import {Link, Navigate} from "react-router-dom";
+import {Link, Navigate, useLocation} from "react-router-dom";
 import style from "./pages.module.css";
 import {useDispatch, useSelector} from "react-redux";
 import {passwordReset} from "../services/actions/reset-password";
 
 export const ResetPassword = () => {
     const dispatch = useDispatch();
+    const {state} = useLocation();
+
+
 
     const {isAuthenticated} = useSelector(state => state.user)
     const {resetSuccess} = useSelector(state => state.password)
@@ -30,6 +33,11 @@ export const ResetPassword = () => {
         }
     };
 
+    useEffect(() => {
+        console.log("state?.from.pathname", state?.from.pathname)
+
+    }, [])
+
     if (isAuthenticated) {
         return (
             <Navigate to='/profile'/>
@@ -38,6 +46,12 @@ export const ResetPassword = () => {
     if (resetSuccess && !isAuthenticated) {
         return (
             <Navigate to='/login'/>
+        )
+    }
+
+    if (!isAuthenticated && state?.from.pathname !== '/forgot-password') {
+        return (
+            <Navigate to="/"/>
         )
     }
 
@@ -62,7 +76,6 @@ export const ResetPassword = () => {
                         name={"code"}
                         ref={inputRef}
                         errorText={"Ошибка"}
-                        //onIconClick={onIconClick}
                     />
                     <Button
                         extraClass="mt-4 mb-20"

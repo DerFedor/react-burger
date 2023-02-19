@@ -9,6 +9,7 @@ import { getUserData } from "../../services/actions/user";
 import { ProtectedRouteElement  } from "../protected-route/protected-route";
 import { IngredientPage } from "../../pages/ingredient/IngredientPage";
 import {AppHeader} from "../app-header/app-header";
+import {Orders} from "../../pages/orders-list";
 
 
 
@@ -43,10 +44,12 @@ export const App = () => {
                     <Route path="/register" element={<Registration/>}/>
                     <Route path="/forgot-password" element={<ForgotPassword/>}/>
                     <Route path="/reset-password" element={<ResetPassword/>}/>
+
+                    <Route path="/profile" element={<ProtectedRouteElement element={<Profile />}/>} />
+                    <Route path="/profile/orders"element={<ProtectedRouteElement element={<Profile />}/>}/>
                     {/*<Route path="/profile" element={<Profile/>}/>*/}
 
                     {/*<Route path="/profile" element={isAuthenticated ? <Profile/> : <LoginPage/>}/>*/}
-                    <Route path="/profile" element={<ProtectedRouteElement element={<Profile />}/>} />
                     <Route path="*" element={<NotFound404/>}/>
                     {/*</div>*/}
                 </Routes>

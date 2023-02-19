@@ -1,28 +1,3 @@
-// import styles from './ingredient-page.module.css';
-// import {IngredientDetails} from "../../components/ingredient-details/ingredient-details";
-// import { useSelector } from "react-redux";
-// import { useParams } from 'react-router-dom';
-//
-// export const IngredientPage = () => {
-//     //const ingredients = useSelector((state) => state.ingredients.ingredients);
-//     const view = useSelector((store) => store.view.openCard);
-//
-//     let { id }  = useParams();
-//
-//     const currentIngredient = view.find((el) => el._id === id);
-//
-//
-//     return  (
-//         // currentIngredient && (
-//             <div className={styles.wrapper}>
-//                 <IngredientDetails />
-//             </div>
-//         // )
-//     )
-// };
-
-
-
 import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import style from './ingredient-page.module.css'
