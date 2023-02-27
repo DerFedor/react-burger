@@ -19,7 +19,6 @@ export const ForgotPassword = () => {
 
     useEffect(() => {
         console.log("forgotSuccess", forgotSuccess)
-        console.log("location", location)
     }, [forgotSuccess])
 
     const forgotPasswordSubmit = (e) => {

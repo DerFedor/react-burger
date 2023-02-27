@@ -33,10 +33,10 @@ export const ResetPassword = () => {
         }
     };
 
-    useEffect(() => {
-        console.log("state?.from.pathname", state?.from.pathname)
-
-    }, [])
+    // useEffect(() => {
+    //     console.log("state?.from.pathname", state?.from.pathname)
+    //
+    // }, [])
 
     if (isAuthenticated) {
         return (
