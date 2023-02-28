@@ -7,7 +7,7 @@ import {
 } from "../actions/constructor-burger";
 
 const constructorInitialState = {
-    buns: "60d3b41abdacab0026a733c7",
+    buns: "",
     components: [],
 };
 
@@ -44,7 +44,7 @@ export const burgerConstructorReducer = (state = constructorInitialState, action
         }
         case CLEAR_COMPONENTS: {
             return {
-                buns: "60d3b41abdacab0026a733c7",
+                buns: "",
                 components: [],
             };
         }

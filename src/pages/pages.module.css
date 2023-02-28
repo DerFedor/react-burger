@@ -1,0 +1,99 @@
+.box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 480px;
+}
+
+
+
+.main {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+}
+.input {
+  min-width: 480px;
+  margin-bottom: 24px;
+}
+
+.i__box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* height: 100vh; */
+  width: 100vw;
+  margin-top: 180px;
+}
+
+.text {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 8px;
+  justify-content: center;
+}
+
+.link {
+  text-decoration: none;
+  color: #4C4CFF;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  text-align: center;
+}
+
+.authorization__box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 480px;
+  /*margin: 20px 20px;*/
+}
+
+.profile {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: baseline;
+  margin-top: 180px;
+
+
+  margin-left: 380px;
+  margin-right: 760px;
+  gap: 60px;
+}
+
+.profile_box {
+  list-style: none;
+  width: 320px;
+  height: 64px;
+  display: flex;
+  align-items: center;
+}
+
+.profile_box:hover {
+  cursor: pointer;
+  background-color: #2F2F37;
+}
+
+.button__box {
+  width: 480px;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+}
+.info {
+  text-align: left;
+ margin-top: 80px ;
+  color: #8585ad;
+  opacity: 0.4;
+}

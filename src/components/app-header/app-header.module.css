@@ -31,7 +31,7 @@
 
 }
 
-.profile {
+.link {
   display: flex;
   text-decoration: none;
   color: rgba(255, 255, 255, 0.99);
@@ -56,7 +56,7 @@
   .interface {
     flex-direction: column;
   }
-  .profile {
+  .link {
     padding-bottom: 20px;
   }
 }

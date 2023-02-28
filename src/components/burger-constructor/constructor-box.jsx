@@ -36,9 +36,6 @@ export const ConstructorBox = ({ingredients}) => {
     const dispatch = useDispatch();
     const [, dropTarget] = useDrop({
         accept: "ingredient",
-        // collect: (monitor) => ({
-        //     isHover: monitor.isOver(),
-        // }),
         drop({card}) {
             if (card.type === "bun") {
                 dispatch({type: CHANGE_BUN, id: card._id});

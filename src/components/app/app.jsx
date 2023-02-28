@@ -1,36 +1,60 @@
-import React from "react";
-import {AppHeader} from "../app-header/app-header";
-import {BurgerIngredients} from "../burger-ingredients/burger-ingredients";
-import appStyle from "./app.module.css";
-import {BurgerConstructor} from "../burger-constructor/burger-constructor";
+import React, {useEffect} from "react";
 import ErrorBoundary from "../error-boundary/error-boundary";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {getIngredients} from "../../services/actions/burger-ingredients";
-import {HTML5Backend} from "react-dnd-html5-backend";
-import {DndProvider} from "react-dnd";
+import {BrowserRouter, Routes, Route, Navigate} from 'react-router-dom';
+import { Profile, ResetPassword, ForgotPassword, Registration, LoginPage, HomePage, FeedPage, NotFound404 } from '../../pages/index'
+import {getCookie, setCookie} from "../../utils/cookies";
+import { getUserData } from "../../services/actions/user";
+import { ProtectedRouteElement  } from "../protected-route/protected-route";
+import { IngredientPage } from "../../pages/ingredient/IngredientPage";
+import {AppHeader} from "../app-header/app-header";
+import {Orders} from "../../pages/orders-list";
+
+
+
 
 
 export const App = () => {
-    const dispatch = useDispatch()
+    const { isAuthenticated, token } = useSelector((state) => state.user);
+    const dispatch = useDispatch();
 
-
-    React.useEffect(() => {
+    useEffect(() => {
         dispatch(getIngredients())
     }, [dispatch])
 
+    useEffect(() => {
+        const refreshToken = getCookie('refreshToken')
+        if (refreshToken) {
+            dispatch(getUserData(refreshToken))
+        }
+    }, [])
+
 
     return (
-        <div className={appStyle.page}>
-            <AppHeader/>
-            <ErrorBoundary>
-                <main className={appStyle.main}>
-                    <DndProvider backend={HTML5Backend}>
-                        <BurgerIngredients/>
-                        <BurgerConstructor/>
-                    </DndProvider>
-                </main>
-            </ErrorBoundary>
-        </div>
+        <ErrorBoundary>
+            <BrowserRouter>
+                <AppHeader/>
+                <Routes>
+                    <Route path="/" element={<HomePage/>}/>
+                    <Route path="/login"  element={<LoginPage />}/>
+                    {/*<Route path="/login" element={(!isAuthenticated && !token) ? <LoginPage /> : <Navigate to={'/'} />} />*/}
+                    <Route path="/feed" element={<FeedPage/>}/>
+                    <Route path="/ingredients/:id" element={<IngredientPage/>}/>
+                    <Route path="/register" element={<Registration/>}/>
+                    <Route path="/forgot-password" element={<ForgotPassword/>}/>
+                    <Route path="/reset-password" element={<ResetPassword/>}/>
+
+                    <Route path="/profile" element={<ProtectedRouteElement element={<Profile />}/>} />
+                    <Route path="/profile/orders"element={<ProtectedRouteElement element={<Profile />}/>}/>
+                    {/*<Route path="/profile" element={<Profile/>}/>*/}
+
+                    {/*<Route path="/profile" element={isAuthenticated ? <Profile/> : <LoginPage/>}/>*/}
+                    <Route path="*" element={<NotFound404/>}/>
+                    {/*</div>*/}
+                </Routes>
+            </BrowserRouter>
+        </ErrorBoundary>
     );
 }
 

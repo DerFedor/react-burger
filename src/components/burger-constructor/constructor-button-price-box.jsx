@@ -7,6 +7,7 @@ import {Modal} from "../modal/modal";
 import {OrderDetails} from "../order-details/order-details";
 import React, {useMemo} from "react";
 import PropTypes from "prop-types";
+import {useNavigate} from "react-router-dom";
 
 export const ConstructorBoxPrice = ({ingredients}) => {
     const ingredientsData = useSelector((state) => state.burger.ingredients);
@@ -38,8 +39,11 @@ ConstructorBoxPrice.propTypes = {
 
 export const ConstructorButtonPriceBox = ({ingredients}) => {
     const dispatch = useDispatch()
+    const navigate = useNavigate()
     const {order} = useSelector(store => store.order)
+    const { isAuthenticated, token } = useSelector(state => state.user)
     const buttonState = useSelector(store => store.order.orderRequest)
+
     const handleClose = () => {
         dispatch({
             type: ORDER_CLEAR
@@ -63,8 +67,12 @@ export const ConstructorButtonPriceBox = ({ingredients}) => {
                 htmlType="button"
                 type="primary"
                 size="large"
-                onClick={async () => {
-                    dispatch(getOrder(ingredients));
+                onClick={() => {
+                    if (!isAuthenticated) {
+                        navigate("/login") ;
+                    } else {
+                        dispatch(getOrder(ingredients, token));
+                    }
                 }}
             >
                 Оформить заказ

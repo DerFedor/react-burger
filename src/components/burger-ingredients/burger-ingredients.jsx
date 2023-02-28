@@ -14,6 +14,7 @@ import {
     OPEN_CARD,
 } from "../../services/actions/view";
 import {useDrag} from "react-dnd";
+import {useNavigate} from "react-router-dom";
 
 
 const HeaderBurgerIngredients = (props) => {
@@ -63,6 +64,7 @@ const TabContainer = (props) => {
 
 const IngredientCard = ({card}) => {
     const dispatch = useDispatch();
+
     const [isVisible, setIsVisible] = useState(false);
 
     const componentsData = useSelector((store) => store.burgerConstruct);
@@ -103,6 +105,7 @@ const IngredientCard = ({card}) => {
             view: card,
         });
         setIsVisible(true);
+        window.history.pushState({ path: `/ingredients/${card._id}` }, '', `/ingredients/${card._id}`)
     };
 
     const handleClose = () => {
@@ -110,6 +113,8 @@ const IngredientCard = ({card}) => {
             type: CLOSE_CARD
         })
         setIsVisible(false);
+        // navigate("/");
+        window.history.pushState({ path: `/` }, '', `/`)
     };
 
     const modal = <Modal onClose={handleClose} header='Детали ингредиента'>
