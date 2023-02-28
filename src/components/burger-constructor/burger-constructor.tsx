@@ -3,14 +3,13 @@ import burgerConstructorStyle from "./burger-constructor.module.css";
 import { useSelector} from 'react-redux';
 import {ConstructorButtonPriceBox} from "./constructor-button-price-box";
 import {ConstructorBox} from "./constructor-box";
-import { Redirect, useNavigate } from "react-router-dom";
 
 export const BurgerConstructor = () => {
 //    const [state, dispatchState] = React.useReducer(reducer, priceInitialState);
-    const componentsData = useSelector((store) => store.burgerConstruct);
+    const componentsData = useSelector((store:any) => store.burgerConstruct);
 
-    function getComponentsIdArray() {
-        let arr = [];
+    function getComponentsIdArray(): Array<string> {
+        let arr: Array<string> = [];
         if (componentsData.components.length > 0) {
             arr = componentsData.components.map((item) => item.id);
         }

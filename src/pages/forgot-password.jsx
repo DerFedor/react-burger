@@ -8,6 +8,7 @@ import style from "./pages.module.css";
 
 import {useDispatch, useSelector} from "react-redux";
 import {passwordForgot} from "../services/actions/reset-password";
+import { ILocationState } from "../utils/types";
 
 
 export const ForgotPassword = () => {

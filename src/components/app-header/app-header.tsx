@@ -12,7 +12,7 @@ import {useSelector} from "react-redux";
 
 
 export const AppHeader = () => {
-    const {isAuthenticated, token} = useSelector(state => state.user);
+    const {isAuthenticated, token} = useSelector((state:any) => state.user);
     console.log("isAuthenticated token:");
     console.log(isAuthenticated);
     console.log(token);
