@@ -10,11 +10,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { getRegistration } from "../services/actions/register";
 
 import style from "./pages.module.css";
+import {IUserAllData} from "../utils/check-response";
 
 
 export const Registration = () => {
-    const dispatch = useDispatch()
-    const { isAuthenticated } = useSelector(state => state.user)
+    const dispatch = useDispatch<any>()
+    const { isAuthenticated } = useSelector((state:any) => state.user)
 
     const [emailValue, setEmailValue] = React.useState("");
 
@@ -26,7 +27,7 @@ export const Registration = () => {
 
     const registerOnClick = (e) => {
         e.preventDefault()
-        const registerData = {
+        const registerData:IUserAllData = {
             email: emailValue,
             password: passwordValue,
             name: nameInput

@@ -3,7 +3,7 @@ import ErrorBoundary from "../error-boundary/error-boundary";
 import {useDispatch, useSelector} from "react-redux";
 import {getIngredients} from "../../services/actions/burger-ingredients";
 import {BrowserRouter, Routes, Route, Navigate} from 'react-router-dom';
-import { Profile, ResetPassword, ForgotPassword, Registration, LoginPage, HomePage, FeedPage, NotFound404 } from '../../pages/index'
+import { Profile, ResetPassword, ForgotPassword, Registration, LoginPage, HomePage, FeedPage, NotFound404 } from '../../pages'
 import {getCookie, setCookie} from "../../utils/cookies";
 import { getUserData } from "../../services/actions/user";
 import { ProtectedRouteElement  } from "../protected-route/protected-route";
@@ -16,8 +16,8 @@ import {Orders} from "../../pages/orders-list";
 
 
 export const App = () => {
-    const { isAuthenticated, token } = useSelector((state) => state.user);
-    const dispatch = useDispatch();
+    const { isAuthenticated, token } = useSelector((state:any) => state.user);
+    const dispatch = useDispatch<any>();
 
     useEffect(() => {
         dispatch(getIngredients())

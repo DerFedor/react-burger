@@ -9,20 +9,20 @@ import {useDispatch, useSelector} from "react-redux";
 import {passwordReset} from "../services/actions/reset-password";
 
 export const ResetPassword = () => {
-    const dispatch = useDispatch();
+    const dispatch = useDispatch<any>();
     const {state} = useLocation();
 
 
 
-    const {isAuthenticated} = useSelector(state => state.user)
-    const {resetSuccess} = useSelector(state => state.password)
+    const {isAuthenticated} = useSelector((state:any) => state.user)
+    const {resetSuccess} = useSelector((state:any) => state.password)
 
     const [passwordValue, setPasswordValue] = useState("");
 
     const [codeInput, setCodeInput] = React.useState("");
     const inputRef = React.useRef(null);
 
-    const resetPasswordSubmit = (e) => {
+    const resetPasswordSubmit = (e: React.FormEvent) => {
         e.preventDefault()
         if (passwordValue && codeInput) {
             const data = {

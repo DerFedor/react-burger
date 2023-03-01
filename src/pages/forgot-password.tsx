@@ -12,10 +12,10 @@ import { ILocationState } from "../utils/types";
 
 
 export const ForgotPassword = () => {
-    const {isAuthenticated} = useSelector(state => state.user);
+    const {isAuthenticated} = useSelector((state:any) => state.user);
     const [emailValue, setEmailValue] = React.useState("");
-    const {forgotSuccess} = useSelector(state => state.password)
-    const dispatch = useDispatch()
+    const {forgotSuccess} = useSelector((state:any) => state.password)
+    const dispatch = useDispatch<any>()
     const location = useLocation()
 
     useEffect(() => {

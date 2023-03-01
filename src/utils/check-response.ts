@@ -14,3 +14,9 @@ export function checkResponse(res: CustomResponse): Promise<any> {
     }
     return Promise.reject(`Ошибка: ${res.status}`);
 }
+
+export interface IUserAllData {
+    email?: string | undefined;
+    password?: string | undefined;
+    name?: string | undefined;
+}
