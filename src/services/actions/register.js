@@ -8,9 +8,7 @@ export const REGISTRATION_SUCCESS = "LOGIN_SUCCESS";
 export const REGISTRATION_FAIL = "LOGIN_FAIL";
 
 export function getRegistration(data) {
-    console.log('reg')
     return function (dispatch) {
-        console.log('reg')
         dispatch({
             type: REGISTRATION_REQUEST,
         });
@@ -29,9 +27,6 @@ export function getRegistration(data) {
                 // res.refreshToken = undefined;
                 // res.accessToken = undefined;
                 if (res && res.success) {
-                    console.log("res:")
-                    console.log(res)
-
                     dispatch({
                         type: REGISTRATION_SUCCESS,
                     });

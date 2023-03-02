@@ -20,7 +20,7 @@ export default class ErrorBoundary extends React.Component<IErrorBoundaryProps, 
 
   // с помощью этого метода логируем информацию об ошибке:
   componentDidCatch(error: Error, info: ErrorInfo) {
-    console.log("Возникла ошибка!", error, info);
+    console.error("Возникла ошибка!", error, info);
   }
 
 

@@ -47,7 +47,12 @@ export const App : FC = () => {
                     <Route path="/register" element={<Registration/>}/>
                     <Route path="/forgot-password" element={<ForgotPassword/>}/>
                     <Route path="/reset-password" element={<ResetPassword/>}/>
-
+                    {/*<ProtectedRouteElement >*/}
+                    {/*<Route path="/profile" element={<Profile />} />*/}
+                    {/*</ProtectedRouteElement>*/}
+                    {/*<ProtectedRouteElement >*/}
+                    {/*<Route path="/profile/orders" element={<Profile />}/>*/}
+                    {/*</ProtectedRouteElement>*/}
                     <Route path="/profile" element={<ProtectedRouteElement element={<Profile />}/>} />
                     <Route path="/profile/orders"element={<ProtectedRouteElement element={<Profile />}/>}/>
                     {/*<Route path="/profile" element={<Profile/>}/>*/}

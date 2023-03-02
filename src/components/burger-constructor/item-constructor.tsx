@@ -137,7 +137,7 @@ export const ConstructorItem: FC<IConstructorItem> = ({
 interface IConstructorLockedItem {
     ingredient: IIngredientType;
     position: string;
-    type: "top" | "bottom" | undefined;
+    type?: "top" | "bottom";
 }
 
 export const ConstructorLockedItem: FC<IConstructorLockedItem> = ({
@@ -145,7 +145,7 @@ export const ConstructorLockedItem: FC<IConstructorLockedItem> = ({
                                                                position,
                                                                type,
                                                            }) => {
-    console.log(type);
+    // console.log(type);
     // console.log(ingredient.name);
     // console.log(ingredient.type);
     return (

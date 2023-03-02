@@ -1,4 +1,4 @@
-import React, { FC, useRef, useState, MutableRefObject } from "react";
+import React, {FC, useRef, useState, MutableRefObject, LegacyRef, RefObject} from "react";
 import IngredientsStyle from "./burger-ingredients.module.css";
 import {
     Tab,
@@ -169,10 +169,9 @@ const IngredientCard: FC<IIngredientCard> = ({ props }) => {
 interface IIngredientsBlock {
     type: string;
     text: string;
-    refElement: {
-        current: any;
-    };
+    refElement: RefObject<HTMLLIElement>;
 }
+
 const BurgerItemIngredients: FC<IIngredientsBlock> = (data) => {
     const ingredients = useSelector((store:any) => store.burger.ingredients);
     const itemType = ingredients.filter((item) => item.type === data.type);
@@ -192,10 +191,10 @@ const BurgerItemIngredients: FC<IIngredientsBlock> = (data) => {
 
 
 export const BurgerIngredients = () => {
-    const buns = useRef<HTMLElement | null>();
-    const sauces = useRef<HTMLElement | null>();
-    const main = useRef<HTMLElement | null>();
-    const [tab, setTab] = useState<string>("one");
+    const buns = useRef<HTMLLIElement>(null);
+    const sauces = useRef<HTMLLIElement>(null);
+    const main = useRef<HTMLLIElement>(null);
+    const [tab, setTab] = useState<"one"|"two"|"three">("one");
 
     const scroll = (item: MutableRefObject<HTMLElement | null | undefined>) => {
         if (item.current) item.current.scrollIntoView({ behavior: "smooth" });

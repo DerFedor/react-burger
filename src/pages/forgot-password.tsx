@@ -8,7 +8,6 @@ import style from "./pages.module.css";
 
 import {useDispatch, useSelector} from "react-redux";
 import {passwordForgot} from "../services/actions/reset-password";
-import { ILocationState } from "../utils/types";
 
 
 export const ForgotPassword = () => {
@@ -18,9 +17,7 @@ export const ForgotPassword = () => {
     const dispatch = useDispatch<any>()
     const location = useLocation()
 
-    useEffect(() => {
-        console.log("forgotSuccess", forgotSuccess)
-    }, [forgotSuccess])
+
 
     const forgotPasswordSubmit = (e) => {
         e.preventDefault()

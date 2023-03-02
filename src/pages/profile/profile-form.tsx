@@ -22,8 +22,8 @@ export const ProfileForm : FC = () => {
     const inputRef = useRef(null);
 
     const location = useLocation();
-    console.log("location:");
-    console.log(location);
+    // console.log("location:");
+    // console.log(location);
     // let buttonState: {false}
     //let buttonState = true;
 
@@ -50,7 +50,7 @@ export const ProfileForm : FC = () => {
 
     const userSaveDataOnClick = (e: React.FormEvent) => {
         e.preventDefault()
-        console.log("e", e)
+        //console.log("e", e)
         const userData = {
             email: emailValue,
             name: nameInput,
@@ -70,7 +70,7 @@ export const ProfileForm : FC = () => {
     const cancelButtonOnClick = (e: React.FormEvent) => {
         e.stopPropagation()
         e.preventDefault()
-        console.log(e)
+        //console.log(e)
         setEmailValue(email);
         setNameInput(userName);
         setPasswordValue('')
