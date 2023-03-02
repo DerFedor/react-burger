@@ -8,7 +8,7 @@ export function getCookie(name: string) {
 export function setCookie(name: string, value: string, props:any = {}) {
     //console.log(name, value, props)
     props = {
-        path: '/',
+        path: "/",
         ...props
     };
     let exp = props.expires;

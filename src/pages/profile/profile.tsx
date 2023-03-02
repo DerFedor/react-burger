@@ -1,4 +1,4 @@
-import React from "react";
+import React, {FC} from "react";
 
 import style from "../pages.module.css";
 import {useDispatch} from "react-redux";
@@ -10,8 +10,8 @@ import {Orders} from "../orders-list";
 
 
 
-export const Profile = () => {
-    const dispatch = useDispatch();
+export const Profile : FC = () => {
+    const dispatch = useDispatch<any>();
     const location = useLocation();
     const navigate = useNavigate();
     const logoutOnClick = () => {

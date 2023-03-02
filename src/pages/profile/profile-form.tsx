@@ -1,4 +1,4 @@
-import React, {useEffect, useState, useRef} from "react";
+import React, {useEffect, useState, useRef, FC} from "react";
 import {
     PasswordInput,
     Button,
@@ -11,9 +11,9 @@ import {getLogout} from "../../services/actions/logout";
 import {getCookie} from "../../utils/cookies";
 import {userDataUpdate, userDataUpdateWithoutToken} from "../../services/actions/user";
 
-export const ProfileForm = () => {
-    const dispatch = useDispatch();
-    const {email, userName, token} = useSelector((state) => state.user);
+export const ProfileForm : FC = () => {
+    const dispatch = useDispatch<any>();
+    const {email, userName, token} = useSelector((state:any) => state.user);
     const [emailValue, setEmailValue] = useState("");
     const [passwordValue, setPasswordValue] = useState("");
     const [nameInput, setNameInput] = useState("");
@@ -48,7 +48,7 @@ export const ProfileForm = () => {
     }, [emailValue, nameInput, passwordValue]);
 
 
-    const userSaveDataOnClick = (e) => {
+    const userSaveDataOnClick = (e: React.FormEvent) => {
         e.preventDefault()
         console.log("e", e)
         const userData = {
@@ -67,7 +67,7 @@ export const ProfileForm = () => {
         }
     }
 
-    const cancelButtonOnClick = (e) => {
+    const cancelButtonOnClick = (e: React.FormEvent) => {
         e.stopPropagation()
         e.preventDefault()
         console.log(e)
