@@ -14,7 +14,7 @@ export const ProtectedRouteElement: FC<IProtectedRoute> = ({ element }) => {
 
     return (isAuthenticated) ?
         <>
-        element
+            {element}
         </>
             : <Navigate  to="/login" replace={true}/>
 
