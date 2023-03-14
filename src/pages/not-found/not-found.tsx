@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 
 import styles from './not-found.module.css';
 
-//import { Breadcrumbs } from '../components/breadcrumbs';
 
 export function NotFound404() {
 

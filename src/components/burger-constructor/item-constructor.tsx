@@ -4,17 +4,33 @@ import {REMOVE_COMPONENT, SORT_COMPONENT} from "../../services/actions/construct
 import {useDrag, useDrop} from "react-dnd";
 import burgerConstructorStyle from "./burger-constructor.module.css";
 import {ConstructorElement, DragIcon} from "@ya.praktikum/react-developer-burger-ui-components";
-import React, {useRef} from "react";
-import {ingredientType} from "../../utils/prop-types";
-import PropTypes from "prop-types";
+import React, {FC, useRef} from "react";
+import {IIngredientType} from "../../utils/types";
+import type { Identifier } from "dnd-core";
 
-export const ItemConstructor = ({ingredient, index, itemKey}) => {
+
+interface IConstructorItem {
+    ingredient: IIngredientType;
+    index: number;
+    itemKey: string;
+}
+interface IConstructorItemMove {
+    ingredient: IIngredientType;
+    index: number;
+    type?: string;
+}
+
+export const ConstructorItem: FC<IConstructorItem> = ({
+                                                          ingredient,
+                                                          index,
+                                                          itemKey,
+                                                      }) => {
     const dispatch = useDispatch();
-    const ref = useRef(null);
-    const componentsData = useSelector((store) => store.burgerConstruct);
+    const ref = useRef<HTMLLIElement>(null);
+    const componentsData = useSelector((store:any) => store.burgerConstruct);
 
 
-    const moveCard = (dragIndex, hoverIndex) => {
+    const moveCard = (dragIndex: number, hoverIndex: number) => {
         const components = componentsData.components;
         const newComp = components.slice();
 
@@ -28,7 +44,7 @@ export const ItemConstructor = ({ingredient, index, itemKey}) => {
             type: SORT_COMPONENT,
             components: spliced,
         });
-    }
+    };
 
     const [{opacity}, dragRef] = useDrag({
         type: "component",
@@ -40,14 +56,18 @@ export const ItemConstructor = ({ingredient, index, itemKey}) => {
         }),
     });
 
-    const [{handlerId}, dropRef] = useDrop({
+    const [{ handlerId }, dropRef] = useDrop<
+        IConstructorItemMove,
+        void,
+        { handlerId: Identifier | null }
+    >({
         accept: "component",
         collect(monitor) {
             return {
                 handlerId: monitor.getHandlerId(),
             };
         },
-        hover(item, monitor) {
+        hover(item: IConstructorItemMove, monitor: any) {
             if (!ref.current) {
                 return;
             }
@@ -78,7 +98,7 @@ export const ItemConstructor = ({ingredient, index, itemKey}) => {
             moveCard(dragIndex, hoverIndex);
             item.index = hoverIndex;
         },
-        drop(item) {
+        drop(item:IConstructorItemMove) {
             const dragIndex = item.index;
             const hoverIndex = index;
             if (dragIndex === hoverIndex) {
@@ -102,7 +122,7 @@ export const ItemConstructor = ({ingredient, index, itemKey}) => {
             </div>
             <div className={burgerConstructorStyle.element} style={{opacity}}>
                 <ConstructorElement
-                    type={ingredient.type}
+                    //type={ingredient.type}
                     text={ingredient.name}
                     price={ingredient.price}
                     thumbnail={ingredient.image}
@@ -112,24 +132,28 @@ export const ItemConstructor = ({ingredient, index, itemKey}) => {
         </li>
     );
 };
-ItemConstructor.propTypes = {
-    ingredient: ingredientType.isRequired,
-    index: PropTypes.number.isRequired,
-    itemKey: PropTypes.string.isRequired
-};
 
 
+interface IConstructorLockedItem {
+    ingredient: IIngredientType;
+    position: string;
+    type?: "top" | "bottom";
+}
 
-
-export const ItemConstructorLocked = ({ingredient, position}) => {
+export const ConstructorLockedItem: FC<IConstructorLockedItem> = ({
+                                                               ingredient,
+                                                               position,
+                                                               type,
+                                                           }) => {
+    // console.log(type);
     // console.log(ingredient.name);
     // console.log(ingredient.type);
     return (
         <li className="pl-8">
             <ConstructorElement
                 isLocked={true}
-                type={position}
-                text={ingredient.name}
+                type={type}
+                text={ingredient.name + position}
                 price={ingredient.price / 2}
                 thumbnail={ingredient.image}
 
@@ -139,7 +163,3 @@ export const ItemConstructorLocked = ({ingredient, position}) => {
 
 };
 
-ItemConstructorLocked.propTypes = {
-    ingredient: ingredientType.isRequired,
-    position: PropTypes.string.isRequired,
-};

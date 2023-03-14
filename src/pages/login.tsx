@@ -12,15 +12,15 @@ import {getLogin} from "../services/actions/login";
 
 export const LoginPage = () => {
 
-    const {isAuthenticated} = useSelector(state => state.user)
+    const {isAuthenticated} = useSelector((state:any) => state.user)
 
-    const dispatch = useDispatch()
+    const dispatch = useDispatch<any>()
 
     const [emailValue, setEmailValue] = React.useState("");
 
     const [passwordValue, setPasswordValue] = React.useState("");
 
-    const loginOnClick = (e) => {
+    const loginOnClick = (e: React.FormEvent) => {
         e.preventDefault()
         const loginData = {
             email: emailValue,
@@ -44,13 +44,12 @@ export const LoginPage = () => {
                     <EmailInput
                         value={emailValue}
                         name={"email"}
-                        onChange={(e) => setEmailValue(e.target.value)}
-                    />
+                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => setEmailValue(e.target.value)}></EmailInput>
                     <PasswordInput
                         value={passwordValue}
                         name={"password"}
                         extraClass="mb-4"
-                        onChange={(e) => setPasswordValue(e.target.value)}
+                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPasswordValue(e.target.value)}
                     />
                     <Button htmlType="submit"
                             type="primary"

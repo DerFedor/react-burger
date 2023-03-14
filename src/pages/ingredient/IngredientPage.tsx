@@ -1,10 +1,14 @@
 import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import style from './ingredient-page.module.css'
-import PropTypes from "prop-types";
+import React, {FC} from "react";
 
 
-const Structure = (props) => {
+interface IStructure {
+    readonly structure: string;
+    children?: React.ReactNode;
+}
+const Structure: FC<IStructure> = (props) => {
     return (
         <div className={style.nutrient__box} >
             <p className="text text_type_main-default text_color_inactive">{props.structure}</p>
@@ -13,13 +17,8 @@ const Structure = (props) => {
     );
 };
 
-Structure.propTypes = {
-    structure: PropTypes.string,
-    children: PropTypes.number
-}
-
 export const IngredientPage = () => {
-    const { ingredients } = useSelector(state => state.burger)
+    const { ingredients } = useSelector((state:any) => state.burger)
     const params = useParams()
     const ingredientData = ingredients.find((item) => item._id === params.id)
 

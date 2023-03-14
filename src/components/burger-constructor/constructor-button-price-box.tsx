@@ -5,12 +5,19 @@ import {getOrder, ORDER_CLEAR} from "../../services/actions/order";
 import {CLEAR_COMPONENTS} from "../../services/actions/constructor-burger";
 import {Modal} from "../modal/modal";
 import {OrderDetails} from "../order-details/order-details";
-import React, {useMemo} from "react";
-import PropTypes from "prop-types";
+import React, {FC, useMemo} from "react";
+
 import {useNavigate} from "react-router-dom";
 
-export const ConstructorBoxPrice = ({ingredients}) => {
-    const ingredientsData = useSelector((state) => state.burger.ingredients);
+interface IConstructorBoxPrice {
+    ingredients: Array<string>;
+}
+
+
+export const ConstructorBoxPrice: FC<IConstructorBoxPrice> = ({
+                                                                  ingredients,
+                                                              }) => {
+    const ingredientsData = useSelector((state: any) => state.burger.ingredients);
 
 
     const price = useMemo(() => {
@@ -32,17 +39,16 @@ export const ConstructorBoxPrice = ({ingredients}) => {
     );
 };
 
-ConstructorBoxPrice.propTypes = {
-    ingredients: PropTypes.arrayOf(PropTypes.string).isRequired,
+interface IConstructorButtonPriceBox {
+    ingredients: Array<string>;
 }
 
-
-export const ConstructorButtonPriceBox = ({ingredients}) => {
-    const dispatch = useDispatch()
+export const ConstructorButtonPriceBox: FC<IConstructorButtonPriceBox> = ({ingredients}) => {
+    const dispatch = useDispatch<any>()
     const navigate = useNavigate()
-    const {order} = useSelector(store => store.order)
-    const { isAuthenticated, token } = useSelector(state => state.user)
-    const buttonState = useSelector(store => store.order.orderRequest)
+    const {order} = useSelector((store:any) => store.order)
+    const {isAuthenticated, token} = useSelector((state:any) => state.user)
+    const buttonState = useSelector((store:any) => store.order.orderRequest)
 
     const handleClose = () => {
         dispatch({
@@ -55,7 +61,7 @@ export const ConstructorButtonPriceBox = ({ingredients}) => {
 
 
     const modal =
-        <Modal onClose={handleClose}>
+        <Modal onClose={handleClose} >
             <OrderDetails/>
         </Modal>;
 
@@ -63,13 +69,13 @@ export const ConstructorButtonPriceBox = ({ingredients}) => {
         <div className={"mr-4 mt-10 " + burgerConstructorStyle.button_order}>
             <ConstructorBoxPrice ingredients={ingredients}/>
             <Button
-                disabled= {buttonState}
+                disabled={buttonState}
                 htmlType="button"
                 type="primary"
                 size="large"
                 onClick={() => {
                     if (!isAuthenticated) {
-                        navigate("/login") ;
+                        navigate("/login");
                     } else {
                         dispatch(getOrder(ingredients, token));
                     }
@@ -82,6 +88,3 @@ export const ConstructorButtonPriceBox = ({ingredients}) => {
     );
 };
 
-ConstructorButtonPriceBox.propTypes = {
-    ingredients: PropTypes.arrayOf(PropTypes.string).isRequired
-};

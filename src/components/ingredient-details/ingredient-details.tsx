@@ -1,10 +1,12 @@
-import React from "react";
-import PropTypes from "prop-types";
-// import ReactDOM from "react-dom";
+import React, {FC} from "react";
 import ingredientDetailsStyle from "./ingredient-details.module.css";
 import { useSelector} from "react-redux";
 
-const Structure = (props) => {
+interface IStructure {
+    readonly structure: string;
+    children?: React.ReactNode;
+    }
+const Structure: FC<IStructure> = (props) => {
     return (
         <div className={ingredientDetailsStyle.structure__box}>
             <p className="text text_type_main-default text_color_inactive">
@@ -16,7 +18,7 @@ const Structure = (props) => {
 };
 
 export const IngredientDetails = () => {
-    const view = useSelector((store) => store.view.openCard);
+    const view = useSelector((store:any) => store.view.openCard);
     return (
         <div className={ingredientDetailsStyle.box}>
             <img className={ingredientDetailsStyle.image} src={view.image} alt={view.name}/>
@@ -32,9 +34,4 @@ export const IngredientDetails = () => {
     );
 };
 
-
-Structure.propTypes = {
-    structure: PropTypes.string.isRequired,
-    children: PropTypes.number.isRequired
-}
 

@@ -3,10 +3,14 @@ import {useDispatch, useSelector} from "react-redux";
 import {useDrop} from "react-dnd";
 import {ADD_COMPONENT, CHANGE_BUN} from "../../services/actions/constructor-burger";
 import {v4 as uuidv4} from "uuid";
-import {ItemConstructor, ItemConstructorLocked} from "./item-constructor";
-import PropTypes from "prop-types";
+import {ConstructorItem, ConstructorLockedItem} from "./item-constructor";
+import {FC} from "react";
+import { IIngredientType } from "../../utils/types";
 
-const Plug = ({type}) => {
+interface IPlug {
+    type: string;
+}
+const Plug: FC<IPlug> = ({ type }) => {
     return (
         <li className={"pl-8 "  + burgerConstructorStyle.card}>
             <div className={"text text_type_main-default"}>
@@ -31,12 +35,14 @@ const Plug = ({type}) => {
     );
 };
 
-
-export const ConstructorBox = ({ingredients}) => {
+interface IConstructorBox {
+    ingredients: Array<string>;
+}
+export const ConstructorBox: FC<IConstructorBox> = ({ ingredients }) => {
     const dispatch = useDispatch();
-    const [, dropTarget] = useDrop({
+    const [, dropTarget] = useDrop(() => ({
         accept: "ingredient",
-        drop({card}) {
+        drop: (card: IIngredientType) => {
             if (card.type === "bun") {
                 dispatch({type: CHANGE_BUN, id: card._id});
             } else {
@@ -44,10 +50,10 @@ export const ConstructorBox = ({ingredients}) => {
                 dispatch({type: ADD_COMPONENT, id: card._id, key: key});
             }
         },
-    });
+    }));
 
-    const ingredientsData = useSelector(state => state.burger.ingredients)
-    const components = useSelector((store) => store.burgerConstruct);
+    const ingredientsData = useSelector((state:any) => state.burger.ingredients)
+    const components = useSelector((store:any) => store.burgerConstruct);
 
 
     return (
@@ -58,11 +64,11 @@ export const ConstructorBox = ({ingredients}) => {
             {components.bun ? ingredientsData.map(
                 (item) =>
                     item._id === components.bun && (
-                        <ItemConstructorLocked
+                        <ConstructorLockedItem
                             key={item._id}
                             ingredient={item}
-                            position={"top"}
-                        />
+                            type={"top"}
+                            position={" (верх)"}/>
                     )
             ) : (<Plug type='top'/>
             )}
@@ -77,7 +83,7 @@ export const ConstructorBox = ({ingredients}) => {
                             );
                             return (
                                 ingredient && (
-                                    <ItemConstructor
+                                    <ConstructorItem
                                         key={key}
                                         ingredient={ingredient}
                                         index={index}
@@ -92,11 +98,11 @@ export const ConstructorBox = ({ingredients}) => {
             {components.bun ? ingredientsData.map(
                 (item) =>
                     item._id === components.bun && (
-                        <ItemConstructorLocked
+                        <ConstructorLockedItem
                             key={item._id}
                             ingredient={item}
-                            position={"bottom"}
-                        />
+                            position={" (низ)"}
+                            type={"bottom"}/>
                     )
             ) : (<Plug type='bottom'/>
             )}
@@ -105,8 +111,4 @@ export const ConstructorBox = ({ingredients}) => {
 
 
     );
-};
-
-ConstructorBox.propTypes = {
-    ingredients: PropTypes.arrayOf(PropTypes.string).isRequired,
 };

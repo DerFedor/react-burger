@@ -1,19 +1,26 @@
-import React from "react";
+import React, { ErrorInfo } from "react";
 
-export default class ErrorBoundary extends React.Component {
-  constructor(props) {
+interface IErrorBoundaryState {
+  hasError: boolean
+}
+interface IErrorBoundaryProps {
+  children?: React.ReactNode;
+}
+
+export default class ErrorBoundary extends React.Component<IErrorBoundaryProps, IErrorBoundaryState> {
+  constructor(props: IErrorBoundaryProps) {
     super(props);
     this.state = { hasError: false };
   }
 
   // с помощью этого метода меняем стейт компонента при возникновении ошибки:
-  static getDerivedStateFromError(error) {
+  static getDerivedStateFromError() {
     return { hasError: true };
   }
 
   // с помощью этого метода логируем информацию об ошибке:
-  componentDidCatch(error, info) {
-    console.log("Возникла ошибка!", error, info);
+  componentDidCatch(error: Error, info: ErrorInfo) {
+    console.error("Возникла ошибка!", error, info);
   }
 
 
@@ -22,7 +29,7 @@ export default class ErrorBoundary extends React.Component {
       // если возникла ошибка, сообщаем об этом пользователю в специальном компоненте:
       return (
         <section>
-          <h1>Что-то пошло не так :(</h1>
+          <h1>Что-то пошло не так :( </h1>
           <p>
             В приложении произошла ошибка. Пожалуйста, перезагрузите страницу.
           </p>
