@@ -1,12 +1,13 @@
 import React from "react";
-//import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./components/app/app";
-import { Provider } from "react-redux";
-import { compose, createStore, applyMiddleware } from "redux";
-import { rootReducer } from "./services/reducers";
+import {Provider} from "react-redux";
+import {compose, createStore, applyMiddleware} from "redux";
+import {rootReducer} from "./services/reducers";
 import thunk from "redux-thunk";
-import { createRoot } from 'react-dom/client';
+import {createRoot} from 'react-dom/client';
+import {BrowserRouter as Router} from 'react-router-dom';
+
 
 declare const window: any;
 
@@ -24,7 +25,10 @@ const root = createRoot(container!); // createRoot(container!) if you use TypeSc
 root.render(
     <React.StrictMode>
         <Provider store={store}>
-            <App />
+            <Router>
+                <App />
+            </Router>
         </Provider>
     </React.StrictMode>,
 );
+

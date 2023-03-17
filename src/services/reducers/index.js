@@ -8,6 +8,7 @@ import { registrationReducer } from "./register";
 import { loginReducer } from "./login";
 import { logoutReducer } from "./logout";
 import { passwordResetReducer } from "./reset-password";
+import {feedReducer} from "./feed-view";
 
 
 export const rootReducer = combineReducers({
@@ -19,5 +20,6 @@ export const rootReducer = combineReducers({
   register: registrationReducer,
   login: loginReducer,
   logout: logoutReducer,
-  password: passwordResetReducer
+  password: passwordResetReducer,
+  feed: feedReducer,
 });

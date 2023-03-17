@@ -12,6 +12,8 @@ interface IModal {
     readonly onClose: () => void;
     readonly header?: string;
     children?: React.ReactNode;
+
+    // onClose(): void;
 }
 export const Modal: FC<IModal> = (props) => {
     const escClose = (e: KeyboardEvent) => {

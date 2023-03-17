@@ -1,11 +1,10 @@
-import React from "react";
+import {
+    Button,
+    Input,
+} from "@ya.praktikum/react-developer-burger-ui-components";
+import React, { useEffect } from "react";
 
 
-
-export const Orders = () => {
-    return (
-        <>
-            Здесь будет Orders
-        </>
-    )
+export const OrdersList = () => {
+    return (<></>)
 }

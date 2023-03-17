@@ -30,6 +30,7 @@ export const ProfileForm : FC = () => {
     useEffect(() => {
         setEmailValue(email);
         setNameInput(userName);
+        setPasswordValue('')
         // console.log("buttonState", buttonState)
     }, []);
 

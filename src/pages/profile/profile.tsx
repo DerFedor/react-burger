@@ -6,7 +6,7 @@ import {getLogout} from "../../services/actions/logout";
 import {getCookie} from "../../utils/cookies";
 import {ProfileForm} from "./profile-form";
 import {useNavigate, useLocation} from "react-router-dom";
-import {Orders} from "../orders-list";
+import {OrdersList} from "../orders-list";
 
 
 
@@ -48,7 +48,7 @@ export const Profile : FC = () => {
                     </p>
                 </ul>
                 {location.pathname === '/profile' && <ProfileForm/>}
-                {location.pathname === '/profile/orders' && <Orders/>}
+                {location.pathname === '/profile/orders' && <OrdersList/>}
             </section>
         </>
     );

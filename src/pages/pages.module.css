@@ -97,3 +97,8 @@
   color: #8585ad;
   opacity: 0.4;
 }
+.feeds__page {
+  display: flex;
+  justify-content: center;
+  gap: 60px;
+}

@@ -23,7 +23,6 @@ export const IngredientPage = () => {
     const ingredientData = ingredients.find((item) => item._id === params.id)
 
     return (
-        <>
             <section className={style.section}>
                 <h1 className={"text text_type_main-large  " + style.header}>Детали ингредиента</h1>
                 <div className={style.box}>
@@ -37,6 +36,5 @@ export const IngredientPage = () => {
                     </div>
                 </div>
             </section>
-        </>
     )
 }
