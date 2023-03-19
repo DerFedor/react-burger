@@ -49,8 +49,7 @@ export const getPasswordForgotRequest = (): IPasswordForgotRequest => ({
 export const getPasswordResetRequest = (): IPasswordResetRequest => ({
     type: PASSWORD_RESET_REQUEST,
 });
-
-export const passwordForgot: AppThunk = (emailValue: string) => {
+export const passwordForgot= (emailValue: string): AppThunk  => {
     return function (dispatch: AppDispatch) {
         dispatch(getPasswordForgotRequest());
         fetch(`${BASE_URL}/password-reset`, {
@@ -85,8 +84,8 @@ interface IPasswordReserFC {
     readonly code: string;
 }
 
-export const passwordReset: AppThunk =
-    ({ password, code }: IPasswordReserFC) =>
+export const passwordReset =
+    ({ password, code }: IPasswordReserFC): AppThunk =>
         (dispatch: AppDispatch) => {
             dispatch(getPasswordResetRequest());
             fetch(`${BASE_URL}/password-reset/reset`, {

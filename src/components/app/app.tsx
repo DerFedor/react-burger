@@ -21,8 +21,6 @@ import {CLOSE_FEED} from "../../services/actions/feed-view";
 import {FeedDetails} from "../feed-details/feed-details";
 import {FeedDetailsPage} from "../../pages/feed-details-page/feed-details-page";
 import {getOrdersTemporary} from "../../services/actions/feeds-list";
-import style from "../../pages/pages.module.css";
-import {Feed} from "../feed/feed";
 import {useDispatch, useSelector} from "../../services/hooks/hooks";
 import {getIngredient} from "../../services/actions/burger-ingredients";
 
@@ -31,7 +29,7 @@ import {getIngredient} from "../../services/actions/burger-ingredients";
 export const App: FC = () => {
     const {email, userName, isAuthenticated, token} = useSelector((state) => state.user);
     const dispatch = useDispatch();
-    const {number} = useSelector((state: any) => state.feed)
+    const {number} = useSelector((state)  => state.feed)
 
 
     const navigate = useNavigate();
@@ -55,7 +53,8 @@ export const App: FC = () => {
 
 
     useEffect(() => {
-        <Navigate to={location.pathname} state={undefined}/>
+        // <Navigate to={location.pathname} state={undefined}/>
+        navigate(location.pathname,undefined);
     }, [])
 
     const onClose = () => {
