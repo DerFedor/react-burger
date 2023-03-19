@@ -1,8 +1,6 @@
 import React, {FC, useEffect} from "react";
 import ErrorBoundary from "../error-boundary/error-boundary";
-import {useDispatch, useSelector} from "react-redux";
-import {getIngredients} from "../../services/actions/burger-ingredients";
-import {Routes, Route, Navigate, useLocation, useNavigate,} from 'react-router-dom';
+import {Routes, Route, Navigate, useLocation, useNavigate, NavLink,} from 'react-router-dom';
 import {
     Profile,
     ResetPassword,
@@ -10,7 +8,7 @@ import {
     Registration,
     LoginPage,
     HomePage,
-    FeedPage,
+    FeedsPage,
     NotFound404
 } from '../../pages'
 import {getCookie, setCookie} from "../../utils/cookies";
@@ -21,38 +19,51 @@ import {AppHeader} from "../app-header/app-header";
 import {Modal} from "../modal/modal";
 import {CLOSE_FEED} from "../../services/actions/feed-view";
 import {FeedDetails} from "../feed-details/feed-details";
+import {FeedDetailsPage} from "../../pages/feed-details-page/feed-details-page";
+import {getOrdersTemporary} from "../../services/actions/feeds-list";
+import style from "../../pages/pages.module.css";
+import {Feed} from "../feed/feed";
+import {useDispatch, useSelector} from "../../services/hooks/hooks";
+import {getIngredient} from "../../services/actions/burger-ingredients";
+
 
 
 export const App: FC = () => {
-    const {isAuthenticated, token} = useSelector((state: any) => state.user);
-    const dispatch = useDispatch<any>();
-    const feed = useSelector((state: any) => state.feed.feedView)
+    const {email, userName, isAuthenticated, token} = useSelector((state) => state.user);
+    const dispatch = useDispatch();
+    const {number} = useSelector((state: any) => state.feed)
+
 
     const navigate = useNavigate();
     const location = useLocation();
     const background = location.state && location.state.background;
+    // const refreshToken = getCookie('refreshToken');
+
 
     useEffect(() => {
-        console.log(background)
-        console.log(location)
-    }, [background])
-
-    useEffect(() => {
-        dispatch(getIngredients())
-        // dispatch(checkUserAuth())
+        dispatch(getIngredient())
+        dispatch(getOrdersTemporary())
     }, [dispatch])
 
     useEffect(() => {
         const refreshToken = getCookie('refreshToken')
+        // console.log('refresh token', refreshToken)
         if (refreshToken) {
             dispatch(getUserData(refreshToken))
         }
+    }, [])
+
+
+    useEffect(() => {
+        <Navigate to={location.pathname} state={undefined}/>
     }, [])
 
     const onClose = () => {
         navigate(-1)
         dispatch({type: CLOSE_FEED})
     }
+
+
     return (
         <ErrorBoundary>
 
@@ -64,7 +75,8 @@ export const App: FC = () => {
                 <Route path="/login" element={<LoginPage/>}/>
 
                 {/*<Route path="/login" element={(!isAuthenticated && !token) ? <LoginPage /> : <Navigate to={'/'} />} />*/}
-                <Route path="/feed" element={<FeedPage/>}/>
+                <Route path="/feed" element={<FeedsPage/>}/>
+                <Route path="/feed/:id" element={<FeedDetailsPage/>}/>
                 <Route path="/ingredients/:id" element={<IngredientPage/>}/>
                 <Route path="/register" element={<Registration/>}/>
                 <Route path="/forgot-password" element={<ForgotPassword/>}/>
@@ -77,7 +89,8 @@ export const App: FC = () => {
                 {/*</ProtectedRouteElement>*/}
                 <Route path="/profile" element={<ProtectedRouteElement element={<Profile/>}/>}/>
                 <Route path="/profile/orders" element={<ProtectedRouteElement element={<Profile/>}/>}/>
-                {/*<Route path="/profile" element={<Profile/>}/>*/}
+                <Route path="/profile/orders/:id" element={<ProtectedRouteElement
+                    element={<FeedDetailsPage/>}/>}/>
 
                 {/*<Route path="/profile" element={isAuthenticated ? <Profile/> : <LoginPage/>}/>*/}
                 <Route path="*" element={<NotFound404/>}/>
@@ -86,12 +99,20 @@ export const App: FC = () => {
 
             {background &&
                 <Routes>
-                <Route path="/feed/:id"
-                       element={
-                           <Modal onClose={onClose} header={`#${feed}`}>
-                               <FeedDetails/>
-                           </Modal>}/>
-                    </Routes>}
+                    <Route path="/profile/orders/:id" element={<ProtectedRouteElement
+                        element={
+                            <Modal onClose={onClose} header={`#${number}`}>
+                                <FeedDetails/>
+                            </Modal>}/>}/>
+                </Routes>}
+            {background &&
+                <Routes>
+                    <Route path="/feed/:id"
+                           element={
+                               <Modal onClose={onClose} header={`#${number}`}>
+                                   <FeedDetails/>
+                               </Modal>}/>
+                </Routes>}
 
         </ErrorBoundary>
     );

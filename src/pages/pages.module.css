@@ -56,7 +56,6 @@
   align-items: center;
   justify-content: center;
   width: 480px;
-  /*margin: 20px 20px;*/
 }
 
 .profile {
@@ -65,8 +64,6 @@
   justify-content: center;
   align-items: baseline;
   margin-top: 180px;
-
-
   margin-left: 380px;
   margin-right: 760px;
   gap: 60px;
@@ -101,4 +98,27 @@
   display: flex;
   justify-content: center;
   gap: 60px;
+}
+.profile__orders {
+  composes: profile;
+  margin-left: 19%;
+  margin-right: 19.25%;
+
+}
+.feeds__list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  max-height: 850px;
+  scrollbar-width: thin;
+  overflow-y: auto;
+
+}
+
+.link {
+  text-decoration: none;
+  color: #F2F2F3;
 }

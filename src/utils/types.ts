@@ -14,11 +14,16 @@ export type IIngredientType = {
     readonly type: string;
 };
 
-export interface ILocationState {
-    from: {
-        pathname: string;
-        search: string;
-        key: string;
-        hash? : string
-    };
+export interface IOrder {
+    readonly _id: string;
+    readonly createdAt: string;
+    readonly name: string;
+    readonly number: number;
+    readonly status: string;
+    readonly updatedAt: string;
+    readonly ingredients: Array<string>;
+}
+export interface IAuthorizationBoolean {
+    readonly isRequest: boolean;
+    readonly isFail: boolean;
 }

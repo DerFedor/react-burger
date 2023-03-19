@@ -1,16 +1,35 @@
-import { USER_SET_DATA, USER_LOGOUT, USER_UPDATE_SUCCESS, TOKEN_UPDATE_SUCCESS, TOKEN_UPDATE_REQUEST, TOKEN_UPDATE_FAIL, USER_UPDATE_FAIL, USER_UPDATE_REQUEST, RESET_TOKEN } from "../actions/user";
+import {
+    USER_SET_DATA,
+    USER_LOGOUT,
+    USER_UPDATE_SUCCESS,
+    TOKEN_UPDATE_SUCCESS,
+    TOKEN_UPDATE_REQUEST,
+    TOKEN_UPDATE_FAIL,
+    USER_UPDATE_FAIL,
+    USER_UPDATE_REQUEST,
+    RESET_TOKEN,
+    TUser,
+} from "../actions/user";
+import { IAuthorizationBoolean } from "../../utils/types";
 
-const userInitState = {
-    userName: null,
-    email: null,
+interface IUserInitState {
+    readonly userName: string;
+    readonly email: string;
+    readonly isAuthenticated: boolean;
+    readonly token: string;
+}
+
+const userInitState: IUserInitState & IAuthorizationBoolean = {
+    userName: "",
+    email: "",
     isAuthenticated: false,
-    token: null,
+    token: "",
 
     isRequest: false,
-    isFail: false
+    isFail: false,
 };
 
-export const userReducer = (state = userInitState, action) => {
+export const userReducer = (state = userInitState, action: TUser) => {
     switch (action.type) {
         case USER_SET_DATA: {
             return {
@@ -18,7 +37,7 @@ export const userReducer = (state = userInitState, action) => {
                 userName: action.name,
                 email: action.email,
                 isAuthenticated: true,
-                token: action.token
+                token: action.token,
             };
         }
         case USER_LOGOUT: {
@@ -29,7 +48,8 @@ export const userReducer = (state = userInitState, action) => {
                 isAuthenticated: false,
                 token: null
             };
-        } case USER_UPDATE_REQUEST: {
+        }
+        case USER_UPDATE_REQUEST: {
             return {
                 ...state,
                 isRequest: true

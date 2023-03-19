@@ -5,10 +5,10 @@ import { ForgotPassword } from "./forgot-password";
 import { ResetPassword } from "./reset-password";
 import { Profile } from "./profile/profile";
 import {NotFound404} from "./not-found/not-found";
-import {FeedPage} from "./feed-page";
+import {FeedsPage} from "./feeds-page";
 
 
 
 
 
-export { Profile, ResetPassword, ForgotPassword, Registration, LoginPage, HomePage, NotFound404, FeedPage }
+export { Profile, ResetPassword, ForgotPassword, Registration, LoginPage, HomePage, NotFound404, FeedsPage }

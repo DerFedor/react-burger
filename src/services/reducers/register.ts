@@ -1,27 +1,28 @@
-import { LOGOUT_REQUEST, LOGOUT_SUCCESS, LOGOUT_FAIL } from "../actions/logout";
+import {REGISTRATION_FAIL, REGISTRATION_SUCCESS, REGISTRATION_REQUEST, TRegistration} from "../actions/register";
+import {IAuthorizationBoolean} from '../../utils/types'
 
 
-const loginInitState = {
+const registrationInitState: IAuthorizationBoolean = {
     isRequest: false,
     isFail: false
 
 }
 
-export const logoutReducer = (state = loginInitState, action) => {
+export const registrationReducer = (state = registrationInitState, action: TRegistration) => {
     switch (action.type) {
-        case LOGOUT_REQUEST: {
+        case REGISTRATION_REQUEST: {
             return {
                 ...state,
                 isRequest: true
             }
         }
-        case LOGOUT_SUCCESS: {
+        case REGISTRATION_SUCCESS: {
             return {
                 ...state,
                 isRequest: false
             }
         }
-        case LOGOUT_FAIL: {
+        case REGISTRATION_FAIL: {
             return {
                 isFail: true,
                 isRequest: false

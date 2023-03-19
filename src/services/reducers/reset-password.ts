@@ -3,9 +3,20 @@ import { PASSWORD_FORGOT_REQUEST,
     PASSWORD_FORGOT_FAIL,
     PASSWORD_RESET_REQUEST,
     PASSWORD_RESET_SUCCESS,
-    PASSWORD_RESET_FAIL } from "../actions/reset-password"
+    PASSWORD_RESET_FAIL,
+    TPassword,} from "../actions/reset-password"
 
-const passwordResetInitState = {
+interface IPasswordResetInitState {
+    readonly forgotRequest: boolean;
+    readonly forgotFail: boolean;
+    readonly forgotSuccess: boolean;
+
+    readonly resetRequest: boolean;
+    readonly resetFail: boolean;
+    readonly resetSuccess: boolean;
+}
+
+const passwordResetInitState: IPasswordResetInitState = {
     forgotRequest: false,
     forgotFail: false,
     forgotSuccess: false,
@@ -15,13 +26,16 @@ const passwordResetInitState = {
     resetSuccess: false
 }
 
-export const passwordResetReducer = (state = passwordResetInitState, action) => {
+export const passwordResetReducer = (
+    state = passwordResetInitState,
+    action: TPassword
+) => {
     switch (action.type) {
         case PASSWORD_FORGOT_REQUEST: {
             return {
                 ...state,
                 forgotRequest: true,
-            }
+            };
         }
         case PASSWORD_FORGOT_SUCCESS: {
             return {
@@ -29,8 +43,8 @@ export const passwordResetReducer = (state = passwordResetInitState, action) => 
                 forgotRequest: false,
                 forgotFail: false,
                 forgotSuccess: true,
-                resetSuccess: false
-            }
+                resetSuccess: false,
+            };
         }
         case PASSWORD_FORGOT_FAIL: {
             return {
@@ -38,14 +52,14 @@ export const passwordResetReducer = (state = passwordResetInitState, action) => 
                 forgotRequest: false,
                 forgotFail: true,
                 forgotSuccess: false,
-                resetSuccess: false
-            }
+                resetSuccess: false,
+            };
         }
         case PASSWORD_RESET_REQUEST: {
             return {
                 ...state,
                 resetRequest: true,
-            }
+            };
         }
         case PASSWORD_RESET_SUCCESS: {
             return {
@@ -54,18 +68,18 @@ export const passwordResetReducer = (state = passwordResetInitState, action) => 
                 forgotSuccess: false,
                 resetRequest: false,
                 resetFail: false,
-            }
+            };
         }
         case PASSWORD_RESET_FAIL: {
             return {
                 ...state,
                 resetRequest: false,
                 resetFail: true,
-                resetSuccess: false
-            }
+                resetSuccess: false,
+            };
         }
         default: {
-            return state
+            return state;
         }
     }
 }

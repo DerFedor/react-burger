@@ -4,14 +4,28 @@ import {
     CHANGE_BUN,
     SORT_COMPONENT,
     CLEAR_COMPONENTS,
+    TConstruct,
 } from "../actions/constructor-burger";
 
-const constructorInitialState = {
-    buns: "",
+export type TComponents = {
+    readonly id: string;
+    readonly key: string;
+};
+
+type TConstructorInitialState<T> = {
+    bun: string;
+    components: Array<T>;
+};
+
+const constructorInitialState: TConstructorInitialState<TComponents> = {
+    bun: "",
     components: [],
 };
 
-export const burgerConstructorReducer = (state = constructorInitialState, action) => {
+export const constructorReducer = (
+    state = constructorInitialState,
+    action: TConstruct
+): TConstructorInitialState<TComponents> => {
     switch (action.type) {
         case ADD_COMPONENT: {
             return {
@@ -44,7 +58,7 @@ export const burgerConstructorReducer = (state = constructorInitialState, action
         }
         case CLEAR_COMPONENTS: {
             return {
-                buns: "",
+                bun: "",
                 components: [],
             };
         }
@@ -53,3 +67,6 @@ export const burgerConstructorReducer = (state = constructorInitialState, action
         }
     }
 };
+
+export class burgerConstructorReducer {
+}

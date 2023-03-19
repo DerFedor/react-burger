@@ -8,10 +8,10 @@ import appHeaderStyle from "./app-header.module.css";
 import {Link, NavLink} from "react-router-dom";
 import {onActiveLink} from "../../utils/onActiveLink";
 import {useSelector} from "react-redux";
+import { FC } from "react";
 
 
-
-export const AppHeader = () => {
+export const AppHeader: FC = () => {
     const {isAuthenticated, token} = useSelector((state:any) => state.user);
 
 

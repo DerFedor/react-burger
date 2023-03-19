@@ -10,7 +10,9 @@
     padding: 0;
     display: flex;
     flex-direction: column;
-    gap: 8px
+    gap: 8px;
+    flex-wrap: wrap;
+    max-height: 320px;
 }
 
 .list__box {
@@ -24,3 +26,10 @@
 .ready {
     color: #00CCCC;
 }
+/*.ready:nth-child(30) {*/
+/*    opacity: 0.5;*/
+/*}*/
+
+/*.ready:nth-child(1n+ 31) {*/
+/*    display: none;*/
+/*}*/

@@ -6,15 +6,15 @@ import {
 import {Link, Navigate, NavLink, useLocation, redirect} from "react-router-dom";
 import style from "./pages.module.css";
 
-import {useDispatch, useSelector} from "react-redux";
+import {useDispatch, useSelector} from "../services/hooks/hooks";
 import {passwordForgot} from "../services/actions/reset-password";
 
 
 export const ForgotPassword = () => {
-    const {isAuthenticated} = useSelector((state:any) => state.user);
+    const {isAuthenticated} = useSelector((state) => state.user);
     const [emailValue, setEmailValue] = React.useState("");
-    const {forgotSuccess} = useSelector((state:any) => state.password)
-    const dispatch = useDispatch<any>()
+    const {forgotSuccess} = useSelector((state) => state.password)
+    const dispatch = useDispatch()
     const location = useLocation()
 
 
