@@ -1,10 +1,10 @@
-import React, { ErrorInfo } from "react";
+import React, { ReactNode, ErrorInfo } from "react";
 
 interface IErrorBoundaryState {
   hasError: boolean
 }
 interface IErrorBoundaryProps {
-  children?: React.ReactNode;
+  children?: ReactNode
 }
 
 export default class ErrorBoundary extends React.Component<IErrorBoundaryProps, IErrorBoundaryState> {
@@ -20,20 +20,19 @@ export default class ErrorBoundary extends React.Component<IErrorBoundaryProps, 
 
   // с помощью этого метода логируем информацию об ошибке:
   componentDidCatch(error: Error, info: ErrorInfo) {
-    console.error("Возникла ошибка!", error, info);
+    console.log("Возникла ошибка!", error, info);
   }
-
 
   render() {
     if (this.state.hasError) {
       // если возникла ошибка, сообщаем об этом пользователю в специальном компоненте:
       return (
-        <section>
-          <h1>Что-то пошло не так :( </h1>
-          <p>
-            В приложении произошла ошибка. Пожалуйста, перезагрузите страницу.
-          </p>
-        </section>
+          <section>
+            <h1>Что-то пошло не так :(</h1>
+            <p>
+              В приложении произошла ошибка. Пожалуйста, перезагрузите страницу.
+            </p>
+          </section>
       );
     }
     // если всё работает штатно, рендерим дочерние компоненты

@@ -3,6 +3,7 @@ import { checkResponse } from "../../utils/check-response";
 import { AppDispatch, AppThunk } from "../hooks/hooks";
 import { IIngredientType } from "../../utils/types";
 
+
 export const GET_INGREDIENTS_REQUEST: "GET_INGREDIENTS_REQUEST" =
     "GET_INGREDIENTS_REQUEST";
 export const GET_INGREDIENTS_SUCCESS: "GET_INGREDIENTS_SUCCESS" =

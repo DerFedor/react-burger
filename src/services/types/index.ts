@@ -13,7 +13,6 @@ import { TRegistration } from "../actions/register";
 import { TUser } from "../actions/user";
 import { TView } from "../actions/view";
 import { TWsConnect } from "../actions/ws-feed-actions";
-import {useDispatch} from "react-redux";
 
 export type TAppActions =
     | TGetIngredients
@@ -30,9 +29,6 @@ export type TAppActions =
     | TWsConnect;
 
 export type RootState = ReturnType<typeof store.getState>;
-// export type AppDispatch = typeof store.dispatch;
-// export type AppThunk<TReturn  = void> = ActionCreator<
-//     ThunkAction<TReturn , Action, RootState, TAppActions>
-// >;
+
 
 

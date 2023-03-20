@@ -1,11 +1,11 @@
 import React from "react";
 import image from '../../images/done.svg'
 import orderDetailsStyle from "./order-details.module.css";
-import { useSelector } from 'react-redux';
+import { useSelector } from "../../services/hooks/hooks";
 import { FC } from "react";
 
 export const OrderDetails: FC = () => {
-    const {order} = useSelector((store:any) => store.order)
+    const {order} = useSelector((store) => store.order)
   return (
     <div className={"m-4 " + orderDetailsStyle.box}>
         <h2 className="text text_type_digits-large pb-8">{order}</h2>

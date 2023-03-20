@@ -1,6 +1,6 @@
-import {useDispatch, useSelector} from "react-redux";
+import {useDispatch, useSelector} from "../../services/hooks/hooks" ;
 import update from "immutability-helper";
-import {REMOVE_COMPONENT, SORT_COMPONENT} from "../../services/actions/constructor-burger";
+import {ISortComponent, REMOVE_COMPONENT, SORT_COMPONENT} from "../../services/actions/constructor-burger";
 import {useDrag, useDrop} from "react-dnd";
 import burgerConstructorStyle from "./burger-constructor.module.css";
 import {ConstructorElement, DragIcon} from "@ya.praktikum/react-developer-burger-ui-components";
@@ -9,11 +9,14 @@ import {IIngredientType} from "../../utils/types";
 import type { Identifier } from "dnd-core";
 
 
+
 interface IConstructorItem {
     ingredient: IIngredientType;
     index: number;
     itemKey: string;
 }
+
+
 interface IConstructorItemMove {
     ingredient: IIngredientType;
     index: number;
@@ -27,13 +30,12 @@ export const ConstructorItem: FC<IConstructorItem> = ({
                                                       }) => {
     const dispatch = useDispatch();
     const ref = useRef<HTMLLIElement>(null);
-    const componentsData = useSelector((store:any) => store.burgerConstruct);
+    const componentsData = useSelector((store) => store.construct);
 
 
     const moveCard = (dragIndex: number, hoverIndex: number) => {
         const components = componentsData.components;
         const newComp = components.slice();
-
         const spliced = update(newComp, {
             $splice: [
                 [dragIndex, 1],

@@ -1,9 +1,9 @@
-import React, {useEffect} from "react";
+import React from "react";
 import {
     Button,
     Input,
 } from "@ya.praktikum/react-developer-burger-ui-components";
-import {Link, Navigate, NavLink, useLocation, redirect} from "react-router-dom";
+import {Link, Navigate, useLocation} from "react-router-dom";
 import style from "./pages.module.css";
 
 import {useDispatch, useSelector} from "../services/hooks/hooks";
@@ -30,9 +30,6 @@ export const ForgotPassword = () => {
         console.log("location", location)
         return (
             <Navigate to="/reset-password" state={{from: location}} />
-
-            // <Navigate to={{ state: { from: location }, pathname: "/reset-password" }}/>
-            // <redirect to={{ pathname: '/reset-password', state: { from: location } }} />
         )
 
     }

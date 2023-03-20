@@ -1,6 +1,6 @@
 import React, {FC, useEffect} from "react";
 import style from "../pages.module.css";
-import {useDispatch, useSelector} from "react-redux";
+import { useSelector, useDispatch } from "../../services/hooks/hooks";
 import {getLogout} from "../../services/actions/logout";
 import {getCookie} from "../../utils/cookies";
 import {ProfileForm} from "./profile-form";
@@ -12,23 +12,22 @@ import {WS_CONNECTION_START_ORDER, WS_CONNECTION_END} from "../../services/actio
 
 
 
-
 export const Profile : FC = () => {
-    const dispatch = useDispatch<any>();
+    const dispatch = useDispatch();
     const location = useLocation();
     const navigate = useNavigate();
-    const { orders } = useSelector((state:any) => state.websocket)
+    const { orders } = useSelector((state) => state.websocket)
 
     useEffect(() => {
         if (location.pathname === '/profile/orders') {
-            console.log('open page profile orders')
             dispatch({ type: WS_CONNECTION_START_ORDER });
             return () => {
-                console.log('close page profile orders')
+                // console.log('close page profile orders')
                 dispatch({ type: WS_CONNECTION_END });
             }
         }
     }, [location.pathname])
+
 
     const logoutOnClick = () => {
         const refreshToken = getCookie('refreshToken')
@@ -48,8 +47,12 @@ export const Profile : FC = () => {
     }
 
     return (
-        <>
-            <section className={style.profile}>
+        <div>
+            <section         className={
+                location.pathname === "/profile"
+                    ? style.profile
+                    : style.profile__orders
+            }>
                 <ul className={style.list}>
                     <li className={style.profile_box} onClick={profileClick}>
                         <p className={"text text_type_main-medium " + (location.pathname === '/profile' ? '' : "text_color_inactive")}>Профиль</p>
@@ -77,12 +80,12 @@ export const Profile : FC = () => {
                         <NavLink key={item._id} className={style.link}
                         to={`/profile/orders/${item._id}`}
                         state={{ background: location } }
-                        onClick={(e) => onClick(item._id)}>
+                        onClick={(e) => onClick(item)}>
                         <Feed key={item._id} feed={item} place='orders'/>
                         </NavLink>
                         )}
                 </ul>}
             </section>
-        </>
+        </div>
     );
 };

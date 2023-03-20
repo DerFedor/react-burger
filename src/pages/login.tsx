@@ -6,15 +6,15 @@ import {
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import style from "./pages.module.css";
 import {Link, Navigate} from "react-router-dom";
-import {useDispatch, useSelector} from "react-redux";
+import { useSelector, useDispatch } from "../services/hooks/hooks";
 import {getLogin} from "../services/actions/login";
 
 
 export const LoginPage = () => {
 
-    const {isAuthenticated} = useSelector((state:any) => state.user)
+    const {isAuthenticated} = useSelector((state) => state.user)
 
-    const dispatch = useDispatch<any>()
+    const dispatch = useDispatch()
 
     const [emailValue, setEmailValue] = React.useState("");
 

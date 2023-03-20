@@ -27,3 +27,18 @@ export interface IAuthorizationBoolean {
     readonly isRequest: boolean;
     readonly isFail: boolean;
 }
+
+export interface ILocationState {
+    from: {
+        pathname: string;
+        search: string;
+        key: string;
+        hash? : string
+    };
+}
+
+export interface IUserAllData {
+    email?: string | undefined;
+    password?: string | undefined;
+    name?: string | undefined;
+}

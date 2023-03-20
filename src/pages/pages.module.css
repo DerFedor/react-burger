@@ -62,13 +62,18 @@
   display: flex;
   flex-direction: row;
   justify-content: center;
-  align-items: baseline;
   margin-top: 180px;
   margin-left: 380px;
   margin-right: 760px;
   gap: 60px;
 }
 
+.profile__orders {
+  composes: profile;
+  margin-left: 19%;
+  margin-right: 19.25%;
+
+}
 .profile_box {
   list-style: none;
   width: 320px;
@@ -93,6 +98,7 @@
  margin-top: 80px ;
   color: #8585ad;
   opacity: 0.4;
+  max-width: 320px;
 }
 .feeds__page {
   display: flex;
@@ -114,7 +120,7 @@
   margin: 0;
   max-height: 850px;
   scrollbar-width: thin;
-  overflow-y: auto;
+  /*overflow-y: auto;*/
 
 }
 

@@ -2,6 +2,8 @@ import { BASE_URL } from "../../utils/base-url";
 
 import { deleteCookie, setCookie } from "../../utils/cookies";
 import { checkResponse } from "../../utils/check-response";
+import { AppThunk, AppDispatch } from "../hooks/hooks";
+import { IUserAllData } from "../../utils/types";
 
 export const USER_SET_DATA: "USER_SET_DATA" = "USER_SET_DATA";
 export const USER_LOGOUT: "USER_LOGOUT" = "USER_LOGOUT";
@@ -33,8 +35,8 @@ export interface IUserUpdateRequest {
 }
 export interface IUserUpdateSuccess {
     readonly type: typeof USER_UPDATE_SUCCESS;
-    readonly email: string;
-    readonly name: string;
+    readonly email?: string;
+    readonly name?: string;
 }
 export interface IUserUpdateFail {
     readonly type: typeof USER_UPDATE_FAIL;
@@ -65,7 +67,12 @@ export type TUser =
     | IUserSetData
     | IUserUpdateRequest;
 
-const addUserUpdate = (data: any) => {
+interface IAddUserUpdate {
+    success: boolean
+    user: IUserAllData
+}
+
+const addUserUpdate =  (data: IAddUserUpdate): IUserUpdateSuccess => {
     return {
         type: USER_UPDATE_SUCCESS,
         email: data.user.email,
@@ -73,8 +80,8 @@ const addUserUpdate = (data: any) => {
     };
 };
 
-export const tokenUpdate = (token: string) => {
-    return function (dispatch: any) {
+export const tokenUpdate = (token: string): AppThunk => {
+    return function (dispatch: AppDispatch) {
         dispatch({
             type: TOKEN_UPDATE_REQUEST,
         });
@@ -118,8 +125,8 @@ export const tokenUpdate = (token: string) => {
     };
 };
 
-export const userDataUpdate = (data: any, token: string) => {
-    return function (dispatch: any) {
+export const userDataUpdate = (data: IUserAllData, token: string): AppThunk => {
+    return function (dispatch: AppDispatch) {
         dispatch({
             type: USER_UPDATE_REQUEST,
         });
@@ -150,8 +157,8 @@ export const userDataUpdate = (data: any, token: string) => {
     };
 };
 
-export const getUserData = (token: string) => {
-    return function (dispatch: any) {
+export const getUserData = (token: string) : AppThunk => {
+    return function (dispatch: AppDispatch) {
         dispatch({
             type: USER_UPDATE_REQUEST,
         });
@@ -215,8 +222,8 @@ export const getUserData = (token: string) => {
     };
 };
 
-export const userDataUpdateWithoutToken = (data: any, token?: string) => {
-    return function (dispatch: any) {
+export const userDataUpdateWithoutToken = (data: IUserAllData, token?: string): AppThunk => {
+    return function (dispatch: AppDispatch) {
         fetch(`${BASE_URL}/auth/token`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },

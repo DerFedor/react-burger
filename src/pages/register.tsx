@@ -6,16 +6,16 @@ import {
     Input,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import {Link, Navigate} from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector, useDispatch } from "../services/hooks/hooks";
 import { getRegistration } from "../services/actions/register";
 
 import style from "./pages.module.css";
-import {IUserAllData} from "../utils/check-response";
+import {IUserAllData} from "../utils/types";
 
 
 export const Registration = () => {
-    const dispatch = useDispatch<any>()
-    const { isAuthenticated } = useSelector((state:any) => state.user)
+    const dispatch = useDispatch()
+    const { isAuthenticated } = useSelector((state) => state.user)
 
     const [emailValue, setEmailValue] = React.useState("");
 

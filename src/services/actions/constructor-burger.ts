@@ -1,3 +1,5 @@
+import {TComponents} from "../reducers/constructor-burger";
+
 export const ADD_COMPONENT: "ADD_COMPONENT" = "ADD_COMPONENT";
 export const REMOVE_COMPONENT: "REMOVE_COMPONENT" = "REMOVE_COMPONENT";
 export const CHANGE_BUN: "CHANGE_BUN" = "CHANGE_BUN";
@@ -27,7 +29,7 @@ export interface IChangeBun {
 
 export interface ISortComponent {
     readonly type: typeof SORT_COMPONENT;
-    readonly components: [];
+    readonly components: TComponents[];
 }
 
 export interface IClearComponents {

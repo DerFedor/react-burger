@@ -1,5 +1,5 @@
 import { compose, createStore, applyMiddleware } from "redux";
-import { rootReducer } from "../services/reducers";
+import { rootReducer } from "./reducers";
 import {
   WS_CONNECTION_START,
   WS_CONNECTION_ERROR,
@@ -12,7 +12,7 @@ import {
 } from "../services/actions/ws-feed-actions";
 import thunk from "redux-thunk";
 import { socketMiddleware } from "../services/middleware/socketMiddleware";
-import { TWsConnect } from "./actions/ws-feed-actions";
+// import { TWsConnect } from "./actions/ws-feed-actions";
 
 declare const window: any;
 

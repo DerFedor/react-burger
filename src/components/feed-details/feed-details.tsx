@@ -1,17 +1,18 @@
 import {
-    Button,
-    Input,
     CurrencyIcon
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import style from './feed-details.module.css'
-import { useSelector } from "react-redux";
-import { useEffect, useMemo } from "react";
+import { useSelector } from "../../services/hooks/hooks";
+import {FC,  useMemo} from "react";
 
 
 
+interface IIngredientDetail {
+    item: string;
+}
 
-const IngredientDetail = ({ item }) => {
-    const ingredients = useSelector((state:any) => state.burger.ingredients)
+const IngredientDetail: FC <IIngredientDetail> = ({ item }) => {
+    const ingredients = useSelector((state) => state.burger.ingredients)
     const data = ingredients?.find((ingr) => ingr._id === item)
 
 
@@ -32,11 +33,11 @@ const IngredientDetail = ({ item }) => {
 
 
 export const FeedDetails = () => {
-    const { orders } = useSelector((state:any) => state.websocket)
+    const { orders } = useSelector((state) => state.websocket)
     // const { orders, total, totalToday } = useSelector((state:any) => state.temporaryOrder)
-    const feed = useSelector((state:any) => state.feed.feedView)
+    const feed = useSelector((state) => state.feed.feedView)
     const data = orders.find(item => item._id === feed)
-    const ingredientsData = useSelector((state:any) => state.burger.ingredients);
+    const ingredientsData = useSelector((state) => state.burger.ingredients);
 
     const price = useMemo(() => {
         let total = 0;

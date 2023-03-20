@@ -6,14 +6,14 @@ import {
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import {useLocation} from "react-router-dom";
 import style from "../pages.module.css";
-import {useDispatch, useSelector} from "react-redux";
+import { useSelector, useDispatch } from "../../services/hooks/hooks";
 import {getLogout} from "../../services/actions/logout";
 import {getCookie} from "../../utils/cookies";
 import {userDataUpdate, userDataUpdateWithoutToken} from "../../services/actions/user";
 
 export const ProfileForm : FC = () => {
-    const dispatch = useDispatch<any>();
-    const {email, userName, token} = useSelector((state:any) => state.user);
+    const dispatch = useDispatch();
+    const {email, userName, token} = useSelector((state) => state.user);
     const [emailValue, setEmailValue] = useState("");
     const [passwordValue, setPasswordValue] = useState("");
     const [nameInput, setNameInput] = useState("");
@@ -21,24 +21,13 @@ export const ProfileForm : FC = () => {
 
     const inputRef = useRef(null);
 
-    const location = useLocation();
-    // console.log("location:");
-    // console.log(location);
-    // let buttonState: {false}
-    //let buttonState = true;
-
     useEffect(() => {
         setEmailValue(email);
         setNameInput(userName);
         setPasswordValue('')
-        // console.log("buttonState", buttonState)
     }, []);
 
     useEffect(() => {
-        // console.log("форма изменилась")
-        // console.log("nameInput", nameInput)
-        // console.log("userName", userName)
-        // //setButtonState( false);
 
         if (nameInput === userName && emailValue === email && !passwordValue) {
             setButtonState(true);

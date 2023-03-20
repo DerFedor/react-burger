@@ -1,5 +1,5 @@
 import burgerConstructorStyle from "./burger-constructor.module.css";
-import {useDispatch, useSelector} from "react-redux";
+import {useDispatch, useSelector} from "../../services/hooks/hooks";
 import {useDrop} from "react-dnd";
 import {ADD_COMPONENT, CHANGE_BUN} from "../../services/actions/constructor-burger";
 import {v4 as uuidv4} from "uuid";
@@ -52,8 +52,8 @@ export const ConstructorBox: FC<IConstructorBox> = ({ ingredients }) => {
         },
     }));
 
-    const ingredientsData = useSelector((state:any) => state.burger.ingredients)
-    const components = useSelector((store:any) => store.burgerConstruct);
+    const ingredientsData = useSelector((state) => state.burger.ingredients);
+    const components = useSelector((store) => store.construct);
 
 
     return (

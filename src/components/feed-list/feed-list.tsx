@@ -1,19 +1,19 @@
-import React, {FC, useEffect, useState} from "react";
+import React, {FC} from "react";
 import style from './feeds-list.module.css'
 import {Feed} from "../feed/feed";
-import {Link, Navigate, NavLink, useLocation} from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { NavLink, useLocation} from "react-router-dom";
+import { useDispatch, useSelector } from "../../services/hooks/hooks";
 import { OPEN_FEED } from "../../services/actions/feed-view";
 
 export const FeedsList: FC = () => {
-    const location = useLocation()
+    const location = useLocation();
     const dispatch = useDispatch()
 
     const onClick = (item) => {
         dispatch({ type: OPEN_FEED, view: item._id, number: item.number })
         // console.log(item)
     }
-    const { orders } = useSelector((state:any) => state.websocket)
+    const { orders } = useSelector((state) => state.websocket)
 
     return (
         <section className="pl-2 pr-2">

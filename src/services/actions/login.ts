@@ -2,6 +2,8 @@ import { BASE_URL } from "../../utils/base-url";
 import { USER_SET_DATA, RESET_TOKEN } from "./user";
 import { setCookie, deleteCookie } from "../../utils/cookies";
 import { checkResponse } from "../../utils/check-response";
+import { AppThunk, AppDispatch } from "../hooks/hooks";
+import { IUserAllData } from "../../utils/types";
 
 export const LOGIN_REQUEST: "LOGIN_REQUEST" = "LOGIN_REQUEST";
 export const LOGIN_SUCCESS: "LOGIN_SUCCESS" = "LOGIN_SUCCESS";
@@ -19,8 +21,8 @@ export interface ILoginFail {
 
 export type TLogin = ILoginRequest | ILoginSuccess | ILoginFail
 
-export function getLogin(data: any) {
-    return function (dispatch: any) {
+export const getLogin = (data: IUserAllData): AppThunk => {
+    return function (dispatch: AppDispatch) {
         dispatch({
             type: LOGIN_REQUEST,
         });

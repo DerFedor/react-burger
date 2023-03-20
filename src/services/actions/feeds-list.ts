@@ -1,6 +1,7 @@
 import { BASE_URL } from "../../utils/base-url";
 import { checkResponse } from "../../utils/check-response";
 import { IOrder } from "../../utils/types";
+import { AppThunk, AppDispatch } from "../hooks/hooks";
 
 export const GET_ORDERS_TEMPORARY: "GET_ORDERS_TEMPORARY" =
     "GET_ORDERS_TEMPORARY";
@@ -24,8 +25,8 @@ export interface IGetOrdersFail {
 
 export type TGetOrders = IGetOrders | IGetOrdersRequest | IGetOrdersFail;
 
-export function getOrdersTemporary() {
-    return function (dispatch: any) {
+export function getOrdersTemporary(): AppThunk {
+    return function (dispatch: AppDispatch) {
         dispatch({ type: GET_ORDERS_TEMPORARY_REQUEST });
 
         fetch(`${BASE_URL}/orders/all`)

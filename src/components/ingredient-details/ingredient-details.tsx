@@ -1,6 +1,6 @@
 import React, {FC} from "react";
 import ingredientDetailsStyle from "./ingredient-details.module.css";
-import { useSelector} from "react-redux";
+import { useSelector} from "../../services/hooks/hooks";
 
 interface IStructure {
     readonly structure: string;

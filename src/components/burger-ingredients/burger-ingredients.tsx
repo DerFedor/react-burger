@@ -1,4 +1,4 @@
-import React, {FC, useRef, useState, MutableRefObject, LegacyRef, RefObject} from "react";
+import React, {FC, useRef, useState, MutableRefObject, RefObject} from "react";
 import IngredientsStyle from "./burger-ingredients.module.css";
 import {
     Tab,
@@ -7,7 +7,7 @@ import {
 import {Modal} from "../modal/modal";
 import {IIngredientType} from "../../utils/types";
 import {IngredientDetails} from "../ingredient-details/ingredient-details";
-import {useDispatch, useSelector} from "react-redux";
+import { useSelector, useDispatch } from "../../services/hooks/hooks";
 import {
     CLOSE_CARD,
     OPEN_CARD,
@@ -70,12 +70,12 @@ const TabContainer: FC<ITabContainer> = (props) => {
 interface IIngredientCard {
     props: IIngredientType;
 }
+
 const IngredientCard: FC<IIngredientCard> = ({ props }) => {
     const dispatch = useDispatch();
-
     const [isVisible, setIsVisible] = useState<boolean>(false);
 
-    const componentsData = useSelector((store:any) => store.burgerConstruct);
+    const componentsData = useSelector((store) => store.construct);
     function getComponentsIdArray() {
         let arr: Array<string>  = [];
         if (componentsData.components.length > 0) {

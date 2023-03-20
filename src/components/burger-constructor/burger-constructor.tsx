@@ -1,13 +1,13 @@
 import React from "react";
 import burgerConstructorStyle from "./burger-constructor.module.css";
-import { useSelector} from 'react-redux';
+import { useSelector} from '../../services/hooks/hooks';
 import {ConstructorButtonPriceBox} from "./constructor-button-price-box";
 import {ConstructorBox} from "./constructor-box";
 import { Loader } from "../loader/loader";
 
 export const BurgerConstructor = () => {
-    const componentsData = useSelector((store:any) => store.burgerConstruct);
-    const { orderRequest } = useSelector((store:any) => store.order);
+    const componentsData = useSelector((store) => store.construct);
+    const { orderRequest } = useSelector((store) => store.order);
 
     function getComponentsIdArray(): Array<string> {
         let arr: Array<string> = [];

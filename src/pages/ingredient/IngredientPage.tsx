@@ -1,6 +1,6 @@
 import { useParams } from "react-router-dom";
-import { useSelector } from "react-redux";
-import style from './ingredient-page.module.css'
+import { useSelector } from "../../services/hooks/hooks";
+import style from './ingredient-page.module.css';
 import React, {FC} from "react";
 
 

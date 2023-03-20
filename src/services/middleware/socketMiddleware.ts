@@ -34,18 +34,15 @@ export const socketMiddleware = (
                 socket.onopen = (event) => {
                     dispatch({ type: onOpen, payload: event });
                 };
-
                 socket.onerror = (event) => {
                     dispatch({ type: onError, payload: event });
                 };
-
                 socket.onmessage = (event) => {
                     const { data } = event;
                     const parsedData = JSON.parse(data);
                     const { success, ...restParsedData } = parsedData;
                     dispatch({ type: onMessage, payload: restParsedData });
                 };
-
                 socket.onclose = (event) => {
                     dispatch({ type: onClose, payload: event });
                 };

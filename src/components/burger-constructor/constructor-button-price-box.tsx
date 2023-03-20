@@ -1,4 +1,4 @@
-import {useDispatch, useSelector} from "react-redux";
+import {useDispatch, useSelector} from "../../services/hooks/hooks" ;
 import burgerConstructorStyle from "./burger-constructor.module.css";
 import {Button, CurrencyIcon} from "@ya.praktikum/react-developer-burger-ui-components";
 import {getOrder, ORDER_CLEAR} from "../../services/actions/order";
@@ -17,7 +17,7 @@ interface IConstructorBoxPrice {
 export const ConstructorBoxPrice: FC<IConstructorBoxPrice> = ({
                                                                   ingredients,
                                                               }) => {
-    const ingredientsData = useSelector((state: any) => state.burger.ingredients);
+    const ingredientsData = useSelector((state) => state.burger.ingredients);
 
 
     const price = useMemo(() => {
@@ -44,11 +44,11 @@ interface IConstructorButtonPriceBox {
 }
 
 export const ConstructorButtonPriceBox: FC<IConstructorButtonPriceBox> = ({ingredients}) => {
-    const dispatch = useDispatch<any>()
+    const dispatch = useDispatch()
     const navigate = useNavigate()
-    const {order} = useSelector((store:any) => store.order)
-    const {isAuthenticated, token} = useSelector((state:any) => state.user)
-    const buttonState = useSelector((store:any) => store.order.orderRequest)
+    const {order} = useSelector((store) => store.order)
+    const {isAuthenticated, token} = useSelector((state) => state.user)
+    const buttonState = useSelector((store) => store.order.orderRequest)
 
     const handleClose = () => {
         dispatch({
