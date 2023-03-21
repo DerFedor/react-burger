@@ -5,18 +5,32 @@ import {Loader} from "../loader/loader";
 
 export interface IProtectedRoute {
     element: ReactNode;
-    //OnlyUnAuth?: boolean;
+    OnlyAuth?: boolean;
 
 }
-export const ProtectedRouteElement: FC<IProtectedRoute> = ({ element }) => {
 
-    const { isAuthenticated } = useSelector((state) => state.user)
+export const ProtectedRouteElement: FC<IProtectedRoute> = ({ element,OnlyAuth= false }) => {
 
-    return (isAuthenticated) ?
-        <>
-            {element}
+    const { isAuthenticated, userName } = useSelector((state) => state.user)
+    const location = useLocation();
+
+    if (!isAuthenticated) return <>
+        <Loader text={"wait..."}/>
         </>
-            : <Navigate  to="/login" replace={true}/>
 
+    if (!userName) {
+        return (
+            <Navigate
+                to="/login"
+                    state = {{from: location}}
+            />
+        )
+    }
+
+    return (
+        <>
+        {element}
+        </>
+    )
 }
 

@@ -1,5 +1,6 @@
 import {
-    CurrencyIcon
+    CurrencyIcon,
+    FormattedDate
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import React, {FC, useMemo} from "react";
 import style from './feed.module.css'
@@ -32,6 +33,9 @@ interface IFeed {
 
 export const Feed: FC<IFeed> = ({ feed, place }) => {
     const ingredientsData = useSelector((state) => state.burger.ingredients);
+    const currentDate = new Date().getTimezoneOffset() / 60;
+    const time = "i-GMT" + (currentDate > 0 ? "-" + currentDate : "+" + -currentDate);
+
     const price = useMemo(() => {
         let total = 0;
         feed.ingredients.forEach((item: string) => {
@@ -55,12 +59,15 @@ export const Feed: FC<IFeed> = ({ feed, place }) => {
         return doneStatus;
     };
 
+
+
     return (
         <li className={place === "orders" ? style.feed__orders : style.feed}>
             <div className={style.numbers}>
                 <h3 className="text text_type_digits-default">{feed.number}</h3>
                 <p className="text text_type_main-default text_color_inactive">
-                    {feed.createdAt.replace(/[A-Za-z]/gi, " ").split(".")[0]}
+                    {/*{feed.createdAt.replace(/[A-Za-z]/gi, " ").split(".")[0]}*/}
+                    <FormattedDate date={new Date(feed.createdAt)} /> {`${time}`}
                 </p>
             </div>
             <div className="pl-6 pr-6">

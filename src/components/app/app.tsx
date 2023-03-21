@@ -72,9 +72,9 @@ export const App: FC = () => {
                 <Route path="/register" element={<Registration/>}/>
                 <Route path="/forgot-password" element={<ForgotPassword/>}/>
                 <Route path="/reset-password" element={<ResetPassword/>}/>
-                <Route path="/profile" element={<ProtectedRouteElement element={<Profile/>}/>}/>
-                <Route path="/profile/orders" element={<ProtectedRouteElement element={<Profile/>}/>}/>
-                <Route path="/profile/orders/:id" element={<ProtectedRouteElement
+                <Route path="/profile" element={<ProtectedRouteElement OnlyAuth={true} element={<Profile/>}/>}/>
+                <Route path="/profile/orders" element={<ProtectedRouteElement OnlyAuth={true} element={<Profile/>}/>}/>
+                <Route path="/profile/orders/:id" element={<ProtectedRouteElement OnlyAuth={true}
                     element={<FeedDetailsPage/>}/>}/>
                 <Route path="*" element={<NotFound404/>}/>
             </Routes>
@@ -82,6 +82,7 @@ export const App: FC = () => {
             {background &&
                 <Routes>
                     <Route path="/profile/orders/:id" element={<ProtectedRouteElement
+                        OnlyAuth={true}
                         element={
                             <Modal onClose={onClose} header={`#${number}`}>
                                 <FeedDetails/>

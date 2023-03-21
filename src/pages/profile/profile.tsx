@@ -7,7 +7,11 @@ import {ProfileForm} from "./profile-form";
 import {useNavigate, useLocation, NavLink} from "react-router-dom";
 import { Feed } from "../../components/feed/feed";
 import { OPEN_FEED } from "../../services/actions/feed-view";
-import {WS_CONNECTION_START_ORDER, WS_CONNECTION_END} from "../../services/actions/ws-feed-actions";
+import {
+    WS_CONNECTION_START_ORDER,
+    WS_CONNECTION_END,
+    WS_CONNECTION_START
+} from "../../services/actions/ws-feed-actions";
 
 
 
@@ -17,6 +21,7 @@ export const Profile : FC = () => {
     const location = useLocation();
     const navigate = useNavigate();
     const { orders } = useSelector((state) => state.websocket)
+
 
     useEffect(() => {
         if (location.pathname === '/profile/orders') {
@@ -74,9 +79,8 @@ export const Profile : FC = () => {
                     </p>
                 </ul>
                 {location.pathname === '/profile' && <ProfileForm/>}
-                {/*{location.pathname === '/profile/orders' && <OrdersList/>}*/}
                 {location.pathname === '/profile/orders' && <ul className={style.feeds__list}>
-                    {orders?.map(item =>
+                    {orders?.slice(0).reverse().map((item) =>
                         <NavLink key={item._id} className={style.link}
                         to={`/profile/orders/${item._id}`}
                         state={{ background: location } }

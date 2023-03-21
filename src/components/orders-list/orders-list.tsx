@@ -8,23 +8,21 @@ export const OrdersList: FC = () => {
     return (
         <section className='pt-25'>
             <div className={style.orders__box}>
-                <div className={style.list__box}><h2 className="mb-6 text text_type_main-default">Готовы:</h2>
-                    <ul className={style.orders__list}
-                        style={orders?.length < 29 ? {maxHeight: 320} : {maxHeight: 275}}>
+                <div className={style.list__box}><h2 className="mb-6 text text_type_main-medium">Готовы:</h2>
+                    <ul className={style.orders__list}>
                         {orders?.map(item => {
                                 // console.log(item.status)
                                 if (item.status === 'done') {
                                     return (
-                                        <li className={orders?.length < 29 ?
-                                            ("text text_type_digits-default " + style.ready)
-                                            : ("text text_type_digits-small " + style.ready)}
-                                            key={item._id}>{item.number}</li>)
+                                        <li className={"text text_type_digits-default " + style.ready}
+                                            key={item._id}>{item.number}</li>
+                                    )
                                 }
                             }
                         )}
                     </ul>
                 </div>
-                <div className={style.list__box}><h2 className="mb-6 text text_type_main-default">В работе:</h2>
+                <div className={style.list__box}><h2 className="mb-6 text text_type_main-medium">В работе:</h2>
                     <ul className={style.orders__list}>
                         {orders?.map(item => {
                                 // console.log(item.status)
