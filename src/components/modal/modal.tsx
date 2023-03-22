@@ -17,7 +17,7 @@ interface IModal {
 }
 export const Modal: FC<IModal> = (props) => {
     const escClose = (e: KeyboardEvent) => {
-        console.log(e);
+        // console.log(e);
         if (e.key === "Escape") {
             props.onClose();
         }

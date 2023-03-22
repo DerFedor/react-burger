@@ -22,22 +22,22 @@ import {FeedDetails} from "../feed-details/feed-details";
 import {FeedDetailsPage} from "../../pages/feed-details-page/feed-details-page";
 import {getOrdersTemporary} from "../../services/actions/feeds-list";
 import {useDispatch, useSelector} from "../../services/hooks/hooks";
-import {getIngredient} from "../../services/actions/burger-ingredients";
+import {getIngredients} from "../../services/actions/burger-ingredients"
+
 
 
 
 export const App: FC = () => {
     const dispatch = useDispatch();
-    const {number} = useSelector((state)  => state.feed)
-
-
     const navigate = useNavigate();
     const location = useLocation();
     const background = location.state && location.state?.background;
-
+    const { orders } = useSelector((state) => state.websocket);
+    const feed = useSelector((state) => state.feed.feedView);
+    const data = orders.find(item => item._id === feed);
 
     useEffect(() => {
-        dispatch(getIngredient());
+        dispatch(getIngredients());
         dispatch(getOrdersTemporary());
     }, [dispatch]);
 
@@ -84,7 +84,7 @@ export const App: FC = () => {
                     <Route path="/profile/orders/:id" element={<ProtectedRouteElement
                         OnlyAuth={true}
                         element={
-                            <Modal onClose={onClose} header={`#${number}`}>
+                            <Modal onClose={onClose} header={`#${data?.number}`}>
                                 <FeedDetails/>
                             </Modal>}/>}/>
                 </Routes>}
@@ -92,7 +92,7 @@ export const App: FC = () => {
                 <Routes>
                     <Route path="/feed/:id"
                            element={
-                               <Modal onClose={onClose} header={`#${number}`}>
+                               <Modal onClose={onClose} header={`#${data?.number}`}>
                                    <FeedDetails/>
                                </Modal>}/>
                 </Routes>}

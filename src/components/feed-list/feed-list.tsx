@@ -7,13 +7,13 @@ import { OPEN_FEED } from "../../services/actions/feed-view";
 
 export const FeedsList: FC = () => {
     const location = useLocation();
-    const dispatch = useDispatch()
-
+    const dispatch = useDispatch();
+    const { orders } = useSelector((state) => state.websocket);
     const onClick = (item) => {
         dispatch({ type: OPEN_FEED, view: item._id, number: item.number })
         // console.log(item)
     }
-    const { orders } = useSelector((state) => state.websocket)
+
 
     return (
         <section className="pl-2 pr-2">

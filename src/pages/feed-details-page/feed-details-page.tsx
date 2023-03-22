@@ -44,6 +44,7 @@ export const FeedDetailsPage = () => {
         }
     }, [pathname]);
     const { id } = useParams<{ id?: string }>();
+
     const { orders } = useSelector((state) => state.temporaryOrder);
     const wsData = useSelector((state) => state.websocket);
 
@@ -82,11 +83,11 @@ export const FeedDetailsPage = () => {
         <section className={style.section}>
             <div className={style.feed__details}>
                 <h1
-                    className={"text text_type_digits-default " + style.header}
+                    className={"text text_type_digits-medium " + style.header}
                 >{`#${data?.number}`}</h1>
-                <h2 className="mt-10 text text_type_main-medium">{data?.name}</h2>
+                <h2 className="mt-10 text text_type_main-medium ">{data?.name}</h2>
                 <p
-                    className="mt-3 text text_type_main-default"
+                    className="mt-3 text text_type_main-default "
                     style={
                         data?.status === "done" ? { color: "#00CCCC" } : { color: "red" }
                     }
@@ -94,7 +95,7 @@ export const FeedDetailsPage = () => {
                     {doneStatus()}
                 </p>
                 <div>
-                    <h2 className="mt-15 mb-6 text text_type_main-medium">Состав:</h2>
+                    <h2 className="mt-15 mb-6 text text_type_main-medium ">Состав:</h2>
                     <ul className={style.composition}>
                         {data?.ingredients.map((item, index) => (
                             <IngredientDetail key={index} item={item} />
@@ -102,7 +103,7 @@ export const FeedDetailsPage = () => {
                     </ul>
                 </div>
                 <div className={"mt-10 mb-10 " + style.date__box}>
-                    <p className="text text_type_main-default text_color_inactive">
+                    <p className="text text_type_main-default text_color_inactive ">
                         {data?.createdAt}
                     </p>
                     <div className={style.price__box}>

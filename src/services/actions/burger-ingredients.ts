@@ -27,7 +27,7 @@ export type TGetIngredients =
     | IGetIngredientsFail
     | IGetIngredientsRequest;
 
-export const getIngredient = (): AppThunk =>
+export const getIngredients = (): AppThunk =>
     function (dispatch: AppDispatch) {
         dispatch({
             type: GET_INGREDIENTS_REQUEST,

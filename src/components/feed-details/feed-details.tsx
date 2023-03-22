@@ -4,6 +4,7 @@ import {
 import style from './feed-details.module.css'
 import { useSelector } from "../../services/hooks/hooks";
 import {FC,  useMemo} from "react";
+import {useParams} from "react-router-dom";
 
 
 
@@ -35,8 +36,23 @@ const IngredientDetail: FC <IIngredientDetail> = ({ item }) => {
 export const FeedDetails = () => {
     const { orders } = useSelector((state) => state.websocket)
     // const { orders, total, totalToday } = useSelector((state:any) => state.temporaryOrder)
-    const feed = useSelector((state) => state.feed.feedView)
-    const data = orders.find(item => item._id === feed)
+    // const feed = useSelector((state) => state.feed.feedView)
+    const { id } = useParams<{ id?: string }>();
+    const data = orders.find(item => item._id === id);
+    // console.log("orders-websocket",orders);
+
+    const ordersTem = useSelector((state) => state.temporaryOrder.orders);
+    // console.log("ordersTem",ordersTem);
+    // const wsData = useSelector((state) => state.websocket);
+    //
+    // const getData = () => {
+    //     return pathname === "/profile/orders/:id"
+    //         ? wsData?.orders.find((item) => item._id === id)
+    //         : orders?.find((item) => item._id === id);
+    // };
+    // const data = getData();
+    console.log("id",id);
+    console.log("data",data);
     const ingredientsData = useSelector((state) => state.burger.ingredients);
 
     const price = useMemo(() => {

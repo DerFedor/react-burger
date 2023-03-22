@@ -22,7 +22,7 @@ const constructorInitialState: TConstructorInitialState<TComponents> = {
     components: [],
 };
 
-export const constructorReducer = (
+export const burgerConstructorReducer = (
     state = constructorInitialState,
     action: TConstruct
 ): TConstructorInitialState<TComponents> => {
@@ -67,6 +67,3 @@ export const constructorReducer = (
         }
     }
 };
-
-export class burgerConstructorReducer {
-}

@@ -4,13 +4,12 @@ import { useSelector, useDispatch } from "../../services/hooks/hooks";
 import {getLogout} from "../../services/actions/logout";
 import {getCookie} from "../../utils/cookies";
 import {ProfileForm} from "./profile-form";
-import {useNavigate, useLocation, NavLink} from "react-router-dom";
+import {useNavigate, useLocation, NavLink, Navigate} from "react-router-dom";
 import { Feed } from "../../components/feed/feed";
 import { OPEN_FEED } from "../../services/actions/feed-view";
 import {
     WS_CONNECTION_START_ORDER,
     WS_CONNECTION_END,
-    WS_CONNECTION_START
 } from "../../services/actions/ws-feed-actions";
 
 
@@ -20,7 +19,7 @@ export const Profile : FC = () => {
     const dispatch = useDispatch();
     const location = useLocation();
     const navigate = useNavigate();
-    const { orders } = useSelector((state) => state.websocket)
+    const { orders } = useSelector((state) => state.websocket);
 
 
     useEffect(() => {
@@ -36,7 +35,8 @@ export const Profile : FC = () => {
 
     const logoutOnClick = () => {
         const refreshToken = getCookie('refreshToken')
-        dispatch(getLogout(refreshToken))
+        dispatch(getLogout(refreshToken));
+        navigate("/login");
     }
     const ordersClick = () => {
             navigate("/profile/orders");
@@ -47,8 +47,8 @@ export const Profile : FC = () => {
     }
 
     const onClick = (item) => {
-        // console.log(item)
         dispatch({ type: OPEN_FEED, view: item._id, number: item.number })
+        console.log("item",item);
     }
 
     return (
