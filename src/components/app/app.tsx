@@ -28,6 +28,7 @@ import {getIngredients} from "../../services/actions/burger-ingredients"
 
 
 export const App: FC = () => {
+
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const location = useLocation();
