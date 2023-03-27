@@ -1,6 +1,6 @@
 import { useParams } from "react-router-dom";
-import { useSelector } from "react-redux";
-import style from './ingredient-page.module.css'
+import { useSelector } from "../../services/hooks/hooks";
+import style from './ingredient-page.module.css';
 import React, {FC} from "react";
 
 
@@ -23,7 +23,6 @@ export const IngredientPage = () => {
     const ingredientData = ingredients.find((item) => item._id === params.id)
 
     return (
-        <>
             <section className={style.section}>
                 <h1 className={"text text_type_main-large  " + style.header}>Детали ингредиента</h1>
                 <div className={style.box}>
@@ -37,6 +36,5 @@ export const IngredientPage = () => {
                     </div>
                 </div>
             </section>
-        </>
     )
 }

@@ -1,0 +1,35 @@
+.orders__box {
+    display: flex;
+    flex-direction: row;
+    gap: 36px;
+}
+
+.orders__list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    flex-wrap: wrap;
+    max-height: 170px;
+}
+
+.list__box {
+    width: 272px;
+    display: flex;
+    flex-direction: column;
+    justify-content: normal;
+/*baseline*/
+}
+
+.ready {
+    color: #00CCCC;
+}
+.ready:nth-child(15) {
+    opacity: 0.5;
+}
+
+.ready:nth-child(1n+ 16) {
+    display: none;
+}

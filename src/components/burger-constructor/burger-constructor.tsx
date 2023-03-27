@@ -1,12 +1,13 @@
 import React from "react";
 import burgerConstructorStyle from "./burger-constructor.module.css";
-import { useSelector} from 'react-redux';
+import { useSelector} from '../../services/hooks/hooks';
 import {ConstructorButtonPriceBox} from "./constructor-button-price-box";
 import {ConstructorBox} from "./constructor-box";
+import { Loader } from "../loader/loader";
 
 export const BurgerConstructor = () => {
-//    const [state, dispatchState] = React.useReducer(reducer, priceInitialState);
-    const componentsData = useSelector((store:any) => store.burgerConstruct);
+    const componentsData = useSelector((store) => store.construct);
+    const { orderRequest } = useSelector((store) => store.order);
 
     function getComponentsIdArray(): Array<string> {
         let arr: Array<string> = [];
@@ -28,6 +29,7 @@ export const BurgerConstructor = () => {
 
     return (
         <section className={"pt-25 " + burgerConstructorStyle.constructor}>
+            {orderRequest && <Loader text="Заказ создается" />}
             <ConstructorBox ingredients={ingredients}/>
             <ConstructorButtonPriceBox ingredients={ingredients}/>
         </section>

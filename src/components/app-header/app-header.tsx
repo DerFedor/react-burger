@@ -7,14 +7,12 @@ import {
 import appHeaderStyle from "./app-header.module.css";
 import {Link, NavLink} from "react-router-dom";
 import {onActiveLink} from "../../utils/onActiveLink";
-import {useSelector} from "react-redux";
+import { FC } from "react";
+import {useSelector} from "../../services/hooks/hooks";
 
 
-
-export const AppHeader = () => {
-    const {isAuthenticated, token} = useSelector((state:any) => state.user);
-
-
+export const AppHeader: FC = () => {
+    const { isAuthenticated } = useSelector((state) => state.user);
     return (
         <header className={appHeaderStyle.header + " p-4"}>
             <Link to="/" className={appHeaderStyle.logo}>
@@ -49,7 +47,7 @@ export const AppHeader = () => {
                 </ul>
                 <li className={appHeaderStyle.interface__item}>
                     <NavLink
-                        to="/profile"
+                        to={isAuthenticated ? "/profile" : "/login"}
                         className={appHeaderStyle.link}
                         style={onActiveLink}>
                         {({isActive}) => (

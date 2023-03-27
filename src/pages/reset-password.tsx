@@ -5,17 +5,17 @@ import {
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import {Link, Navigate, useLocation} from "react-router-dom";
 import style from "./pages.module.css";
-import {useDispatch, useSelector} from "react-redux";
+import {useDispatch, useSelector} from "../services/hooks/hooks";
 import {passwordReset} from "../services/actions/reset-password";
 
 export const ResetPassword = () => {
-    const dispatch = useDispatch<any>();
+    const dispatch = useDispatch();
     const {state} = useLocation();
 
 
 
-    const {isAuthenticated} = useSelector((state:any) => state.user)
-    const {resetSuccess} = useSelector((state:any) => state.password)
+    const {isAuthenticated} = useSelector((state) => state.user)
+    const {resetSuccess} = useSelector((state) => state.password)
 
     const [passwordValue, setPasswordValue] = useState("");
 

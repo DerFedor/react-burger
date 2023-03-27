@@ -12,10 +12,12 @@ interface IModal {
     readonly onClose: () => void;
     readonly header?: string;
     children?: React.ReactNode;
+
+    // onClose(): void;
 }
 export const Modal: FC<IModal> = (props) => {
     const escClose = (e: KeyboardEvent) => {
-        console.log(e);
+        // console.log(e);
         if (e.key === "Escape") {
             props.onClose();
         }

@@ -14,6 +14,20 @@ export type IIngredientType = {
     readonly type: string;
 };
 
+export interface IOrder {
+    readonly _id: string;
+    readonly createdAt: string;
+    readonly name: string;
+    readonly number: number;
+    readonly status: string;
+    readonly updatedAt: string;
+    readonly ingredients: Array<string>;
+}
+export interface IAuthorizationBoolean {
+    readonly isRequest: boolean;
+    readonly isFail: boolean;
+}
+
 export interface ILocationState {
     from: {
         pathname: string;
@@ -21,4 +35,10 @@ export interface ILocationState {
         key: string;
         hash? : string
     };
+}
+
+export interface IUserAllData {
+    email?: string | undefined;
+    password?: string | undefined;
+    name?: string | undefined;
 }
