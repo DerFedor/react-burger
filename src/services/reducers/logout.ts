@@ -2,7 +2,7 @@ import { LOGOUT_REQUEST, LOGOUT_SUCCESS, LOGOUT_FAIL, TLogout } from "../actions
 import { IAuthorizationBoolean } from '../../utils/types'
 
 
-const loginInitState: IAuthorizationBoolean = {
+export const loginInitState: IAuthorizationBoolean = {
     isRequest: false,
     isFail: false
 

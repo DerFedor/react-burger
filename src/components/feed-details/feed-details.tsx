@@ -51,8 +51,8 @@ export const FeedDetails = () => {
     //         : orders?.find((item) => item._id === id);
     // };
     // const data = getData();
-    console.log("id",id);
-    console.log("data",data);
+    // console.log("id",id);
+    // console.log("data",data);
     const ingredientsData = useSelector((state) => state.burger.ingredients);
 
     const price = useMemo(() => {

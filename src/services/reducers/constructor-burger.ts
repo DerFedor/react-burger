@@ -17,7 +17,7 @@ type TConstructorInitialState<T> = {
     components: Array<T>;
 };
 
-const constructorInitialState: TConstructorInitialState<TComponents> = {
+export const constructorInitialState: TConstructorInitialState<TComponents> = {
     bun: "",
     components: [],
 };

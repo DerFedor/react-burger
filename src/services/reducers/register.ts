@@ -2,7 +2,7 @@ import {REGISTRATION_FAIL, REGISTRATION_SUCCESS, REGISTRATION_REQUEST, TRegistra
 import {IAuthorizationBoolean} from '../../utils/types'
 
 
-const registrationInitState: IAuthorizationBoolean = {
+export const registrationInitState: IAuthorizationBoolean = {
     isRequest: false,
     isFail: false
 

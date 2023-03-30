@@ -19,7 +19,7 @@ interface IUserInitState {
     readonly token: string;
 }
 
-const userInitState: IUserInitState & IAuthorizationBoolean = {
+export const userInitState: IUserInitState & IAuthorizationBoolean = {
     userName: "",
     email: "",
     isAuthenticated: false,
@@ -32,6 +32,7 @@ const userInitState: IUserInitState & IAuthorizationBoolean = {
 export const userReducer = (state = userInitState, action: TUser) => {
     switch (action.type) {
         case USER_SET_DATA: {
+            // console.log("token", action.token)
             return {
                 ...state,
                 userName: action.name,

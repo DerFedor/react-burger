@@ -12,7 +12,7 @@ interface IOrderInitialState {
     readonly orderFail: boolean
 }
 
-const orderInitialState: IOrderInitialState = {
+export const orderInitialState: IOrderInitialState = {
     order: null,
     orderRequest: false,
     orderFail: false,

@@ -6,13 +6,13 @@ import {
 } from "../actions/burger-ingredients";
 import { IIngredientType } from "../../utils/types";
 
-interface IInitialState {
+ interface IInitialState {
     readonly ingredients: Array<IIngredientType>;
     readonly ingredientsRequest: boolean;
     readonly ingredientsFail: boolean;
 }
 
-const initialState: IInitialState = {
+export const initialState: IInitialState = {
     ingredients: [],
     ingredientsRequest: false,
     ingredientsFail: false,

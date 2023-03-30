@@ -16,7 +16,7 @@ interface IPasswordResetInitState {
     readonly resetSuccess: boolean;
 }
 
-const passwordResetInitState: IPasswordResetInitState = {
+export const passwordResetInitState: IPasswordResetInitState = {
     forgotRequest: false,
     forgotFail: false,
     forgotSuccess: false,

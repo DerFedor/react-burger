@@ -5,7 +5,7 @@ type TViewInitialState<T> = {
     readonly openCard: T | null;
 };
 
-const viewInitialState: TViewInitialState<IIngredientType> = {
+export const viewInitialState: TViewInitialState<IIngredientType> = {
     openCard: null
 };
 
@@ -14,6 +14,7 @@ export const viewReducer = (
     action: TView ): TViewInitialState<IIngredientType> => {
     switch (action.type) {
         case OPEN_CARD: {
+            // console.log("View",action.view);
             return {
                 openCard: action.view,
             };
