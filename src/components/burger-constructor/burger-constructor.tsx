@@ -28,7 +28,7 @@ export const BurgerConstructor = () => {
     );
 
     return (
-        <section className={"pt-25 " + burgerConstructorStyle.constructor}>
+        <section className={"pt-25 " + burgerConstructorStyle.constructor} data-test="constructorContainer">
             {orderRequest && <Loader text="Заказ создается" />}
             <ConstructorBox ingredients={ingredients}/>
             <ConstructorButtonPriceBox ingredients={ingredients}/>

@@ -133,6 +133,7 @@ const IngredientCard: FC<IIngredientCard> = ({ props }) => {
         <>
             <li
                 className={"mt-6 " + IngredientsStyle.ingredientCard}
+                data-test="ingredientsList"
                 onClick={handleOpen}
                 ref={ref}
                 style={{opacity}}
@@ -178,7 +179,7 @@ const BurgerItemIngredients: FC<IIngredientsBlock> = (data) => {
     return (
         <li className="mt-10" id={data.type} ref={data.refElement}>
             <h2 className="text text_type_main-medium">{data.text}</h2>
-            <ul className={" pl-4 " + IngredientsStyle.ingredientsList}>
+            <ul className={" pl-4 " + IngredientsStyle.ingredientsList} >
                 {itemType.map((item) => (
                     <IngredientCard key={item._id} props={item}/>
                 ))}

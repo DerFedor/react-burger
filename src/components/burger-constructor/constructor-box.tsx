@@ -68,7 +68,8 @@ export const ConstructorBox: FC<IConstructorBox> = ({ ingredients }) => {
                             key={item._id}
                             ingredient={item}
                             type={"top"}
-                            position={" (верх)"}/>
+                            position={" (верх)"}
+                            data-test="constructorBunTop"/>
                     )
             ) : (<Plug type='top'/>
             )}
@@ -88,6 +89,7 @@ export const ConstructorBox: FC<IConstructorBox> = ({ ingredients }) => {
                                         ingredient={ingredient}
                                         index={index}
                                         itemKey={key}
+                                        // data-test="constructorInnerItems"
                                     />
                                 )
                             );
@@ -102,7 +104,8 @@ export const ConstructorBox: FC<IConstructorBox> = ({ ingredients }) => {
                             key={item._id}
                             ingredient={item}
                             position={" (низ)"}
-                            type={"bottom"}/>
+                            type={"bottom"}
+                            data-test="constructorBunBottom"/>
                     )
             ) : (<Plug type='bottom'/>
             )}
