@@ -2,6 +2,7 @@
   "name": "react-burger",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://derfedor.github.io/react-burger/",
   "dependencies": {
     "@4tw/cypress-drag-drop": "^2.2.3",
     "@reduxjs/toolkit": "^1.9.2",
@@ -65,6 +66,5 @@
     "fetch-mock": "^9.11.0",
     "react-test-renderer": "^18.2.0",
     "redux-mock-store": "^1.5.4"
-  },
-  "homepage": "https://derfedor.github.io/react-burger/"
+  }
 }

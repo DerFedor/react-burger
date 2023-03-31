@@ -113,7 +113,7 @@ const IngredientCard: FC<IIngredientCard> = ({ props }) => {
             view: props,
         });
         setIsVisible(true);
-        window.history.pushState({ path: `/ingredients/${props._id}` }, '', `/ingredients/${props._id}`)
+        window.history.pushState({ path: `#/ingredients/${props._id}` }, '', `#/ingredients/${props._id}`)
     };
 
     const handleClose = () => {
@@ -122,7 +122,7 @@ const IngredientCard: FC<IIngredientCard> = ({ props }) => {
         })
         setIsVisible(false);
         // navigate("/");
-        window.history.pushState({ path: `/` }, '', `/`)
+        window.history.pushState({ path: `#/` }, '', `#/`)
     };
 
     const modal = <Modal onClose={handleClose} header='Детали ингредиента'>
