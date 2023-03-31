@@ -1,46 +1,50 @@
-# Getting Started with Create React App
+# **Космическая бургерная**
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Учебный проект на курсе Яндекс практикум
 
-## Available Scripts
+## Содержание
+- [О проекте](#О-проекте)
+- [Технологии](#Технологии)
+- [Особенности](#Особенности)
+- [Адрес проекта](#Адрес-проекта)
 
-In the project directory, you can run:
+## О проекте
+Веб приложение **Космическая бургерная**. Разработано на курсе [React-разработчик](https://praktikum.yandex.ru/react/).
 
-### `npm start`
+Представляет собой приложение интернет-магазин с возможностью регистрации, авторизации, онлайн-заказа, просмотра истории заказов, а так же возможностью узнать состав ингредиентов.
+Бэкенд, база данных пользователей и заказов, API разработано командой Яндекса и хранится на сервере компании отдельно от данного пректа.
+Некоторые страницы защищены авторизацией, передача данных с API проходит через защищенное соединение с валидацией запросов.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Технологии
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+- Шаблон приложения развернут с помощью create-react-app
+- Использована библиотека UI-компонентов [Яндекс.Практикум.Реакт](https://github.com/yandex-praktikum/react-developer-burger-ui-components)
+- Frontend приложения написан с использованием библиотеки [React](https://reactjs.org/)
+- Хранилище данных в браузере разработано на Redux
+- Лента заказов отражается при помощи Web Sockets
+- Для верстки использовался flex, css размещен в виде CSS Modules
+- Для тестирования приложения использовани Jest и Cypress
 
-### `npm test`
+## Особенности
+Проект запускается локально по адресу http://localhost:3000/ путем клонирования данного репозитория и
+последовательного запуска команд в терминале (должны быть установлены программы Git, NodeJS и менеджер пакетов npm):
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+```bash
+git clone https://github.com/DerFedor/react-burger.git
 
-### `npm run build`
+cd react-burger
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+npm install
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+npm run start
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+npm test //для тестирования:
 
-### `npm run eject`
+npx cypress open  //для тестирования:
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+npm run deploy // деплой на github 
+```
+## Адрес проекта
+[Мой сайт доступен по адресу] (https://derfedor.github.io/react-burger/)
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
