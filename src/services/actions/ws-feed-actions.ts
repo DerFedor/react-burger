@@ -14,6 +14,7 @@ export const WS_CONNECTION_END: "WS_CONNECTION_END" = "WS_CONNECTION_END";
 
 export interface IConnectStart {
     readonly type: typeof WS_CONNECTION_START;
+    readonly payload: string;
 }
 export interface IConnectStartOrder {
     readonly type: typeof WS_CONNECTION_START_ORDER;

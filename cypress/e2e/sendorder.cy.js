@@ -13,9 +13,9 @@ describe('Отправка заказа', () => {
   });
 
   it('Заказ должен отправляться', () => {
-    cy.get(selectors.ingredients.ingredient).eq(0).drag('[class^="burger-constructor"]');
-    cy.get(selectors.ingredients.ingredient).eq(2).drag('[class^="burger-constructor"]');
-    cy.get(selectors.ingredients.ingredient).eq(6).drag('[class^="burger-constructor"]');
+    cy.get(selectors.ingredients.ingredient).eq(0).drag(selectors.constructor.burgerContainer);
+    cy.get(selectors.ingredients.ingredient).eq(2).drag(selectors.constructor.burgerContainer);
+    cy.get(selectors.ingredients.ingredient).eq(6).drag(selectors.constructor.burgerContainer);
     cy.get('button').contains('Оформить заказ').click();
 
     cy.get(selectors.modal.container,{ timeout: 20000 }).should('exist');

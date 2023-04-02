@@ -29,7 +29,7 @@ export type TGetOrder =
 
 export const getOrder = (
     ingredients: Array<string>,
-    token: string
+    token: string ,
 ): AppThunk => {
     // console.log("getOrder");
     return function (dispatch: AppDispatch) {

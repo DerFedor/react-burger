@@ -8,9 +8,9 @@ describe("Drag'n'Drop", () => {
 
   describe('Перетаскивание ингредиентов в конструктор', () => {
     it('Перетаскивание ингредиентов в конструктор', function() {
-      cy.get(selectors.ingredients.ingredient).eq(0).drag('[class^="burger-constructor"]');
-      cy.get(selectors.ingredients.ingredient).eq(2).drag('[class^="burger-constructor"]');
-      cy.get(selectors.ingredients.ingredient).eq(6).drag('[class^="burger-constructor"]');
+      cy.get(selectors.ingredients.ingredient).eq(0).drag(selectors.constructor.burgerContainer);
+      cy.get(selectors.ingredients.ingredient).eq(2).drag(selectors.constructor.burgerContainer);
+      cy.get(selectors.ingredients.ingredient).eq(6).drag(selectors.constructor.burgerContainer);
       // cy.get('button').contains('Оформить заказ').click();
     });
   });

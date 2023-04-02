@@ -19,6 +19,7 @@ export const selectors = {
   },
 
   constructor: {
+    burgerContainer: '[class^="burger-constructor"]',
     container: '[data-test=constructorContainer]',
     bunTop: '[data-test=constructorBunTop]',
     bunBottom: '[data-test=constructorBunBottom]',

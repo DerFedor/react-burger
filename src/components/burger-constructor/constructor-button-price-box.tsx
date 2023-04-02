@@ -44,7 +44,7 @@ interface IConstructorButtonPriceBox {
 }
 
 export const ConstructorButtonPriceBox: FC<IConstructorButtonPriceBox> = ({ingredients}) => {
-    console.log("ingredients",ingredients);
+    // console.log("ingredients",ingredients);
     const dispatch = useDispatch()
     const navigate = useNavigate()
     const {order} = useSelector((store) => store.order)
