@@ -23,7 +23,7 @@ export const socketMiddleware = (
             } = wsActions;
             const { token } = getState().user;
             if (type === wsInit) {
-                socket = new WebSocket(`${wsUrl}/all`);
+                socket = new WebSocket(payload);
             } else if (type === wsInitOrder && token) {
                 socket = new WebSocket(`${wsUrl}?token=${token.split("Bearer ")[1]}`);
             }

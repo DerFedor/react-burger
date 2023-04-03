@@ -19,7 +19,7 @@ interface IUserInitState {
     readonly token: string;
 }
 
-const userInitState: IUserInitState & IAuthorizationBoolean = {
+export const userInitState: IUserInitState & IAuthorizationBoolean = {
     userName: "",
     email: "",
     isAuthenticated: false,

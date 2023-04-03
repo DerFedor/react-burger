@@ -12,7 +12,7 @@ interface IInitStateTemp {
     readonly request: boolean
 }
 
-const initStateTemp: IInitStateTemp = {
+export const initStateTemp: IInitStateTemp = {
     orders: [],
     total: 0,
     totalToday: 0,

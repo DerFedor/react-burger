@@ -35,13 +35,13 @@ export const Modal: FC<IModal> = (props) => {
     return ReactDOM.createPortal(
         <div>
             <ModalOverlay onClose={() => props.onClose()}/>
-            <div className={modalStyle.popup} onClick={(e) => e.stopPropagation()}>
+            <div className={modalStyle.popup} onClick={(e) => e.stopPropagation()} data-testid="modalContainer">
                 <div className={"pl-10 pt-10 pr-10 " + modalStyle.header__box}>
                     <h2 className={"text text_type_main-large " + modalStyle.header}>
                         {props.header}
                     </h2>
-                    <div className={modalStyle.close}>
-                        <CloseIcon type="primary" onClick={() => props.onClose()}/>
+                    <div className={modalStyle.close} data-testid="modalCloseButton">
+                        <CloseIcon type="primary" onClick={() => props.onClose()} />
                     </div>
                 </div>
                 {props.children}

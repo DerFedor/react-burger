@@ -7,29 +7,27 @@ import {
     WS_CONNECTION_END,
 } from "../../services/actions/ws-feed-actions";
 import { useSelector, useDispatch } from "../../services/hooks/hooks";
+import {TOrderIngredient} from "../../utils/types";
 
 interface IIngredientDetail {
-    item: string;
+    item: TOrderIngredient;
 }
 
-const IngredientDetail: FC<IIngredientDetail> = ({ item }) => {
-    const ingredients = useSelector((state) => state.burger.ingredients);
-    const data = ingredients?.find((ingr) => ingr._id === item);
 
-
+const IngredientDetail: FC<IIngredientDetail> = ({item}) => {
     return (
-        <li className={"pr-6 " + style.ingr__details}>
+        <li className={'pr-6 ' + style.ingr__details}>
             <div className={style.name__box}>
-                <img className={style.ingr__image} src={data?.image}></img>
-                <p className="ml-4 text text_type_main-default">{data?.name}</p>
+                <img className={style.ingr__image} src={item?.image}></img>
+                <p className="ml-4 text text_type_main-default">{item?.name}</p>
             </div>
             <div className={style.price__box}>
-                <p className="text text_type_digits-default">{`1 x ${data?.price}`}</p>
-                <CurrencyIcon type={"primary"}/>
+                <p className="text text_type_digits-default">{`${item.quantityInOrder} x ${item?.price}`}</p>
+                <CurrencyIcon type="primary"/>
             </div>
         </li>
     )
-}
+};
 
 export const FeedDetailsPage = () => {
     const dispatch = useDispatch()
@@ -67,6 +65,17 @@ export const FeedDetailsPage = () => {
         return total;
     }, [data, ingredientsData]);
 
+    let orderIngredients: TOrderIngredient[] = [];  ////////////////////////////////////////////////////////////////////////////////////////
+    data?.ingredients.forEach((item) => {
+        const currentIngredient = ingredientsData.find((el) => el._id === item);
+        if (currentIngredient) {
+            if (orderIngredients.find(item => item._id === currentIngredient?._id) === undefined) {
+                let q = data?.ingredients.filter(item => item === currentIngredient?._id).length;
+                orderIngredients.push({...currentIngredient, quantityInOrder: q});
+            }
+        }
+    });
+
     const doneStatus = () => {
         const doneStatus =
             data?.status === "done"
@@ -97,9 +106,7 @@ export const FeedDetailsPage = () => {
                 <div>
                     <h2 className="mt-15 mb-6 text text_type_main-medium ">Состав:</h2>
                     <ul className={style.composition}>
-                        {data?.ingredients.map((item, index) => (
-                            <IngredientDetail key={index} item={item} />
-                        ))}
+                        {orderIngredients?.map((item, index) => <IngredientDetail key={index} item={item}/>)}
                     </ul>
                 </div>
                 <div className={"mt-10 mb-10 " + style.date__box}>

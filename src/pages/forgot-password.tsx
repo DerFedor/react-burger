@@ -27,7 +27,7 @@ export const ForgotPassword = () => {
     };
 
     if (!isAuthenticated && forgotSuccess) {
-        console.log("location", location)
+        // console.log("location", location)
         return (
             <Navigate to="/reset-password" state={{from: location}} />
         )

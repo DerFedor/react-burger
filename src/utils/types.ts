@@ -22,6 +22,7 @@ export interface IOrder {
     readonly status: string;
     readonly updatedAt: string;
     readonly ingredients: Array<string>;
+
 }
 export interface IAuthorizationBoolean {
     readonly isRequest: boolean;
@@ -42,3 +43,7 @@ export interface IUserAllData {
     password?: string | undefined;
     name?: string | undefined;
 }
+
+export type TOrderIngredient = IIngredientType & {
+    quantityInOrder: number;
+};

@@ -44,12 +44,16 @@ export const LoginPage = () => {
                     <EmailInput
                         value={emailValue}
                         name={"email"}
-                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => setEmailValue(e.target.value)}></EmailInput>
+                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => setEmailValue(e.target.value)}
+                        data-testid="email_input">
+
+                    </EmailInput>
                     <PasswordInput
                         value={passwordValue}
                         name={"password"}
                         extraClass="mb-4"
                         onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPasswordValue(e.target.value)}
+                        data-testid="password_input"
                     />
                     <Button htmlType="submit"
                             type="primary"

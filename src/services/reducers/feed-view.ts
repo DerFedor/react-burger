@@ -5,7 +5,7 @@ type TFeedInitState = {
     number: number | null;
 };
 
-const feedInitState: TFeedInitState = {
+export const feedInitState: TFeedInitState = {
     feedView: "",
     number: null,
 };
@@ -13,6 +13,8 @@ const feedInitState: TFeedInitState = {
 export const feedReducer = (state = feedInitState, action: TFeedView): TFeedInitState => {
     switch (action.type) {
         case OPEN_FEED: {
+            // console.log("feedView",action.view);
+            // console.log("number",action.number);
             return {
                 feedView: action.view,
                 number: action.number,

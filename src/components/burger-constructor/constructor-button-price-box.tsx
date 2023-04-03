@@ -44,11 +44,13 @@ interface IConstructorButtonPriceBox {
 }
 
 export const ConstructorButtonPriceBox: FC<IConstructorButtonPriceBox> = ({ingredients}) => {
+    // console.log("ingredients",ingredients);
     const dispatch = useDispatch()
     const navigate = useNavigate()
     const {order} = useSelector((store) => store.order)
     const {isAuthenticated, token} = useSelector((state) => state.user)
-    const buttonState = useSelector((store) => store.order.orderRequest)
+    // const buttonState = useSelector((store) => store.order.orderRequest)
+    const bun = useSelector((store) => store.construct);
 
     const handleClose = () => {
         dispatch({
@@ -69,7 +71,7 @@ export const ConstructorButtonPriceBox: FC<IConstructorButtonPriceBox> = ({ingre
         <div className={"mr-4 mt-10 " + burgerConstructorStyle.button_order}>
             <ConstructorBoxPrice ingredients={ingredients}/>
             <Button
-                disabled={buttonState}
+                disabled={ !bun}
                 htmlType="button"
                 type="primary"
                 size="large"
@@ -80,6 +82,7 @@ export const ConstructorButtonPriceBox: FC<IConstructorButtonPriceBox> = ({ingre
                         dispatch(getOrder(ingredients, token));
                     }
                 }}
+                data-test="submitOrderButton"
             >
                 Оформить заказ
             </Button>

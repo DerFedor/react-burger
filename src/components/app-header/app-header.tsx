@@ -7,12 +7,12 @@ import {
 import appHeaderStyle from "./app-header.module.css";
 import {Link, NavLink} from "react-router-dom";
 import {onActiveLink} from "../../utils/onActiveLink";
-import { FC } from "react";
+import {FC} from "react";
 import {useSelector} from "../../services/hooks/hooks";
 
 
 export const AppHeader: FC = () => {
-    const { isAuthenticated } = useSelector((state) => state.user);
+    const {isAuthenticated, userName} = useSelector((state) => state.user);
     return (
         <header className={appHeaderStyle.header + " p-4"}>
             <Link to="/" className={appHeaderStyle.logo}>
@@ -45,7 +45,7 @@ export const AppHeader: FC = () => {
                         </NavLink>
                     </li>
                 </ul>
-                <li className={appHeaderStyle.interface__item}>
+                <li className={appHeaderStyle.interface__item} data-testid="personalText">
                     <NavLink
                         to={isAuthenticated ? "/profile" : "/login"}
                         className={appHeaderStyle.link}
@@ -53,7 +53,13 @@ export const AppHeader: FC = () => {
                         {({isActive}) => (
                             <>
                                 <ProfileIcon type={isActive ? "primary" : "secondary"}/>
-                                <p className="pl-3 text text_type_main-default">Личный кабинет</p>
+                                {/*<p className="pl-3 text text_type_main-default">Личный кабинет</p>*/}
+                                {isAuthenticated && userName ? (
+                                    <span className="pl-3 text text_type_main-default text_color_inactive">{userName}</span>
+                                ) : (
+                                    <span className="pl-3 text text_type_main-default text_color_inactive">
+                                        Личный кабинет
+                                    </span>)}
                             </>
                         )}
                     </NavLink>
